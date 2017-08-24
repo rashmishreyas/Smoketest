@@ -1,0 +1,33 @@
+package com.servicenow.applicationspecificlibraries;
+
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import org.apache.log4j.Logger;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.servicenow.genericlibraries.ReporterLogs;
+
+public class WaitUtils {
+	
+	public static void waitForIdPresent(WebDriver driver, String wbId){
+		WebDriverWait wait = new WebDriverWait(driver, 50);
+		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.id(wbId)));	
+	}
+	
+	public static void waitForNamePresent(WebDriver driver, String wbName){
+		WebDriverWait wait = new WebDriverWait(driver, 50);
+		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.name(wbName)));
+	}
+	
+	public static void waitForXpathPresent(WebDriver driver, String wbXpath){
+		WebDriverWait wait = new WebDriverWait(driver, 80);
+		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(wbXpath)));
+	}
+	
+}

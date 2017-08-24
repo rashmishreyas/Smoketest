@@ -1,0 +1,5 @@
+package com.servicenow.applicationspecificlibraries;
+
+public class Assertions {
+
+}

@@ -1,0 +1,65 @@
+package testcase;
+
+import java.io.IOException;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.Listeners;
+import org.testng.annotations.Test;
+
+import pages.ChangePage;
+import pages.HomePage;
+
+import com.servicenow.applicationspecificlibraries.Frames;
+import com.servicenow.applicationspecificlibraries.SafeLogin;
+import com.servicenow.applicationspecificlibraries.SnowReporter;
+import com.servicenow.applicationspecificlibraries.SuperTestNG;
+import com.servicenow.applicationspecificlibraries.Wait1;
+import com.servicenow.applicationspecificlibraries.Waits;
+import com.servicenow.genericlibraries.DropDowns;
+import com.servicenow.genericlibraries.ReporterLogs;
+import com.servicenow.genericlibraries.TextBoxes;
+
+@Listeners(value=SnowReporter.class)
+public class changeManagement extends SuperTestNG{
+
+	@Test(priority=0,description="testReporterOne")
+	public void TestValidLogInOut() throws IOException, InterruptedException{
+			SafeLogin.logInUser(driver);  
+			ReporterLogs.log("Title ="+ driver.getTitle(),"info");
+			ReporterLogs.log("--Logged in successfully--", "info");
+			Waits.waitForIdPresent(driver, "filter");
+			TextBoxes.enterTextValue(HomePage.getfilterEdt(driver), "change", "Filter Edit box for searching");
+			Waits.waitForXpathPresent(driver, "//a[text()='Create New']");
+			HomePage.getCreateNewBtn(driver).click();
+			Frames.switchToFrameById("gsft_main", driver);
+			Waits.waitForXpathPresent(driver, "//a[contains(text(),'Normal: Planned')]");
+			ChangePage.getNormalLnk(driver).click();
+			Waits.waitForIdPresent(driver, "sys_display.change_request.assignment_group");
+			ReporterLogs.log("Assignment Group field is entered successfully", "info");
+			TextBoxes.enterTextValue(ChangePage.getAssignmentGrpEdt(driver), "DEVELOP-QA-SERVICE-MANAGER", "Assignement Group Field");
+			Waits.waitForIdPresent(driver, "sys_display.change_request.cmdb_ci");
+			ReporterLogs.log("CI field is entered successfully", "info");
+			TextBoxes.enterTextValue(ChangePage.getConfigurationItemEdt(driver), "beta-000935", "Configuration Item");
+			ReporterLogs.log("Enter the Short Description", "info");
+			Thread.sleep(5000);
+			TextBoxes.enterTextValue(ChangePage.getShortDescriptionEdt(driver), "test ticket!!! Plz Ignore!!!", "Short Description");
+			ReporterLogs.log("Enter the Description", "info");
+			Waits.waitForIdPresent(driver, "change_request.description");
+			TextBoxes.enterTextValue(ChangePage.getDescriptionEdt(driver), "test ticket!!! Plz Ignore!!!", "Description");	
+			ReporterLogs.log("Enter the Reason For Change", "info");
+			TextBoxes.enterTextValue(ChangePage.getReasonForChangeEdt(driver), "test ticket!!! Plz Ignore!!!", "Reason For Change");
+			ChangePage.getScheduleTab(driver).click();
+			ReporterLogs.log("Clicked the Scheduled Tab", "info");
+			ChangePage.getRequestedByDateCalenderBtn(driver).click();
+			ReporterLogs.log("Entered the Requested By Date", "info");
+			ReporterLogs.log("Select Expected Service Impact During The Execution of Change", "info");
+			DropDowns.selectDropdownByIndex(ChangePage.getExpectedServiceImpactDuringTheExecutionofChangeDropDown(driver), 1, "Expected Service Impact During The Execution of Change Drop Down");
+			
+	}
+}

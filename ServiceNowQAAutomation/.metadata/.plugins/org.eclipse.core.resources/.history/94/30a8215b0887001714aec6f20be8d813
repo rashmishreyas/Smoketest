@@ -1,0 +1,53 @@
+package com.servicenow.applicationspecificlibraries;
+
+import java.io.IOException;
+
+import org.apache.log4j.Logger;
+import org.openqa.selenium.WebDriver;
+
+import com.servicenow.genericlibraries.Capabilities;
+import com.servicenow.genericlibraries.ReporterLogs;
+
+import pages.HomePage;
+import pages.loginPage;
+
+public class SafeLogin {
+	
+	public static void logInUser(WebDriver driver) throws IOException{
+		
+				
+				if(driver.getTitle().equalsIgnoreCase("Sign in to SAFE")){
+					loginPage.getsafeUserIDEdt(driver).sendKeys(Capabilities.getPropertyValue("UserId"));
+					loginPage.getsafePasswordEdt(driver).sendKeys(Capabilities.getPropertyValue("Password"));
+					loginPage.getsafeLoginbtn(driver).click();	
+					ReporterLogs.log("Logged in successfully", "info");
+				}		
+	}
+	
+	public static void logInSnow(WebDriver driver, String usrID, String pwd){
+		if(driver.getTitle().equalsIgnoreCase("Sign in to SAFE")){
+			loginPage.getsafeUserIDEdt(driver).sendKeys(usrID);
+			loginPage.getsafePasswordEdt(driver).sendKeys(pwd);
+			loginPage.getsafeLoginbtn(driver).click();
+			ReporterLogs.log("Logged in successfuly", "info");
+	}
+	}
+	
+	public static void logOut(WebDriver driver) throws InterruptedException{
+        HomePage.getUserNameDropDown(driver).click();
+        String username=elementUsername.getText();           
+        driver.findElement(By.xpath("//button[@id='user_info_dropdown']/following::a[text()='Logout']")).click();
+        WaitUtils.waitForPageToLoad(driver, 10);
+        WaitUtils.waitForXpathPresent(driver, "//div[@class='field-head']/following::p[contains(text(),'SUCCESS! You are now logged out of your application.')]");
+        if(driver.getTitle().equalsIgnoreCase("SAFE Logout")){
+               System.out.println("The user "+username+" has succesfully logged out of the application");
+               ReporterLogs.log("The user "+username+" has succesfully logged out of the application", "info");
+        }
+        else {
+               System.out.println("Logout failed");
+               System.out.println(driver.getTitle());
+        }
+}
+
+	}
+}

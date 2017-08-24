@@ -1,0 +1,66 @@
+package com.servicenow.applicationspecificlibraries;
+
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import org.apache.log4j.Logger;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.servicenow.genericlibraries.ReporterLogs;
+
+public class WaitUtils {
+	
+	public static void waitForIdPresent(WebDriver driver, String wbId){
+		WebDriverWait wait = new WebDriverWait(driver, 50);
+		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.id(wbId)));	
+	}
+	
+	public static void waitForNamePresent(WebDriver driver, String wbName){
+		WebDriverWait wait = new WebDriverWait(driver, 50);
+		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.name(wbName)));
+	}
+	
+	public static void waitForXpathPresent(WebDriver driver, String wbXpath){
+		WebDriverWait wait = new WebDriverWait(driver, 80);
+		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(wbXpath)));
+	}
+	//Checking for Visibility of element using Explicit Wait
+	public static void visibilityOfElement(WebDriver driver, WebElement element, int timeOut, String elementName){
+		if(element != null){
+			try
+			{
+				ReporterLogs.log("Waiting "+timeOut+ " Seconds for Visibility of "+elementName, "info");
+				WebDriverWait wait=new WebDriverWait(driver,timeOut);
+				wait.until(ExpectedConditions.visibilityOf(element));
+			}
+			catch(Exception e)
+			{
+				ReporterLogs.log("Unable to find "+elementName+" in "+timeOut+" milli Seconds as exception encountered "+e.getMessage(), "error");
+			}	
+		}else{
+			ReporterLogs.log("Null Pointer Exception");
+		}
+	}
+
+	/*
+	 * Checking for Visibility of all element using Explicit Wait
+	 */
+	public static void visibilityOfAllElement(WebDriver driver,List<WebElement> elements, int timeOut)
+		{
+			try
+			{
+				ReporterLogs.log("Waiting "+timeOut+ " Seconds for Visibility of all the given elements ", "info");
+				WebDriverWait wait=new WebDriverWait(driver,timeOut);
+				wait.until(ExpectedConditions.visibilityOfAllElements(elements));
+			}
+			catch(Exception e)
+			{
+				ReporterLogs.log("Unable to find elements in "+timeOut+" Seconds" + e.getCause(), "error");
+			}	
+		}
+}

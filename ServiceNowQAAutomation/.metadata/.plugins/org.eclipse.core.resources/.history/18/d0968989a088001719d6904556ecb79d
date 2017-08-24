@@ -1,0 +1,15 @@
+Browser=ff
+URL=https://thomsonreutersqa.service-now.com/navpage.do
+UserId=6035997
+Password=Face@123
+DataDir=.\\testdata\\
+PropertiesDir=.\\properties\\
+logProperties=.\\properties\\log4j.properties
+SnapShotDir=.\\target\\SnapShots\\
+SnapShotType=jpg
+ElementShapShotType=png
+IEDrivers=.\\properties\\IEDriverServer.exe
+ChromeDrivers=.\\properties\\chromedriver.exe
+FirefoxDriver=.\\properties\\geckodriver.exe
+ExtentConfig=.\\properties\\extent-config.xml
+FileDownload=.\\properties\\File

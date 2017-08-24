@@ -1,0 +1,36 @@
+package testcase;
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+public class Calender {
+
+	public static void main(String[] args) throws InterruptedException {
+		System.setProperty("webdriver.gecko.driver", "C:\\SnowQA\\SNOWQA\\properties\\geckodriver.exe");
+		WebDriver driver = new FirefoxDriver();
+		driver.get("https://thomsonreutersqa.service-now.com/nav_to.do?");
+		driver.manage().window().maximize();
+		driver.findElement(By.id("USER")).sendKeys("6035997");
+		driver.findElement(By.id("PASSWORD")).sendKeys("Face@123");
+		driver.findElement(By.id("safeLoginbtn")).click();
+		Thread.sleep(5000);
+		driver.findElement(By.id("filter")).sendKeys("change");
+		Thread.sleep(3000);
+		driver.findElement(By.xpath("//a[text()='Create New']")).click();
+		Thread.sleep(3000);
+		driver.switchTo().frame("gsft_main");
+		driver.findElement(By.xpath("//a[contains(text(),'Normal: Planned')]")).click();
+		Thread.sleep(5000);
+		driver.findElement(By.xpath("//*[@id='tabs2_section']/span[4]/span/span[2]")).click();
+		Thread.sleep(3000);
+		driver.findElement(By.xpath("//a[@id='change_request.requested_by_date.ui_policy_sensitive']/span[@class='icon icon-calendar']")).click();
+		
+		
+		
+
+	}
+
+}
