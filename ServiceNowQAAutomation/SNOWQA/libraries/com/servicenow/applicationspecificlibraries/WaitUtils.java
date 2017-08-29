@@ -39,5 +39,4 @@ public class WaitUtils {
         WebDriverWait wait=new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.titleIs(wbTitle));
     }
-
 }
