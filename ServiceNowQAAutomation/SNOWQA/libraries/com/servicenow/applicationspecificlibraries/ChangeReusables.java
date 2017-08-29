@@ -107,8 +107,9 @@ public class ChangeReusables {
 						ExtentReport.reportLog(LogStatus.FAIL, "Unable to create change : "+changeId);
 						Assert.assertEquals(ChangePage.getChangeStatusFromQueue(driver, changeId).getText(), "Draft");
 					}	
-					Frames.switchToDefaultContent(driver);
+					
 				}
+				Frames.switchToDefaultContent(driver);
 	
 		}catch(Exception e){
 			e.getMessage();
