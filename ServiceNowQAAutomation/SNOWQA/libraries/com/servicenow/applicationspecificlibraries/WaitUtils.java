@@ -30,6 +30,11 @@ public class WaitUtils {
 		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.name(wbName)));
 	}
 	
+	public static void waitForCSSPresent(WebDriver driver, String wbCss){
+		WebDriverWait wait = new WebDriverWait(driver, 50);
+		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector(wbCss)));
+	}
+	
 	public static void waitForXpathPresent(WebDriver driver, String wbXpath){
 		WebDriverWait wait = new WebDriverWait(driver, 50);
 		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(wbXpath)));
