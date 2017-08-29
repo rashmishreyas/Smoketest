@@ -34,5 +34,10 @@ public class WaitUtils {
 		WebDriverWait wait = new WebDriverWait(driver, 50);
 		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(wbXpath)));
 	}
+	
+	public static void waitForTitleToBeDisplayed(WebDriver driver, String wbTitle){
+        WebDriverWait wait=new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.titleIs(wbTitle));
+    }
 
 }
