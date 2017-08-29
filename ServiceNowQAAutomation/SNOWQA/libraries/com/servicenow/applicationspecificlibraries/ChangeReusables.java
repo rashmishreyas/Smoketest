@@ -1,6 +1,5 @@
 package com.servicenow.applicationspecificlibraries;
 
-import org.apache.bcel.verifier.structurals.GenericArray;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -22,7 +21,7 @@ public class ChangeReusables {
 		try{
 				WaitUtils.waitForXpathPresent(driver, "//a[contains(text(),'Normal: Planned')]");
 				ChangePage.getNormalLnk(driver).click();
-				Thread.sleep(3000);
+				ExtentReport.reportLog(LogStatus.INFO, "Creating Normal Change Ticket");
 				String assignmentGroup = ExcelUtils.getData("Change_Management_TestData.xlsx", "Smoke_Suite", 1, 5);
 				String configurationItem = ExcelUtils.getData("Change_Management_TestData.xlsx", "Smoke_Suite", 1, 6);
 				String shortDescription = ExcelUtils.getData("Change_Management_TestData.xlsx", "Smoke_Suite", 1, 7);
@@ -32,9 +31,9 @@ public class ChangeReusables {
 				String implementationPlan= ExcelUtils.getData("Change_Management_TestData.xlsx", "Smoke_Suite", 1, 11);
 				String testPlan = ExcelUtils.getData("Change_Management_TestData.xlsx", "Smoke_Suite", 1, 12);
 				String backoutPlan = ExcelUtils.getData("Change_Management_TestData.xlsx", "Smoke_Suite", 1, 13);
-				String requestedByDate = ExcelUtils.getData("Change_Management_TestData.xlsx", "Smoke_Suite", 1, 14);	
 				String changeId = ChangePage.getChangeNumberEdt(driver).getAttribute("value");
 				ExcelUtils.writeDataIntoCell("Change_Management_TestData.xlsx", "Smoke_Suite", 1, 2, changeId);
+				ExtentReport.reportLog(LogStatus.INFO, "Change Id : "+changeId);
 				TextBoxes.enterTextValue(ChangePage.getAssignmentGrpEdt(driver), assignmentGroup, "Assignement Group Field");
 				ReporterLogs.log("Assignment Group field is entered successfully "+assignmentGroup, "info");
 				Thread.sleep(5000);
@@ -65,20 +64,22 @@ public class ChangeReusables {
 				ReporterLogs.log("Assignment Group field is entered successfully "+ backoutPlan, "info");
 				WaitUtils.waitForXpathPresent(driver, "//*[@id='tabs2_section']/span[4]/span/span[2]");
 				ChangePage.getScheduleTab(driver).click();
+				String requestedByDate = Utils.getCurrentDateTime();
 				TextBoxes.enterTextValue(ChangePage.getRequestedByDateEdt(driver), requestedByDate, "Requested By Date");
 				ReporterLogs.log("Requested By Date field is entered successfully "+ requestedByDate, "info");
 				WaitUtils.waitForIdPresent(driver, "sysverb_insert");
 				ChangePage.getSubmitBtn(driver).click();
-				Thread.sleep(5000);
+				WaitUtils.waitForPageToLoad(driver, 10);
+				WaitUtils.waitForTitleToBeDisplayed(driver, "Change Requests | ServiceNow");
 				if(ChangePage.getSearchDropDown(driver).getAttribute("value").equalsIgnoreCase("number")){
 					Thread.sleep(3000);
 					TextBoxes.enterTextValue(ChangePage.getSearchChangeEdt(driver), changeId, "Search Change ");
 					ChangePage.getSearchChangeEdt(driver).sendKeys(Keys.ENTER);
-					Thread.sleep(3000);
+					WaitUtils.waitForPageToLoad(driver, 10);
 					ExtentReport.startReport(".\\Reports\\Change Management\\", "TC001", "Create Change");
-					if(ChangePage.getChangeStatusFromQueue(driver, changeId).getText().equalsIgnoreCase("junk")){
+					if(ChangePage.getChangeStatusFromQueue(driver, changeId).getText().equalsIgnoreCase("Draft")){
 						Assert.assertEquals(ChangePage.getChangeStatusFromQueue(driver, changeId).getText(), "Draft");
-						ExtentReport.reportLog(LogStatus.PASS, "info");
+						ExtentReport.reportLog(LogStatus.PASS, "Successfully created change : "+changeId);
 						ReporterLogs.log("Successfully created Change with Id "+changeId, "info");
 						ExcelUtils.writeDataIntoCell("Change_Management_TestData.xlsx", "Smoke_Suite", 1, 4, "Passed");	
 						System.out.println("Soft Assertion -> 1st alert assertion executed.");
@@ -86,13 +87,9 @@ public class ChangeReusables {
 						ReporterLogs.log("Actual Status displayed is "+ChangePage.getChangeStatusFromQueue(driver, changeId).getText(), "error");
 						ReporterLogs.log("Unable to create a Change Ticket "+changeId, "error");
 						ExcelUtils.writeDataIntoCell("Change_Management_TestData.xlsx", "Smoke_Suite", 1, 4, "Failed");
-						String filename = ScreenShot.takeFullScreenShot("CreateChange");
-						//String screenshot = ScreenShot.takeFullScreenShot(filename);
-						//ExtentReport.attachScreenshotInReport(".\\Reports\\Change Management\\");
-						String screenshot=ExtentReport.attachScreenshotInReport(filename);
-						ExtentReport.reportLog(LogStatus.FAIL, "error"+screenshot);
+						ExtentReport.reportLog(LogStatus.FAIL, "Unable to create change : "+changeId);
 						ExtentReport.endReport();
-						Assert.assertEquals(ChangePage.getChangeStatusFromQueue(driver, changeId).getText(), "junk");
+						Assert.assertEquals(ChangePage.getChangeStatusFromQueue(driver, changeId).getText(), "Draft");
 					}	
 					
 				}else{
@@ -102,12 +99,20 @@ public class ChangeReusables {
 					ReporterLogs.log("Entering Change Id in the Search Text "+changeId, "info");
 					ChangePage.getSearchChangeEdt(driver).sendKeys(Keys.ENTER);
 					if(ChangePage.getChangeStatusFromQueue(driver, changeId).getText().equalsIgnoreCase("Draft")){
+						Assert.assertEquals(ChangePage.getChangeStatusFromQueue(driver, changeId).getText(), "Draft");
+						ExtentReport.reportLog(LogStatus.PASS, "Successfully created change : "+changeId);
 						ReporterLogs.log("Successfully created Change with Id "+changeId, "info");
 						ExcelUtils.writeDataIntoCell("Change_Management_TestData.xlsx", "Smoke_Suite", 1, 4, "Passed");	
+						System.out.println("Soft Assertion -> 1st alert assertion executed.");
 					}else{
+						ReporterLogs.log("Actual Status displayed is "+ChangePage.getChangeStatusFromQueue(driver, changeId).getText(), "error");
 						ReporterLogs.log("Unable to create a Change Ticket "+changeId, "error");
 						ExcelUtils.writeDataIntoCell("Change_Management_TestData.xlsx", "Smoke_Suite", 1, 4, "Failed");
+						ExtentReport.reportLog(LogStatus.FAIL, "Unable to create change : "+changeId);
+						ExtentReport.endReport();
+						Assert.assertEquals(ChangePage.getChangeStatusFromQueue(driver, changeId).getText(), "Draft");
 					}	
+					Frames.switchToDefaultContent(driver);
 				}
 	
 		}catch(Exception e){
