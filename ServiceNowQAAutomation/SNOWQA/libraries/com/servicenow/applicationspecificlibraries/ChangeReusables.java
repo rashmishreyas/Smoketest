@@ -76,19 +76,16 @@ public class ChangeReusables {
 					TextBoxes.enterTextValue(ChangePage.getSearchChangeEdt(driver), changeId, "Search Change ");
 					ChangePage.getSearchChangeEdt(driver).sendKeys(Keys.ENTER);
 					WaitUtils.waitForPageToLoad(driver, 10);
-					ExtentReport.startReport(".\\Reports\\Change Management\\", "TC001", "Create Change");
 					if(ChangePage.getChangeStatusFromQueue(driver, changeId).getText().equalsIgnoreCase("Draft")){
 						Assert.assertEquals(ChangePage.getChangeStatusFromQueue(driver, changeId).getText(), "Draft");
 						ExtentReport.reportLog(LogStatus.PASS, "Successfully created change : "+changeId);
 						ReporterLogs.log("Successfully created Change with Id "+changeId, "info");
-						ExcelUtils.writeDataIntoCell("Change_Management_TestData.xlsx", "Smoke_Suite", 1, 4, "Passed");	
-						System.out.println("Soft Assertion -> 1st alert assertion executed.");
+						ExcelUtils.writeDataIntoCell("Change_Management_TestData.xlsx", "Smoke_Suite", 1, 4, "Passed");
 					}else{
 						ReporterLogs.log("Actual Status displayed is "+ChangePage.getChangeStatusFromQueue(driver, changeId).getText(), "error");
 						ReporterLogs.log("Unable to create a Change Ticket "+changeId, "error");
 						ExcelUtils.writeDataIntoCell("Change_Management_TestData.xlsx", "Smoke_Suite", 1, 4, "Failed");
 						ExtentReport.reportLog(LogStatus.FAIL, "Unable to create change : "+changeId);
-						ExtentReport.endReport();
 						Assert.assertEquals(ChangePage.getChangeStatusFromQueue(driver, changeId).getText(), "Draft");
 					}	
 					
@@ -103,17 +100,16 @@ public class ChangeReusables {
 						ExtentReport.reportLog(LogStatus.PASS, "Successfully created change : "+changeId);
 						ReporterLogs.log("Successfully created Change with Id "+changeId, "info");
 						ExcelUtils.writeDataIntoCell("Change_Management_TestData.xlsx", "Smoke_Suite", 1, 4, "Passed");	
-						System.out.println("Soft Assertion -> 1st alert assertion executed.");
 					}else{
 						ReporterLogs.log("Actual Status displayed is "+ChangePage.getChangeStatusFromQueue(driver, changeId).getText(), "error");
 						ReporterLogs.log("Unable to create a Change Ticket "+changeId, "error");
 						ExcelUtils.writeDataIntoCell("Change_Management_TestData.xlsx", "Smoke_Suite", 1, 4, "Failed");
 						ExtentReport.reportLog(LogStatus.FAIL, "Unable to create change : "+changeId);
-						ExtentReport.endReport();
 						Assert.assertEquals(ChangePage.getChangeStatusFromQueue(driver, changeId).getText(), "Draft");
 					}	
-					Frames.switchToDefaultContent(driver);
+					
 				}
+				Frames.switchToDefaultContent(driver);
 	
 		}catch(Exception e){
 			e.getMessage();
