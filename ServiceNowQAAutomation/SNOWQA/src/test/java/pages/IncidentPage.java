@@ -136,7 +136,7 @@ public class IncidentPage {
 	
 	public static WebElement getIncidentManagerRequiredChkbox(WebDriver driver) throws Exception
 	{
-		element=driver.findElement(By.xpath("//input[@id='sys_original.incident.u_incident_manager_required']"));
+		element=driver.findElement(By.xpath("//label[@id='label.ni.incident.u_incident_manager_required']"));
 		return element;
 	}
 	
@@ -472,4 +472,15 @@ public class IncidentPage {
 		return element;
 	}
 	
+	public static WebElement getIncidentNumberfromQueue(WebDriver driver, String incidentNumber) throws Exception
+	{
+		element=driver.findElement(By.xpath("//tbody[@class='list2_body']//a[text()='"+incidentNumber+"']"));
+		return element;
+	}
+	
+	public static WebElement getIncidentManagerRequiredValueFromNotesTab(WebDriver driver) throws Exception
+	{
+		element=driver.findElement(By.xpath("//ul[@class='h-card-wrapper activities-form']//span[text()='Incident Manager Required']//following-sibling::span//span"));
+		return element;
+	}
 }

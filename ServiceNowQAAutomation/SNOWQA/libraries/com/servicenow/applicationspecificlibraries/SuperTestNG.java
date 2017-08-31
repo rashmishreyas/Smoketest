@@ -94,22 +94,28 @@ public class SuperTestNG {
 	 */
 	@AfterMethod
 	public void postCondition(ITestResult result) throws InterruptedException{  
-		
-	     //Here will compare if test is failing then only it will enter into if condition
-	       if(ITestResult.FAILURE==result.getStatus()){
-	             try {
-	                    Thread.sleep(3000);
-	                  	String filename=ScreenShot.takeFullScreenShot(result.getName());
-	                    String screenshot=ExtentReport.attachScreenshotInReport(filename);
-	                    ExtentReport.reportLog(LogStatus.FAIL, result.getThrowable()+screenshot);
-	                    ReporterLogs.log("Exception encountered "+result.getThrowable(), "error");
-	             } catch (Exception e) {
-	                    e.printStackTrace();
-	             }      
-	       }      
-	       ReporterLogs.log("Test Case Passed", "info");
+		try {
+			//Here will compare if test is failing then only it will enter into if condition
+		       if(ITestResult.FAILURE==result.getStatus()){
+		             try {
+		                    Thread.sleep(3000);
+		                  	String filename=ScreenShot.takeFullScreenShot(result.getName());
+		                    String screenshot=ExtentReport.attachScreenshotInReport(filename);
+		                    ExtentReport.reportLog(LogStatus.FAIL, result.getThrowable()+screenshot);
+		                    ReporterLogs.log("Exception encountered "+result.getThrowable(), "error");
+		             } catch (Exception e) {
+		                    e.printStackTrace();
+		             }  
+		       	} 
+		     }
+	     finally {
+	               Frames.switchToDefaultContent(driver);
+	  	    	   SafeLogin.logOut(driver);
+	  		       driver.close();
+	  		}
+	                  
 	       ExtentReport.endReport();  
-	       SafeLogin.logOut(driver);
-	       driver.quit();
+	       
+	       
 	}
 }

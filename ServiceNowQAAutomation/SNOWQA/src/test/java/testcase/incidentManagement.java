@@ -13,6 +13,8 @@ import com.servicenow.applicationspecificlibraries.SnowReporter;
 import com.servicenow.applicationspecificlibraries.SuperTestNG;
 import com.servicenow.genericlibraries.Capabilities;
 import com.servicenow.genericlibraries.ExtentReport;
+import com.servicenow.genericlibraries.ReporterLogs;
+
 import pages.HomePage;
 import pages.IncidentPage;
 
@@ -20,46 +22,42 @@ import pages.IncidentPage;
 public class incidentManagement extends SuperTestNG {
 
 	
-	@Test(priority=0,description="Create standalone incident ticket")
+	@Test(priority=0,description="Create standalone incident ticket", groups="Incidents")
 	public void testCreateStandAloneIncidentTicket() throws Exception{
 		
-		//String currentDateTime=GenericMethods.getCurrentDateTime();
-		ExtentReport.startReport(Capabilities.getPropertyValue("IncidentReports"),"testCreateStandAloneIncidentTicket","CreateStandAloneIncident");
+		//ExtentReport.startReport(Capabilities.getPropertyValue("IncidentReports"),"testCreateStandAloneIncidentTicket","CreateStandAloneIncident");
 		
 		try {
 			SafeLogin.logInUser(driver);			
 			com.servicenow.applicationspecificlibraries.WaitUtils.waitForPageToLoad(driver, 10);			
 			ServiceNowUtils.navigateToModuleName(driver,"incident");
-			IncidentReusables.createStandaloneIncident(driver);	
+			IncidentReusables.createIncident(driver, false);	
 			
 			}
 		catch (Exception e) {
-			System.out.println(e.getMessage());
-			e.printStackTrace();
-		}		
+			ReporterLogs.log("Exception "+e.getMessage(), "info");
+			}		
 		
 	}
 	
 
-	/*@Test(priority=1,description="Create managed incident ticket")
+	@Test(priority=1,description="Create managed incident ticket",groups="Incidents")
 	public void testCreateManagedIncidentTicket() throws Exception{
 		
-		String currentDateTime=GenericMethods.getCurrentDateTime();
-		ExtentReport.startReport(".\\Reports\\IncidentManagement\\","testCreateManagedIncidentTicket","CreateManagedIncident");
+		//ExtentReport.startReport(Capabilities.getPropertyValue("IncidentReports"),"testCreateManagedIncidentTicket","Create Managed Incident");
 		
 		try {
 			SafeLogin.logInUser(driver);			
 			com.servicenow.applicationspecificlibraries.WaitUtils.waitForPageToLoad(driver, 10);			
 			ServiceNowUtils.navigateToModuleName(driver,"incident");
-			IncidentReusables.createStandaloneIncident(driver);	
+			IncidentReusables.createIncident(driver, true);	
 			
 			}
 		catch (Exception e) {
-			System.out.println(e.getMessage());
-			e.printStackTrace();
+			ReporterLogs.log("Exception "+e.getMessage(), "info");
 		}		
 		
 	}
-	*/
+	
 	
 }
