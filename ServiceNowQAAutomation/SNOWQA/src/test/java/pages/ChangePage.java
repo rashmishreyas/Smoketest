@@ -129,4 +129,5 @@ public class ChangePage {
     	element = driver.findElement(By.xpath("//tbody[@class='list2_body']//a[text()='"+changeNumber+"']/following::td"));
     	return element;
     }
+
 }

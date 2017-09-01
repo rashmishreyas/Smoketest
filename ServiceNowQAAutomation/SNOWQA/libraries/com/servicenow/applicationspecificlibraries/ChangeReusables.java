@@ -109,8 +109,6 @@ public class ChangeReusables {
 					}	
 					
 				}
-				Frames.switchToDefaultContent(driver);
-	
 		}catch(Exception e){
 			e.getMessage();
 		}

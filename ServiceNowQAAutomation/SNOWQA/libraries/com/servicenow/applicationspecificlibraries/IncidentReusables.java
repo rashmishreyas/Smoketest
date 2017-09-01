@@ -126,12 +126,12 @@ public class IncidentReusables {
 			                ExtentReport.reportLog(LogStatus.PASS, "Successfully created Managed incident with Id "+incNumber);
 			                ExcelUtils.writeDataIntoCell("Incident_Management_TestData.xlsx", "Smoke_Suite", 2, 4, "Passed");
 			                ExtentReport.reportLog(LogStatus.INFO, "Incident Manager Required value for the incident "+ incNumber +" is "+ incMgrReqdValue);
-			            	ServiceNowUtils.scrollingToElementofAPage(IncidentPage.getIncidentManagerRequiredValueFromNotesTab(driver), driver);
+			            	Utils.scrollingToElementofAPage(IncidentPage.getIncidentManagerRequiredValueFromNotesTab(driver), driver, "Incident Manager Required");
 			      }else {
 							ReporterLogs.log("Unable to create a Managed incident Ticket. Incident Manager Required value from Notes tab displayed is "+ incMgrReqdValue, "error");
 			                ExtentReport.reportLog(LogStatus.FAIL, "Unable to create a managed incident ticket");
 			                ExcelUtils.writeDataIntoCell("Incident_Management_TestData.xlsx", "Smoke_Suite", 2, 4, "Failed");
-			                ServiceNowUtils.scrollingToElementofAPage(IncidentPage.getIncidentManagerRequiredValueFromNotesTab(driver), driver);
+			                Utils.scrollingToElementofAPage(IncidentPage.getIncidentManagerRequiredValueFromNotesTab(driver), driver,"Incident Manager Required");
 			                Assert.assertEquals(incMgrReqdValue, "true");
 						}
 			        }            
@@ -153,12 +153,12 @@ public class IncidentReusables {
 				            	ExtentReport.reportLog(LogStatus.PASS, "Successfully created Managed incident with Id "+incNumber);
 				            	ExcelUtils.writeDataIntoCell("Incident_Management_TestData.xlsx", "Smoke_Suite", 2, 4, "Passed");
 				            	ExtentReport.reportLog(LogStatus.INFO, "Incident Manager Required value for the incident "+ incNumber +" is "+ incMgrReqdValue);
-				            	ServiceNowUtils.scrollingToElementofAPage(IncidentPage.getIncidentManagerRequiredValueFromNotesTab(driver), driver);
+				            	Utils.scrollingToElementofAPage(IncidentPage.getIncidentManagerRequiredValueFromNotesTab(driver), driver,"Incident Manager Required");
 				            }else{
 								ReporterLogs.log("Unable to create a Managed incident Ticket. Incident Manager Required value from Notes tab displayed is "+ incMgrReqdValue, "error");
 								ExtentReport.reportLog(LogStatus.FAIL, "Unable to create a managed incident ticket");
 								ExcelUtils.writeDataIntoCell("Incident_Management_TestData.xlsx", "Smoke_Suite", 2, 4, "Failed");
-								ServiceNowUtils.scrollingToElementofAPage(IncidentPage.getIncidentManagerRequiredValueFromNotesTab(driver), driver);
+								Utils.scrollingToElementofAPage(IncidentPage.getIncidentManagerRequiredValueFromNotesTab(driver), driver, "Incident Manager Required");
 								Assert.assertEquals(incMgrReqdValue, "true");
 							}
 					  }				

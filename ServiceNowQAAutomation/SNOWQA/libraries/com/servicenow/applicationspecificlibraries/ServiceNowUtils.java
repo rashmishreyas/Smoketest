@@ -7,6 +7,7 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 import pages.HomePage;
 
+import com.servicenow.genericlibraries.ReporterLogs;
 import com.servicenow.genericlibraries.TextBoxes;
 
 public class ServiceNowUtils {
@@ -18,21 +19,4 @@ public class ServiceNowUtils {
         HomePage.getCreateNewBtn(driver).click();
 		Frames.switchToFrameById("gsft_main", driver);	
 	}
-	
-		
-	public static void scrollingToElementofAPage(WebElement element, WebDriver driver)
-	{
-	   try
-	      {
-	         ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();",element);
-	         }
-	   catch(Exception e){
-		  e.getMessage();
-	   }
-	   
-	   }
-		   	                                                              
-	                                                                
-	                                }
-
-
+}
