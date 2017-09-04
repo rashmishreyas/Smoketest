@@ -14,9 +14,10 @@ public class ServiceNowUtils {
 
 	public static void navigateToModuleName(WebDriver driver, String moduleName) throws InterruptedException {
 		WaitUtils.waitForIdPresent(driver, "filter");
-		TextBoxes.enterTextValue(HomePage.getfilterEdt(driver), moduleName, "Filter Edit box for searching");
+		TextBoxes.enterTextValue(HomePage.getfilterEdt(driver), moduleName, "Filter Edit box for searching : "+moduleName);
 		WaitUtils.waitForXpathPresent(driver,"//a[text()='Create New']");
-        HomePage.getCreateNewBtn(driver).click();
+		WaitUtils.waitForPageToLoad(driver, 10);
+		HomePage.getCreateNewBtn(driver).click();
 		Frames.switchToFrameById("gsft_main", driver);	
 	}
 }

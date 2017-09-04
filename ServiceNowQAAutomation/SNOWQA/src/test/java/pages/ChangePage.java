@@ -129,5 +129,35 @@ public class ChangePage {
     	element = driver.findElement(By.xpath("//tbody[@class='list2_body']//a[text()='"+changeNumber+"']/following::td"));
     	return element;
     }
+  
+    public static WebElement getChangeNumberFromQueue(WebDriver driver, String changeNumber){
+    	element = driver.findElement(By.xpath("//tbody[@class='list2_body']//a[text()='"+changeNumber+"']"));
+    	return element;
+    }
 
+    public static WebElement getSubmitForPlanningBtn(WebDriver driver){
+    	element = driver.findElement(By.xpath("//button[text()='Submit for Planning']"));
+    	return element;
+    }
+    
+    public static WebElement getChangeStateEdtDropDown(WebDriver driver){
+    	element = driver.findElement(By.id("change_request.state"));
+    	return element;
+    }
+    
+    public static WebElement getChangeCancelBtn(WebDriver driver){
+    	element = driver.findElement(By.id("cancel_change"));
+    	return element;
+    }
+  
+    public static WebElement getActivityTab(WebDriver driver){
+    	element = driver.findElement(By.xpath("//span[text()='Activity']"));
+    	return element;
+    }
+    
+    public static WebElement getReasonForCancellationEdt(WebDriver driver){
+    	element = driver.findElement(By.id("change_request.u_reason_for_cancellation"));
+    	return element;
+    }
+    
 }
