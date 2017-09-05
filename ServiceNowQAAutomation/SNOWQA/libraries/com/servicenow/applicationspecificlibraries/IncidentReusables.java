@@ -20,6 +20,8 @@ import com.servicenow.genericlibraries.ExtentReport;
 import com.servicenow.genericlibraries.ReporterLogs;
 import com.servicenow.genericlibraries.ScreenShot;
 import com.servicenow.genericlibraries.TextBoxes;
+
+import pages.HomePage;
 import pages.IncidentPage;
 
 public class IncidentReusables {	
@@ -105,7 +107,7 @@ public class IncidentReusables {
 			driver.findElement(By.xpath("//button[text()='Submit']")).click();			
 			
 			WaitUtils.waitForPageToLoad(driver, 10);
-			WaitUtils.waitForTitleToBeDisplayed(driver, "Incidents | ServiceNow");
+			WaitUtils.waitForTitleIs(driver, "Incidents | ServiceNow");
 			String incidentState = null;
 			
 			 if(IncidentPage.getSearchDropDown(driver).getAttribute("value").equalsIgnoreCase("number")){
@@ -117,7 +119,7 @@ public class IncidentReusables {
 			        WaitUtils.waitForPageToLoad(driver, 10);            
 			        IncidentPage.getIncidentNumberfromQueue(driver, incNumber).click();
 			        WaitUtils.waitForPageToLoad(driver, 10);
-			        WaitUtils.waitForTitleToBeDisplayed(driver, incNumber+" | ServiceNow");
+			        WaitUtils.waitForTitleIs(driver, incNumber+" | ServiceNow");
 			        ReporterLogs.log("Title of the page after searching the incident: "+driver.getTitle(), "info");
 			        String incMgrReqdValue=IncidentPage.getIncidentManagerRequiredValueFromNotesTab(driver).getText();
 			        if (incMgrReqdValue.equalsIgnoreCase("true")) {
@@ -144,7 +146,7 @@ public class IncidentReusables {
 				   WaitUtils.waitForPageToLoad(driver, 10);            
 				   IncidentPage.getIncidentNumberfromQueue(driver, incNumber).click();
 				   WaitUtils.waitForPageToLoad(driver, 10);
-				   WaitUtils.waitForTitleToBeDisplayed(driver, incNumber+" | ServiceNow");
+				   WaitUtils.waitForTitleIs(driver, incNumber+" | ServiceNow");
 				   String incMgrReqdValue=IncidentPage.getIncidentManagerRequiredValueFromNotesTab(driver).getText();
 				   ReporterLogs.log("Incident Manager Required value is: "+incMgrReqdValue, "info");
 				            if (incMgrReqdValue.equalsIgnoreCase("true")) {
@@ -222,7 +224,7 @@ public class IncidentReusables {
 			driver.findElement(By.xpath("//button[text()='Submit']")).click();			
 			
 			WaitUtils.waitForPageToLoad(driver, 10);
-			WaitUtils.waitForTitleToBeDisplayed(driver, "Incidents | ServiceNow");
+			WaitUtils.waitForTitleIs(driver, "Incidents | ServiceNow");
 			String incidentState = null;
 			
 			//Search for the created incident id and verify if its status is new
@@ -292,4 +294,218 @@ public class IncidentReusables {
 		    }		
 		}			
 	}	
+	
+	public static void resolveIncident(WebDriver driver) throws Exception
+	{
+		
+		try{
+		WaitUtils.waitForPageToLoad(driver, 10);
+		
+		//Search for the Incident Ticket
+		String incNumber=ExcelUtils.getData("Incident_Management_TestData.xlsx","Smoke_Suite", 1, 2);
+		String assignedTo=ExcelUtils.getData("Incident_Management_TestData.xlsx","Smoke_Suite", 3, 7);
+		ExcelUtils.writeDataIntoCell("Incident_Management_TestData.xlsx","Smoke_Suite", 3, 2, incNumber);
+		ReporterLogs.log("Incident Number is "+incNumber, "info");
+		ExtentReport.reportLog(LogStatus.INFO, "Incident Number is "+incNumber);
+		WaitUtils.waitForTitleIs(driver, "Incidents | ServiceNow");			
+		if(!IncidentPage.getSearchDropDown(driver).getAttribute("value").equalsIgnoreCase("number")){
+			 WaitUtils.waitForXpathPresent(driver, "//div[@class='input-group']//select");
+	         DropDowns.selectDropdownByVisibleText(IncidentPage.getSearchDropDown(driver), "Number", "Search Drop Down");
+		}
+	         ServiceNowUtils.searchTicketFromQueue(driver, incNumber);
+	         String incidentState=IncidentPage.getIncidentStatusfromQueue(driver, incNumber).getText();
+	         if (incidentState.equalsIgnoreCase("New")) {
+	        	 Thread.sleep(3000);
+	        	 IncidentPage.getIncidentNumberfromQueue(driver, incNumber).click();
+	        	 WaitUtils.waitForPageToLoad(driver, 10);
+	        	 WaitUtils.waitForTitleIs(driver, incNumber+" | ServiceNow");
+	        	 ReporterLogs.log("Current State of Incident " + incNumber + "is "+incidentState, "info");
+	        	 ExtentReport.reportLog(LogStatus.INFO, "Current State of Incident " + incNumber + "is "+incidentState);
+	        	 
+	        	 //Update the status from New to Work in Progress
+	        	 DropDowns.selectDropdownByVisibleText(IncidentPage.getStateDropdown(driver), "Work in Progress", "State");
+	        	 IncidentPage.getAssignedToEdt(driver).sendKeys(assignedTo);
+	        	 IncidentPage.getAssignedToEdt(driver).sendKeys(Keys.ENTER);
+	        	 Thread.sleep(2000);
+	        	 IncidentPage.getUpdateBtn(driver).click();						
+	        	 WaitUtils.waitForTitleIs(driver, "Incidents | ServiceNow");
+	        	 
+	        	 //Search for the incident ticket
+	        	 DropDowns.selectDropdownByVisibleText(IncidentPage.getSearchDropDown(driver), "Number", "Search Drop Down");
+	        	 ServiceNowUtils.searchTicketFromQueue(driver, incNumber);
+	        	 WaitUtils.waitForTitleIs(driver, "Incidents | ServiceNow");
+	        	 String incidentStateWIP=IncidentPage.getIncidentStatusfromQueue(driver, incNumber).getText();
+	        	 ReporterLogs.log("Current State of Incident " + incNumber + "is "+incidentStateWIP, "info");
+	        	 ExtentReport.reportLog(LogStatus.INFO, "Current State of Incident " + incNumber + "is "+incidentStateWIP);
+	        	 
+	        	 //Update the incident ticket from Work in Progress to Resolved State
+	        	 if (incidentStateWIP.equalsIgnoreCase("Work in Progress")) {					
+					Thread.sleep(3000);
+					IncidentPage.getIncidentNumberfromQueue(driver, incNumber).click();
+					WaitUtils.waitForPageToLoad(driver, 10);
+					WaitUtils.waitForTitleIs(driver, incNumber+" | ServiceNow");
+					DropDowns.selectDropdownByVisibleText(IncidentPage.getStateDropdown(driver), "Resolved", "State");					
+					
+					String configurationItem=ExcelUtils.getData("Incident_Management_TestData.xlsx","Smoke_Suite", 3, 13);
+					String causeCode=ExcelUtils.getData("Incident_Management_TestData.xlsx","Smoke_Suite", 3, 14);
+					String subCauseCode=ExcelUtils.getData("Incident_Management_TestData.xlsx","Smoke_Suite", 3, 15);
+					String mitigationSolutionSteps=ExcelUtils.getData("Incident_Management_TestData.xlsx","Smoke_Suite", 3, 16);
+					IncidentPage.getConfigurationItemEdt(driver).sendKeys(configurationItem);
+					IncidentPage.getConfigurationItemEdt(driver).sendKeys(Keys.ENTER);
+					
+					//Fill closure tab fields
+					IncidentPage.getClosureTab(driver).click();
+					DropDowns.selectDropdownByVisibleText(IncidentPage.getCauseCodeDropdown(driver), causeCode, "Cause Code");
+					DropDowns.selectDropdownByVisibleText(IncidentPage.getSubCauseCodeDropdown(driver), subCauseCode, "Sub Cause Code");
+					Thread.sleep(5000);
+					TextBoxes.enterTextValue(IncidentPage.getMitigationAndSolutionStepsEdt(driver), mitigationSolutionSteps + incNumber, "Mitigation and Solution Steps");
+					
+					IncidentPage.getUpdateBtn(driver).click();	
+					
+					WaitUtils.waitForTitleIs(driver, "Incidents | ServiceNow");
+		        	 
+		        	 //Search for the incident ticket
+		        	 DropDowns.selectDropdownByVisibleText(IncidentPage.getSearchDropDown(driver), "Number", "Search Drop Down");
+		        	 ServiceNowUtils.searchTicketFromQueue(driver, incNumber);
+		        	 WaitUtils.waitForTitleIs(driver, "Incidents | ServiceNow");
+		        	 String incidentStateResolved=IncidentPage.getIncidentStatusfromQueue(driver, incNumber).getText();
+		        	 ReporterLogs.log("Current State of Incident " + incNumber + "is "+incidentStateResolved, "info");
+		        	 ExtentReport.reportLog(LogStatus.INFO, "Current State of Incident " + incNumber + "is "+incidentStateResolved);
+		        	 
+		        	 //Update the incident ticket from Work in Progress to Resolved State
+		        	 if (incidentStateResolved.equalsIgnoreCase("Resolved")) {
+		        		 Assert.assertEquals(incidentStateResolved, "Resolved");
+		        		 ExtentReport.reportLog(LogStatus.PASS, "Incident ticket " + incNumber +" has been successfully moved to Resolved State");
+		        		 ReporterLogs.log("Incident ticket " + incNumber +" has been successfully moved to Resolved State", "pass");
+		        		 ExcelUtils.writeDataIntoCell("Incident_Management_TestData.xlsx", "Smoke_Suite", 3, 4, "Passed");
+		        	 }
+		        	 else{
+		        		 ReporterLogs.log("Incident ticket " + incNumber +" has not been moved to Resolved State", "error");
+		        		 ExtentReport.reportLog(LogStatus.FAIL, "Incident ticket " + incNumber +" has not been moved to Resolved State");
+		        		 ExcelUtils.writeDataIntoCell("Incident_Management_TestData.xlsx", "Smoke_Suite", 3, 4, "Failed");
+		        		 Assert.assertEquals(incidentStateResolved, "Resolved");
+		        	 }
+	        	 	}
+	        	 
+	        	 else{
+	        		 ReporterLogs.log("Incident ticket " + incNumber +" is not Work in Progress", "error");
+	        		 ExtentReport.reportLog(LogStatus.FAIL, "Incident ticket " + incNumber +" is not Work in Progress");
+	        		 ExcelUtils.writeDataIntoCell("Incident_Management_TestData.xlsx", "Smoke_Suite", 3, 4, "Failed");
+	        		 Assert.assertEquals(incidentStateWIP, "Work in Progress");
+	        	 }
+	         	}	
+	         
+	         else {
+	        	 	ReporterLogs.log("Incident ticket " + incNumber +" status is not New", "error");
+					ExtentReport.reportLog(LogStatus.FAIL, "Incident ticket " + incNumber +" status is not New");
+					ExcelUtils.writeDataIntoCell("Incident_Management_TestData.xlsx", "Smoke_Suite", 3, 4, "Failed");
+	        		Assert.assertEquals(incidentState, "New");
+			}         
+				
+		
+		
+		/*// Else if search dropdown attribute has value=number
+		else {
+			 ServiceNowUtils.searchTicketFromQueue(driver, incNumber);
+	         String incidentState=IncidentPage.getIncidentStatusfromQueue(driver, incNumber).getText();
+	         if (incidentState.equalsIgnoreCase("New")) {
+	        	 Thread.sleep(2000);
+	        	 IncidentPage.getIncidentNumberfromQueue(driver, incNumber).click();
+	        	 WaitUtils.waitForPageToLoad(driver, 10);
+	        	 WaitUtils.waitForTitleIs(driver, incNumber+" | ServiceNow");
+	        	 ReporterLogs.log("Current State of Incident " + incNumber + "is "+incidentState, "info");
+	        	 ExtentReport.reportLog(LogStatus.INFO, "Current State of Incident " + incNumber + "is "+incidentState);
+	        	 
+	        	 //Update the status from New to Work in Progress
+	        	 DropDowns.selectDropdownByVisibleText(IncidentPage.getStateDropdown(driver), "Work in Progress", "State");
+	        	 IncidentPage.getAssignedToEdt(driver).sendKeys(assignedTo);
+	        	 IncidentPage.getAssignedToEdt(driver).sendKeys(Keys.ENTER);
+	        	 Thread.sleep(2000);
+	        	 IncidentPage.getUpdateBtn(driver).click();						
+	        	 WaitUtils.waitForTitleIs(driver, "Incidents | ServiceNow");
+	        	 
+	        	 //Search for the incident ticket
+	        	 DropDowns.selectDropdownByVisibleText(IncidentPage.getSearchDropDown(driver), "Number", "Search Drop Down");
+	        	 ServiceNowUtils.searchTicketFromQueue(driver, incNumber);
+	        	 WaitUtils.waitForTitleIs(driver, "Incidents | ServiceNow");
+	        	 String incidentStateWIP=IncidentPage.getIncidentStatusfromQueue(driver, incNumber).getText();
+	        	 ReporterLogs.log("Current State of Incident " + incNumber + "is "+incidentStateWIP, "info");
+	        	 ExtentReport.reportLog(LogStatus.INFO, "Current State of Incident " + incNumber + "is "+incidentStateWIP);
+	        	 
+	        	 //Update the incident ticket from Work in Progress to Resolved State
+	        	 if (incidentStateWIP.equalsIgnoreCase("Work in Progress")) {					
+					Thread.sleep(3000);
+					IncidentPage.getIncidentNumberfromQueue(driver, incNumber).click();
+					WaitUtils.waitForPageToLoad(driver, 10);
+					WaitUtils.waitForTitleIs(driver, incNumber+" | ServiceNow");
+					DropDowns.selectDropdownByVisibleText(IncidentPage.getStateDropdown(driver), "Resolved", "State");					
+					
+					String configurationItem=ExcelUtils.getData("Incident_Management_TestData.xlsx","Smoke_Suite", 3, 13);
+					String causeCode=ExcelUtils.getData("Incident_Management_TestData.xlsx","Smoke_Suite", 3, 14);
+					String subCauseCode=ExcelUtils.getData("Incident_Management_TestData.xlsx","Smoke_Suite", 3, 15);
+					String mitigationSolutionSteps=ExcelUtils.getData("Incident_Management_TestData.xlsx","Smoke_Suite", 3, 16);
+					IncidentPage.getConfigurationItemEdt(driver).sendKeys(configurationItem);
+					IncidentPage.getConfigurationItemEdt(driver).sendKeys(Keys.ENTER);
+					
+					//Fill closure tab fields
+					IncidentPage.getClosureTab(driver).click();
+					DropDowns.selectDropdownByVisibleText(IncidentPage.getCauseCodeDropdown(driver), causeCode, "Cause Code");
+					DropDowns.selectDropdownByVisibleText(IncidentPage.getSubCauseCodeDropdown(driver), subCauseCode, "Sub Cause Code");
+					Thread.sleep(5000);
+					TextBoxes.enterTextValue(IncidentPage.getMitigationAndSolutionStepsEdt(driver), mitigationSolutionSteps+ incNumber, "Mitigation and Solution Steps");
+					IncidentPage.getUpdateBtn(driver).click();	
+					
+					WaitUtils.waitForTitleIs(driver, "Incidents | ServiceNow");
+		        	 
+		        	//Search for the incident ticket
+					DropDowns.selectDropdownByVisibleText(IncidentPage.getSearchDropDown(driver), "Number", "Search Drop Down");
+					ServiceNowUtils.searchTicketFromQueue(driver, incNumber);
+					WaitUtils.waitForTitleIs(driver, "Incidents | ServiceNow");
+					String incidentStateResolved=IncidentPage.getIncidentStatusfromQueue(driver, incNumber).getText();
+					ReporterLogs.log("Current State of Incident " + incNumber + "is "+incidentStateResolved, "info");
+					ExtentReport.reportLog(LogStatus.INFO, "Current State of Incident " + incNumber + "is "+incidentStateResolved);
+		        	 
+		        	 //Update the incident ticket from Work in Progress to Resolved State
+					if (incidentStateResolved.equalsIgnoreCase("Resolved")) {
+						Assert.assertEquals(incidentStateResolved, "Resolved");
+						ExtentReport.reportLog(LogStatus.PASS, "Incident ticket " + incNumber +" has been successfully moved to Resolved State");
+						ReporterLogs.log("Incident ticket" + incNumber +" has been successfully moved to Resolved State", "pass");
+		        	 }
+					else{
+						ReporterLogs.log("Incident ticket" + incNumber +" has not been moved to Resolved State", "error");
+						ExtentReport.reportLog(LogStatus.FAIL, "Incident ticket " + incNumber +" has not been moved to Resolved State");
+						Assert.assertEquals(incidentStateResolved, "Resolved");
+		        	 	}
+	        	 	}
+	        	 
+	        	 else{
+	        		 ReporterLogs.log("Incident ticket" + incNumber +" is not Work in Progress", "error");
+	        		 ExtentReport.reportLog(LogStatus.FAIL, "Incident ticket " + incNumber +"  is not Work in Progress");
+	        		 Assert.assertEquals(incidentStateWIP, "Work in Progress");
+	        	 }
+	         	}	
+	         
+	         else {
+	        	 ReporterLogs.log("Incident ticket" + incNumber +" is not New", "error");
+					ExtentReport.reportLog(LogStatus.FAIL, "Incident ticket" + incNumber +" is not New");
+	        		Assert.assertEquals(incidentState, "New");
+			} */        
+		}
+			
+		
+		catch (UnhandledAlertException f) {
+		    try {
+		        Alert alert = driver.switchTo().alert();
+		        String alertText = alert.getText();
+		        System.out.println("Alert data: " + alertText);
+		         Assert.fail("Unhandled alert");
+		        
+		        } 
+		    catch (NoAlertPresentException e) {
+		        e.printStackTrace();
+		    }		
+		}		
+	}
 }
+
+

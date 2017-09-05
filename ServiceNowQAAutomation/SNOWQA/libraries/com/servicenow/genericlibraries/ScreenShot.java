@@ -30,13 +30,14 @@ public class ScreenShot {
 		       Rectangle captureRect = new Rectangle(0, 0, screenSize.width, screenSize.height);
 		       BufferedImage screenFullImage = robot.createScreenCapture(captureRect);
 		       ImageIO.write(screenFullImage, Capabilities.getPropertyValue("SnapShotType"), new File(fileName));
-		       log.info("screenshot was saved in location : " + fileName);
+		       ReporterLogs.log("screenshot was saved in location : " + fileName, "info");
 		       return fileName;
-   }catch(Exception ex){
-					        log.error(ex);
+        	}
+        		catch(Exception ex){
+	   						ReporterLogs.log("Exception " + ex, "error");
 					        return ex.getMessage();
-   }
-        }
+        					}
+        		}
 
 	
 	//will be used for taking screenshot during GUI or functionality testing
@@ -53,10 +54,10 @@ public class ScreenShot {
 		        BufferedImage eleScreenshot= fullImg.getSubimage(pointX, pointY, elemWidth, elemHight);
 		        ImageIO.write(eleScreenshot, Capabilities.getPropertyValue("ElementShapShotType"), fullBrowser);
 		        FileUtils.copyFile(fullBrowser, new File(fileName));
-		        log.info("Element screenshot was saved in location : " + fileName);
+		        ReporterLogs.log("Element screenshot was saved in location : " + fileName, "info");
 		        
 		    } catch (IOException ex) {
-		        log.error(ex);
+		    	ReporterLogs.log("Exception " + ex, "error");
 		    }
 	}
 	
@@ -79,7 +80,7 @@ public class ScreenShot {
         	FileUtils.copyFile(SrcFile, DestFile);
 
         }catch(IOException ex){
-        	log.error(ex);
+        	ReporterLogs.log("Exception " + ex, "error");
         }
 
     }

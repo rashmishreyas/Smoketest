@@ -78,7 +78,7 @@ public class ChangeReusables {
 	
 	public static void verifyChangeCreation(WebDriver driver, String crNumber, int snum,int cellnum) throws FileNotFoundException, IOException{
 		WaitUtils.waitForPageToLoad(driver, 10);
-		WaitUtils.waitForTitleToBeDisplayed(driver, "Change Requests | ServiceNow");
+		WaitUtils.waitForTitleIs(driver, "Change Requests | ServiceNow");
 		if(ChangePage.getSearchDropDown(driver).getAttribute("value").equalsIgnoreCase("number")){
 			WaitUtils.waitForXpathPresent(driver, "//div[@class='input-group']/label[text()='Search']/following-sibling::input");
 			TextBoxes.enterTextValue(ChangePage.getSearchChangeEdt(driver), crNumber, "Search Change ");

@@ -483,4 +483,10 @@ public class IncidentPage {
 		element=driver.findElement(By.xpath("//ul[@class='h-card-wrapper activities-form']//span[text()='Incident Manager Required']//following-sibling::span//span"));
 		return element;
 	}
-}
+	
+	public static WebElement getIncidentSearchTicketEdt(WebDriver driver){
+    	element = driver.findElement(By.xpath("//div[@class='input-group']/label[text()='Search']/following-sibling::input"));
+    	return element;
+    }
+    
+    }

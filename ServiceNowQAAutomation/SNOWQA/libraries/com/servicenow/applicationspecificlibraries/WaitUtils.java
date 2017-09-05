@@ -40,8 +40,19 @@ public class WaitUtils {
 		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(wbXpath)));
 	}
 	
-	public static void waitForTitleToBeDisplayed(WebDriver driver, String wbTitle){
+	public static void waitForTitleIs(WebDriver driver, String wbTitle){
         WebDriverWait wait=new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.titleIs(wbTitle));
     }
+	
+	public static void waitForElementToBeClickable(WebDriver driver, WebElement wbLocator){
+        WebDriverWait wait=new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.elementToBeClickable(wbLocator));
+        }
+	
+	public static void waitForTitleContains(WebDriver driver, String wbTitle){
+        WebDriverWait wait=new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.titleContains(wbTitle));
+        }
+	
 }

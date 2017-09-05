@@ -118,11 +118,12 @@ public class SuperTestNG {
 		     }
 	     finally {
 	               Frames.switchToDefaultContent(driver);
-/*	  	    	   SafeLogin.logOut(driver);
-	  		       driver.close();*/
+	  	    	   SafeLogin.logOut(driver);
+	  		       driver.close();
+	               ExtentReport.endReport();
 	  		}
 	                  
-	       ExtentReport.endReport();  
+	         
 	       
 	       
 	}

@@ -1,5 +1,6 @@
 package testcase;
 
+import org.openqa.selenium.Keys;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -11,7 +12,9 @@ import com.servicenow.applicationspecificlibraries.SafeLogin;
 import com.servicenow.applicationspecificlibraries.ServiceNowUtils;
 import com.servicenow.applicationspecificlibraries.SnowReporter;
 import com.servicenow.applicationspecificlibraries.SuperTestNG;
+import com.servicenow.applicationspecificlibraries.WaitUtils;
 import com.servicenow.genericlibraries.Capabilities;
+import com.servicenow.genericlibraries.ExcelUtils;
 import com.servicenow.genericlibraries.ExtentReport;
 import com.servicenow.genericlibraries.ReporterLogs;
 
@@ -29,7 +32,7 @@ public class incidentManagement extends SuperTestNG {
 		
 		try {
 			SafeLogin.logInUser(driver);			
-			com.servicenow.applicationspecificlibraries.WaitUtils.waitForPageToLoad(driver, 10);			
+			WaitUtils.waitForPageToLoad(driver, 10);			
 			ServiceNowUtils.navigateToModuleName(driver,"incident");
 			IncidentReusables.createIncident(driver, false);	
 			
@@ -41,14 +44,14 @@ public class incidentManagement extends SuperTestNG {
 	}
 	
 
-	@Test(priority=1,description="Create managed incident ticket",groups="Incidents")
+	@Test(priority=1,description="Create managed incident ticket",groups="Incidents",enabled=false)
 	public void testCreateManagedIncidentTicket() throws Exception{
 		
 		//ExtentReport.startReport(Capabilities.getPropertyValue("IncidentReports"),"testCreateManagedIncidentTicket","Create Managed Incident");
 		
 		try {
 			SafeLogin.logInUser(driver);			
-			com.servicenow.applicationspecificlibraries.WaitUtils.waitForPageToLoad(driver, 10);			
+			WaitUtils.waitForPageToLoad(driver, 10);			
 			ServiceNowUtils.navigateToModuleName(driver,"incident");
 			IncidentReusables.createIncident(driver, true);	
 			
@@ -59,5 +62,17 @@ public class incidentManagement extends SuperTestNG {
 		
 	}
 	
+	@Test(priority=2,description="Progression of Incident ticket to Resolved state",groups="Incidents",dependsOnMethods={"testCreateStandAloneIncidentTicket"})
+	public void testResolveIncidentTicket() throws Exception{
+		ExtentReport.startReport(Capabilities.getPropertyValue("IncidentReports"), "Test Resolve Incident Ticket", "Progress Incident ticket to Resolved state");
+		SafeLogin.logInUser(driver);
+		WaitUtils.waitForPageToLoad(driver, 10);
+		ServiceNowUtils.navigateToAllQueueForDesiredModule(driver, "Incident");	
+		IncidentReusables.resolveIncident(driver);
+		
+			
+		
+		
+	}
 	
 }
