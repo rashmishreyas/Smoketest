@@ -42,7 +42,7 @@ public class changeManagement extends SuperTestNG{
 	
 	static String crNumber=null;
 
-	@Test(priority=0,description="-----Create Change Test Case-----")
+	@Test(priority=0,description="-----Create Change Test Case-----",enabled=false)
 	public void testCreateChangeTicket() throws IOException, InterruptedException{
 			ExtentReport.startReport(Capabilities.getPropertyValue("ChangeReports"), "Test Create Change Ticket", "Create Change Ticket");
 			SafeLogin.logInUser(driver);
@@ -52,75 +52,24 @@ public class changeManagement extends SuperTestNG{
 			ChangeReusables.verifyChangeCreation(driver, crNumber,1,4);
 	}
 	
-	@Test(priority=1,description="-----Update Change Test Case-----",enabled=false)
-	public void testUpdateChangeTicket() throws IOException, InterruptedException{
-		ExtentReport.startReport(Capabilities.getPropertyValue("ChangeReports"), "Test Create Change Ticket", "Create Change Ticket");
+	@Test(priority=1,description="-----Update Change Test Case-----",enabled=true)
+	public void testChangeTicketUpdation() throws IOException, InterruptedException{
+		ExtentReport.startReport(Capabilities.getPropertyValue("ChangeReports"), "Update Change Test Case", "Create Change Ticket");
 		SafeLogin.logInUser(driver);
 		crNumber = ExcelUtils.getData("Change_Management_TestData.xlsx", "Smoke_Suite", 1, 2);
 		WaitUtils.waitForPageToLoad(driver, 10);
-		WaitUtils.waitForIdPresent(driver, "filter");
-		HomePage.getfilterEdt(driver).sendKeys("change");
+		ServiceNowUtils.navigateToAllQueueForDesiredModule(driver, "change");
+		ServiceNowUtils.searchDesiredTicket(driver, crNumber, "Change");
+		ChangePage.getChangeNumberFromQueue(driver, crNumber).click();	
 		WaitUtils.waitForPageToLoad(driver, 10);
-		HomePage.getAllLnk(driver).click();
-		Frames.switchToFrameById("gsft_main", driver);
-		WaitUtils.waitForPageToLoad(driver, 10);
-		if(ChangePage.getSearchDropDown(driver).getAttribute("value").equalsIgnoreCase("number")){
-			WaitUtils.waitForXpathPresent(driver, "//div[@class='input-group']/label[text()='Search']/following-sibling::input");
-			TextBoxes.enterTextValue(ChangePage.getSearchChangeEdt(driver), crNumber, "Search Change ");
-			ChangePage.getSearchChangeEdt(driver).sendKeys(Keys.ENTER);
-			WaitUtils.waitForPageToLoad(driver, 10);
-			ChangePage.getChangeNumberFromQueue(driver, crNumber).click();	
-			WaitUtils.waitForPageToLoad(driver, 10);
-			ChangePage.getSubmitForPlanningBtn(driver).click();
-			Thread.sleep(10000);
-			String stateofChange = DropDowns.getFirstSelectedOptionName(ChangePage.getChangeStateEdtDropDown(driver), "State Drop Down");
-			ReporterLogs.log("State of the Change is :"+stateofChange);
-			if(stateofChange.equalsIgnoreCase("Planning")){
-				Assert.assertEquals(stateofChange, "Planning");
-				ExtentReport.reportLog(LogStatus.PASS, "Successfully updated change : "+crNumber);
-				ReporterLogs.log("Successfully updated Change with Id "+crNumber, "info");
-				ExcelUtils.writeDataIntoCell("Change_Management_TestData.xlsx", "Smoke_Suite", 2, 2, crNumber);
-				ExcelUtils.writeDataIntoCell("Change_Management_TestData.xlsx", "Smoke_Suite", 2, 4, "Passed");
-			}else{
-				ExtentReport.reportLog(LogStatus.FAIL, "Unable to update change : "+crNumber);
-				ReporterLogs.log("Unable to update Change with Id "+crNumber, "error");
-				ExcelUtils.writeDataIntoCell("Change_Management_TestData.xlsx", "Smoke_Suite", 2, 2, crNumber);
-				ExcelUtils.writeDataIntoCell("Change_Management_TestData.xlsx", "Smoke_Suite", 2, 4, "Failed");
-				Assert.assertEquals(stateofChange, "Planning");
-		}
-		}else{
-				WaitUtils.waitForXpathPresent(driver, "//div[@class='input-group']//select");
-				DropDowns.selectDropdownByVisibleText(ChangePage.getSearchDropDown(driver), "Number", "Search Drop Down");
-				TextBoxes.enterTextValue(ChangePage.getSearchChangeEdt(driver), crNumber, "Search Change ");
-				ReporterLogs.log("Entering Change Id in the Search Text "+crNumber, "info");
-				ChangePage.getSearchChangeEdt(driver).sendKeys(Keys.ENTER);
-				WaitUtils.waitForPageToLoad(driver, 10);
-				ChangePage.getChangeNumberFromQueue(driver, crNumber).click();	
-				WaitUtils.waitForPageToLoad(driver, 10);
-				ChangePage.getSubmitForPlanningBtn(driver).click();
-				WaitUtils.waitForPageToLoad(driver, 10);
-				ChangePage.getSubmitForPlanningBtn(driver).click();
-				Thread.sleep(10000);
-				String stateofChange = DropDowns.getFirstSelectedOptionName(ChangePage.getChangeStateEdtDropDown(driver), "State Drop Down");
-				if(stateofChange.equalsIgnoreCase("Planning")){
-					Assert.assertEquals(stateofChange, "Planning");
-					ExtentReport.reportLog(LogStatus.PASS, "Successfully updated change : "+crNumber);
-					ReporterLogs.log("Successfully updated Change with Id "+crNumber, "info");
-					ExcelUtils.writeDataIntoCell("Change_Management_TestData.xlsx", "Smoke_Suite", 2, 2, crNumber);
-					ExcelUtils.writeDataIntoCell("Change_Management_TestData.xlsx", "Smoke_Suite", 2, 4, "Passed");
-				}else{
-						ExtentReport.reportLog(LogStatus.FAIL, "Unable to update change : "+crNumber);
-						ReporterLogs.log("Unable to update Change with Id "+crNumber, "error");
-						ExcelUtils.writeDataIntoCell("Change_Management_TestData.xlsx", "Smoke_Suite", 2, 4, "Failed");
-						ExcelUtils.writeDataIntoCell("Change_Management_TestData.xlsx", "Smoke_Suite", 2, 2, crNumber);
-						Assert.assertEquals(stateofChange, "Planning");
-			}
-		}
+		ChangePage.getSubmitForPlanningBtn(driver).click();
+		Thread.sleep(10000);
+		ChangeReusables.verifyStateOfChangeTicket(driver, "Planning", crNumber);
 	}
 	
-	@Test(priority=2,description="-----Cancel Change Test Case-----")
-	public void testCancelChangeTicket() throws IOException, InterruptedException{
-		ExtentReport.startReport(Capabilities.getPropertyValue("ChangeReports"), "Test Create Change Ticket", "Create Change Ticket");
+	@Test(priority=2,description="-----Cancel Change Test Case-----",enabled=false)
+	public void testChangeTicketCancellation() throws IOException, InterruptedException{
+		ExtentReport.startReport(Capabilities.getPropertyValue("ChangeReports"), "Test Cancel Change Ticket", "Create Change Ticket");
 		SafeLogin.logInUser(driver);
 		WaitUtils.waitForPageToLoad(driver, 10);
 		ServiceNowUtils.navigateToModuleName(driver, "change");
@@ -130,28 +79,40 @@ public class changeManagement extends SuperTestNG{
 		WaitUtils.waitForPageToLoad(driver, 10);
 		ChangePage.getSubmitForPlanningBtn(driver).click();
 		Thread.sleep(10000);
-		ChangePage.getActivityTab(driver).click();
-		ChangePage.getReasonForCancellationEdt(driver).sendKeys("test Cancel");
-		ChangePage.getChangeCancelBtn(driver).click();
-		WaitUtils.waitForPageToLoad(driver, 20);
-		ChangePage.getChangeNumberFromQueue(driver, crNumber).click();	
-		WaitUtils.waitForPageToLoad(driver, 10);
-		String stateofChange = DropDowns.getFirstSelectedOptionName(ChangePage.getChangeStateEdtDropDown(driver), "State Drop Down");
-		ReporterLogs.log("State of the Change is :"+stateofChange);
-		if(stateofChange.equalsIgnoreCase("Cancelled")){
-				Assert.assertEquals(stateofChange, "Cancelled");
-				ExtentReport.reportLog(LogStatus.PASS, "Successfully Change change : "+crNumber);
-				ReporterLogs.log("Successfully updated Change with Id "+crNumber, "info");
-				ExcelUtils.writeDataIntoCell("Change_Management_TestData.xlsx", "Smoke_Suite", 3, 2, crNumber);
-				ExcelUtils.writeDataIntoCell("Change_Management_TestData.xlsx", "Smoke_Suite", 3, 4, "Passed");
-			}else{
-				ExtentReport.reportLog(LogStatus.FAIL, "Unable to Cancel change : "+crNumber);
-				ReporterLogs.log("Unable to update Change with Id "+crNumber, "error");
-				ExcelUtils.writeDataIntoCell("Change_Management_TestData.xlsx", "Smoke_Suite", 3, 2, crNumber);
-				ExcelUtils.writeDataIntoCell("Change_Management_TestData.xlsx", "Smoke_Suite", 3, 4, "Failed");
-				Assert.assertEquals(stateofChange, "Planning");
-		}
+		ChangeReusables.moveToCancelledState(driver, crNumber);		
+		ChangeReusables.verifyStateOfChangeTicket(driver, "Cancelled", crNumber);
 		
-		
+	}
+	
+	@Test(priority=3,description="-----Change Ticket Approval-----",enabled=false)
+	public void testChangeTicketApproval() throws IOException, InterruptedException{
+			ExtentReport.startReport(Capabilities.getPropertyValue("ChangeReports"), "Test Create Change Ticket", "Create Change Ticket");
+			SafeLogin.logInUser(driver);
+			crNumber = ExcelUtils.getData("Change_Management_TestData.xlsx", "Smoke_Suite", 2, 2);
+			ServiceNowUtils.navigateToAllQueueForDesiredModule(driver, "change");
+			ServiceNowUtils.searchDesiredTicket(driver, crNumber, "Change");
+			ChangePage.getChangeNumberFromQueue(driver, crNumber).click();	
+			WaitUtils.waitForPageToLoad(driver, 10);
+			ChangePage.getSubmitForPlanningBtn(driver).click();
+			Thread.sleep(10000);
+			ChangeReusables.verifyStateOfChangeTicket(driver, "Assessment", crNumber);
+			ChangeReusables.moveToApprovalState(driver);
+			ExcelUtils.writeDataIntoCell("Change_Management_TestData.xlsx", "Smoke_Suite", 3, 2, crNumber);
+			ChangeReusables.verifyStateOfChangeTicket(driver, "Approval", crNumber);
+			
+			
+			
+	}
+	
+	@Test(priority=4,description="-----Change Ticket Closure-----",enabled=false)
+	public void testChangeTicketClosure() throws IOException, InterruptedException{
+			ExtentReport.startReport(Capabilities.getPropertyValue("ChangeReports"), "Test Create Change Ticket", "Create Change Ticket");
+			SafeLogin.logInUser(driver);
+			crNumber = ExcelUtils.getData("Change_Management_TestData.xlsx", "Smoke_Suite", 1, 2);
+			ServiceNowUtils.navigateToAllQueueForDesiredModule(driver, "change");
+			ServiceNowUtils.searchDesiredTicket(driver, crNumber, "Change");
+			ChangePage.getChangeNumberFromQueue(driver, crNumber).click();	
+			WaitUtils.waitForPageToLoad(driver, 10);
+			
 	}
 }

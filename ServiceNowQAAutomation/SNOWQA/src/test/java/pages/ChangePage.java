@@ -45,7 +45,7 @@ public class ChangePage {
     
     
     public static WebElement getPlanningTab(WebDriver driver){
-    	element = driver.findElement(By.xpath(".//*[@id='tabs2_section']/span[2]/span/span[2]"));
+    	element = driver.findElement(By.xpath("//span[contains(text(),'Planning')"));
     	return element;
     }
     
@@ -85,7 +85,7 @@ public class ChangePage {
     }
   
     public static WebElement getScheduleTab(WebDriver driver){
-    	element = driver.findElement(By.xpath("//*[@id='tabs2_section']/span[4]/span/span[2]"));
+    	element = driver.findElement(By.xpath("//span[contains(text(),'Schedule')]"));
     	return element;
     }
     
@@ -160,4 +160,63 @@ public class ChangePage {
     	return element;
     }
     
+    public static WebElement getSubmitForAssessmentBtn(WebDriver driver){
+    	element = driver.findElement(By.xpath("//button[text()='Submit For Assessment']"));
+    	return element;
+    }
+    
+    public static WebElement getEnvironmentInWhichChangeIsToBeExecutedDropDown(WebDriver driver){
+    	element = driver.findElement(By.id("change_request.u_technology_maturity"));
+    	return element;
+    }
+    
+    public static WebElement getExpectedServiceImpactDuringExecutionOfTheChangeDropDown(WebDriver driver){
+    	element = driver.findElement(By.id("change_request.u_knowledge_of_impacted_config"));
+    	return element;
+    }
+    
+    public static WebElement getPotentialServiceImpactDuringExecutionOfTheChangeDropDown(WebDriver driver){
+    	element = driver.findElement(By.id("change_request.u_service_impact"));
+    	return element;
+    }
+    
+    public static WebElement getUserSupportedByTheAssetDropDown(WebDriver driver){
+    	element = driver.findElement(By.id("change_request.u_business_user_impact"));
+    	return element;
+    }
+    
+    public static WebElement getBackOutRecoveryComplexityDropDown(WebDriver driver){
+    	element = driver.findElement(By.id("change_request.u_backout___remediation_capabi"));
+    	return element;
+    }
+    
+    public static WebElement getFamilarityWithChangeDropDown(WebDriver driver){
+    	element = driver.findElement(By.id("change_request.u_change_conflict"));
+    	return element;
+    }
+    
+    public static WebElement getRedundantServiceDropDown(WebDriver driver){
+    	element = driver.findElement(By.id("change_request.u_service_availability"));
+    	return element;
+    }
+    
+    public static WebElement getRiskAndImpactTab(WebDriver driver){
+    	element = driver.findElement(By.xpath("//span[contains(text(),'Risk') and contains(text(),'Impact')]"));
+    	return element;
+    }
+    
+    public static WebElement getPlannedStartDateEdt(WebDriver driver){
+    	element = driver.findElement(By.id("change_request.start_date"));
+    	return element;
+    }
+    
+    public static WebElement getPlannedEndDateEdt(WebDriver driver){
+    	element = driver.findElement(By.id("change_request.end_date"));
+    	return element;
+    }
+    
+    public static WebElement getRequestImpementationApprovalBtn(WebDriver driver){
+    	element = driver.findElement(By.xpath("//button[contains(text(),'Request') and contains(text(),'Implementation') and contains(text(),'Approval')]"));
+    	return element;
+    }
 }

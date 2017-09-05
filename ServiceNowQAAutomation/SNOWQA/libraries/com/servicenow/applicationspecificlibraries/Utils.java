@@ -2,6 +2,7 @@ package com.servicenow.applicationspecificlibraries;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import org.openqa.selenium.JavascriptExecutor;
@@ -17,8 +18,7 @@ public class Utils {
 	 * Objective : Capture current system time
 	 */
 	public static String getCurrentDateTime() throws Exception {
-	DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	 
+	DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");	 
 	 //get current date time with Date()
 	 Date date = new Date();
 	 // Now format the date
@@ -28,6 +28,10 @@ public class Utils {
 	 return date1;			
 }
 	
+	/*
+	 * Author : Samujjal Das Choudhury
+	 * Objective : Scroll to the required web element
+	 */
 	public static void scrollingToElementofAPage(WebElement element, WebDriver driver,String elementName)
 	{
 	   try
@@ -41,5 +45,24 @@ public class Utils {
 		  
 	   }
 }
+	
+	/*
+	 * Author : Samujjal Das Choudhury
+	 * Objective : Get future date and time
+	 */
+	public static String getDesiredDateAndTime(int days){
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Date date = new Date();
+			Calendar c = Calendar.getInstance();
+			c.setTime(date);
+	        c.add(Calendar.MONTH, days);
+	        c.add(Calendar.DATE, days);
+	        c.add(Calendar.HOUR, days);
+	        c.add(Calendar.MINUTE, days);
+	        c.add(Calendar.SECOND, days);
+	        // convert calendar to date
+	        Date currentDatePlusDays = c.getTime();     
+		return dateFormat.format(currentDatePlusDays);	
+	}
 
 }

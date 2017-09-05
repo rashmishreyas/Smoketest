@@ -32,7 +32,6 @@ public class SuperTestNG {
 	 */
 	public static WebDriver driver = null;
 	String browserType;
-	
 	 static{
 		 
 	        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss");
@@ -41,7 +40,7 @@ public class SuperTestNG {
 	 
 	@BeforeMethod
 	public void preCondition() throws IOException
-	{
+	{	
 		browserType = Capabilities.getPropertyValue("Browser");
 		ReporterLogs.log("Browser Set Up:::","info");
 		ReporterLogs.log("WebDriver Instance inside the setup():::" + browserType,"info");
@@ -119,8 +118,8 @@ public class SuperTestNG {
 		     }
 	     finally {
 	               Frames.switchToDefaultContent(driver);
-	  	    	   SafeLogin.logOut(driver);
-	  		       driver.close();
+/*	  	    	   SafeLogin.logOut(driver);
+	  		       driver.close();*/
 	  		}
 	                  
 	       ExtentReport.endReport();  

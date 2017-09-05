@@ -21,23 +21,30 @@ import freemarker.core.ReturnInstruction.Return;
 
 public class ChangeReusables {
 
+	static String changeId=null;
+	static String assignmentGroup = null;
+	static String configurationItem = null;
+	static String shortDescription = null;
+	static String description = null;
+	static String reasonForChange = null;
+	static String customerImpactDuringChange = null;
+	static String implementationPlan= null;
+	static String testPlan = null;
+	static String backoutPlan = null;
+	static String plannedStartDate = null;
+	static String plannedEndtDate=null;
 	public static String createChange(WebDriver driver){
 		
-		String changeId=null;
 		try{
 				WaitUtils.waitForXpathPresent(driver, "//a[contains(text(),'Normal: Planned')]");
 				ChangePage.getNormalLnk(driver).click();
 				ExtentReport.reportLog(LogStatus.INFO, "Creating Normal Change Ticket");
-				String assignmentGroup = ExcelUtils.getData("Change_Management_TestData.xlsx", "Smoke_Suite", 1, 5);
-				String configurationItem = ExcelUtils.getData("Change_Management_TestData.xlsx", "Smoke_Suite", 1, 6);
-				String shortDescription = ExcelUtils.getData("Change_Management_TestData.xlsx", "Smoke_Suite", 1, 7);
-				String description = ExcelUtils.getData("Change_Management_TestData.xlsx", "Smoke_Suite", 1, 8);
-				String reasonForChange = ExcelUtils.getData("Change_Management_TestData.xlsx", "Smoke_Suite", 1, 9);
-				String customerImpactDuringChange = ExcelUtils.getData("Change_Management_TestData.xlsx", "Smoke_Suite", 1, 10);
-				String implementationPlan= ExcelUtils.getData("Change_Management_TestData.xlsx", "Smoke_Suite", 1, 11);
-				String testPlan = ExcelUtils.getData("Change_Management_TestData.xlsx", "Smoke_Suite", 1, 12);
-				String backoutPlan = ExcelUtils.getData("Change_Management_TestData.xlsx", "Smoke_Suite", 1, 13);
-				changeId = ChangePage.getChangeNumberEdt(driver).getAttribute("value");
+				assignmentGroup = ExcelUtils.getData("Change_Management_TestData.xlsx", "Smoke_Suite", 1, 5);
+				configurationItem = ExcelUtils.getData("Change_Management_TestData.xlsx", "Smoke_Suite", 1, 6);
+				shortDescription = ExcelUtils.getData("Change_Management_TestData.xlsx", "Smoke_Suite", 1, 7);
+				description = ExcelUtils.getData("Change_Management_TestData.xlsx", "Smoke_Suite", 1, 8);
+				reasonForChange = ExcelUtils.getData("Change_Management_TestData.xlsx", "Smoke_Suite", 1, 9);
+				changeId=ChangePage.getChangeNumberEdt(driver).getText();
 				ExcelUtils.writeDataIntoCell("Change_Management_TestData.xlsx", "Smoke_Suite", 1, 2, changeId);
 				ExtentReport.reportLog(LogStatus.INFO, "Change Id : "+changeId);
 				TextBoxes.enterTextValue(ChangePage.getAssignmentGrpEdt(driver), assignmentGroup, "Assignement Group Field");
@@ -55,20 +62,8 @@ public class ChangeReusables {
 				ChangePage.getPlanningTab(driver).click();
 				WaitUtils.waitForIdPresent(driver, "change_request.u_reason_for_change");
 				TextBoxes.enterTextValue(ChangePage.getReasonForChangeEdt(driver), reasonForChange, "Reason For Change");
-				ReporterLogs.log("Assignment Group field is entered successfully "+ reasonForChange, "info");
-				WaitUtils.waitForIdPresent(driver, "change_request.u_customer_impact");
-				TextBoxes.enterTextValue(ChangePage.getCustomerImpactDuringChangeEdt(driver), customerImpactDuringChange, "Customer Impact During Change");	
-				ReporterLogs.log("Assignment Group field is entered successfully "+ customerImpactDuringChange, "info");
-				WaitUtils.waitForIdPresent(driver, "change_request.change_plan");
-				TextBoxes.enterTextValue(ChangePage.getImplementationPlanEdt(driver), implementationPlan, "Implementation Plan");
-				ReporterLogs.log("Assignment Group field is entered successfully "+ implementationPlan, "info");
-				WaitUtils.waitForIdPresent(driver, "change_request.test_plan");
-				TextBoxes.enterTextValue(ChangePage.getTestPlanEdt(driver), testPlan, "Test Plan");
-				ReporterLogs.log("Assignment Group field is entered successfully "+ testPlan, "info");
-				WaitUtils.waitForIdPresent(driver, "change_request.backout_plan");
-				TextBoxes.enterTextValue(ChangePage.getBackoutPlanEdt(driver), backoutPlan, "Backout Plan");
-				ReporterLogs.log("Assignment Group field is entered successfully "+ backoutPlan, "info");
-				WaitUtils.waitForXpathPresent(driver, "//*[@id='tabs2_section']/span[4]/span/span[2]");
+				ReporterLogs.log("Assignment Group field is entered successfully "+ reasonForChange, "info");		
+				WaitUtils.waitForXpathPresent(driver, "//span[contains(text(),'Schedule')]");
 				ChangePage.getScheduleTab(driver).click();
 				String requestedByDate = Utils.getCurrentDateTime();
 				TextBoxes.enterTextValue(ChangePage.getRequestedByDateEdt(driver), requestedByDate, "Requested By Date");
@@ -123,8 +118,107 @@ public class ChangeReusables {
 		}
 	}
 	
-	public static void searchChange(WebDriver driver){
+	public static void moveToAssessmentState(WebDriver driver){
 		
+		try{
+				customerImpactDuringChange = ExcelUtils.getData("Change_Management_TestData.xlsx", "Smoke_Suite", 1, 10);
+				implementationPlan= ExcelUtils.getData("Change_Management_TestData.xlsx", "Smoke_Suite", 1, 11);
+				testPlan = ExcelUtils.getData("Change_Management_TestData.xlsx", "Smoke_Suite", 1, 12);
+				backoutPlan = ExcelUtils.getData("Change_Management_TestData.xlsx", "Smoke_Suite", 1, 13);
+				WaitUtils.waitForIdPresent(driver, "change_request.u_customer_impact");
+				TextBoxes.enterTextValue(ChangePage.getCustomerImpactDuringChangeEdt(driver), customerImpactDuringChange, "Customer Impact During Change");	
+				ReporterLogs.log("Assignment Group field is entered successfully "+ customerImpactDuringChange, "info");
+				WaitUtils.waitForIdPresent(driver, "change_request.change_plan");
+				TextBoxes.enterTextValue(ChangePage.getImplementationPlanEdt(driver), implementationPlan, "Implementation Plan");
+				ReporterLogs.log("Assignment Group field is entered successfully "+ implementationPlan, "info");
+				WaitUtils.waitForIdPresent(driver, "change_request.test_plan");
+				TextBoxes.enterTextValue(ChangePage.getTestPlanEdt(driver), testPlan, "Test Plan");
+				ReporterLogs.log("Assignment Group field is entered successfully "+ testPlan, "info");
+				WaitUtils.waitForIdPresent(driver, "change_request.backout_plan");
+				TextBoxes.enterTextValue(ChangePage.getBackoutPlanEdt(driver), backoutPlan, "Backout Plan");
+				ReporterLogs.log("Assignment Group field is entered successfully "+ backoutPlan, "info");
+				ChangePage.getRiskAndImpactTab(driver).click();
+				DropDowns.selectDropdownByIndex(ChangePage.getEnvironmentInWhichChangeIsToBeExecutedDropDown(driver), 1, "---Environment In Which Change Is To Be Executed Drop Down---");
+				DropDowns.selectDropdownByIndex(ChangePage.getExpectedServiceImpactDuringExecutionOfTheChangeDropDown(driver), 1, "---Expected Service Impact During Execution Of The Change Drop Down---");
+				DropDowns.selectDropdownByIndex(ChangePage.getPotentialServiceImpactDuringExecutionOfTheChangeDropDown(driver), 1, "---Potential Service Impact During Execution Of The Change Drop Down---");
+				DropDowns.selectDropdownByIndex(ChangePage.getUserSupportedByTheAssetDropDown(driver), 3, "---Users Supported By The Asset Drop Down---");
+				DropDowns.selectDropdownByIndex(ChangePage.getBackOutRecoveryComplexityDropDown(driver), 1, "---Back Out Recovery Complexity Drop Down---");
+				DropDowns.selectDropdownByIndex(ChangePage.getFamilarityWithChangeDropDown(driver), 1, "---Familarity With Change Drop Down---");
+				DropDowns.selectDropdownByIndex(ChangePage.getRedundantServiceDropDown(driver), 1, "---Redundant Service Drop Down---");
+				ChangePage.getSubmitForAssessmentBtn(driver).click();
+				
+		}catch(Exception e){
+		ReporterLogs.log("Exception encountred "+ e.getMessage(), "error");
 	}
 	
+}
+	
+	public static void moveToCancelledState(WebDriver driver,String crNumber) {
+		try{
+			ChangePage.getActivityTab(driver).click();
+			ChangePage.getReasonForCancellationEdt(driver).sendKeys("test Cancel");
+			ChangePage.getChangeCancelBtn(driver).click();
+			WaitUtils.waitForPageToLoad(driver, 20);
+			ChangePage.getChangeNumberFromQueue(driver, crNumber).click();	
+			WaitUtils.waitForPageToLoad(driver, 10);
+			String stateofChange = DropDowns.getFirstSelectedOptionName(ChangePage.getChangeStateEdtDropDown(driver), "State Drop Down");
+			ReporterLogs.log("State of the Change is :"+stateofChange);
+			if(stateofChange.equalsIgnoreCase("Cancelled")){
+					Assert.assertEquals(stateofChange, "Cancelled");
+					ExtentReport.reportLog(LogStatus.PASS, "Successfully Change change : "+crNumber);
+					ReporterLogs.log("Successfully updated Change with Id "+crNumber, "info");
+					ExcelUtils.writeDataIntoCell("Change_Management_TestData.xlsx", "Smoke_Suite", 3, 2, crNumber);
+					ExcelUtils.writeDataIntoCell("Change_Management_TestData.xlsx", "Smoke_Suite", 3, 4, "Passed");
+				}else{
+					ExtentReport.reportLog(LogStatus.FAIL, "Unable to Cancel change : "+crNumber);
+					ReporterLogs.log("Unable to update Change with Id "+crNumber, "error");
+					ExcelUtils.writeDataIntoCell("Change_Management_TestData.xlsx", "Smoke_Suite", 3, 2, crNumber);
+					ExcelUtils.writeDataIntoCell("Change_Management_TestData.xlsx", "Smoke_Suite", 3, 4, "Failed");
+					Assert.assertEquals(stateofChange, "Planning");
+		}
+		}catch(Exception e){
+			ReporterLogs.log("Exception :"+e.getMessage(),"error");
+		}		
+	}
+	
+	public static void moveToApprovalState(WebDriver driver) {
+		try{
+				plannedStartDate = Utils.getDesiredDateAndTime(1);
+				plannedEndtDate= Utils.getDesiredDateAndTime(2);
+				WaitUtils.waitForXpathPresent(driver, "//span[contains(text(),'Schedule')]");
+				ChangePage.getScheduleTab(driver).click();
+				WaitUtils.waitForIdPresent(driver, "change_request.start_date");
+				TextBoxes.enterTextValue(ChangePage.getPlannedStartDateEdt(driver), plannedStartDate, "Planned Start Date");
+				ReporterLogs.log("Requested By Date field is entered successfully "+ plannedStartDate, "info");
+				WaitUtils.waitForIdPresent(driver, "change_request.end_date");
+				TextBoxes.enterTextValue(ChangePage.getPlannedStartDateEdt(driver), plannedEndtDate, "Planned End Date");
+				ReporterLogs.log("Requested By Date field is entered successfully "+ plannedEndtDate, "info");
+				ChangePage.getRequestImpementationApprovalBtn(driver).click();
+				Thread.sleep(10000);
+		}catch(Exception e){
+			ReporterLogs.log("Exception :"+e.getMessage(),"error");
+		}	
+	}
+	
+	public static void verifyStateOfChangeTicket(WebDriver driver, String expectedStateOfTicket,String crNumber) {
+		try{
+				String stateOfTicket = DropDowns.getFirstSelectedOptionName(ChangePage.getChangeStateEdtDropDown(driver), "State Drop Down");
+				ReporterLogs.log("State of the Change is :"+stateOfTicket);
+				if(stateOfTicket.equalsIgnoreCase(expectedStateOfTicket)){
+					Assert.assertEquals(stateOfTicket, expectedStateOfTicket);
+					ExtentReport.reportLog(LogStatus.PASS, "Successfully updated change : "+crNumber);
+					ReporterLogs.log("Successfully updated Change with Id "+crNumber, "info");
+					ExcelUtils.writeDataIntoCell("Change_Management_TestData.xlsx", "Smoke_Suite", 2, 2, crNumber);
+					ExcelUtils.writeDataIntoCell("Change_Management_TestData.xlsx", "Smoke_Suite", 2, 4, "Passed");
+				}else{
+					ExtentReport.reportLog(LogStatus.FAIL, "Unable to update change : "+crNumber);
+					ReporterLogs.log("Unable to update Change with Id "+crNumber, "error");
+					ExcelUtils.writeDataIntoCell("Change_Management_TestData.xlsx", "Smoke_Suite", 2, 2, crNumber);
+					ExcelUtils.writeDataIntoCell("Change_Management_TestData.xlsx", "Smoke_Suite", 2, 4, "Failed");
+					Assert.assertEquals(stateOfTicket, expectedStateOfTicket);
+	}
+		}catch(Exception e){
+			ReporterLogs.log("Exception :"+e.getMessage(),"error");
+		}
+	}
 }
