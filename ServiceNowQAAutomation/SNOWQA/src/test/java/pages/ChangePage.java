@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 
 public class ChangePage {
 
-	private static WebElement element;
+	private static WebElement element=null;
 	
     public static WebElement getNormalLnk(WebDriver driver) {
         element = driver.findElement(By.xpath("//a[contains(text(),'Normal: Planned')]"));
