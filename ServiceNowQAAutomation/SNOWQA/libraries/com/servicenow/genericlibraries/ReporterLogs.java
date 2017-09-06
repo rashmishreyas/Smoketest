@@ -4,7 +4,7 @@ import org.apache.log4j.Logger;
 
 public class ReporterLogs {
 
-	private static Logger logs = Logger.getLogger("Snow");
+	private static Logger logs = Logger.getLogger("devpinoyLogger");
 	
 	public static void log(String message){
 		logs.info(message);

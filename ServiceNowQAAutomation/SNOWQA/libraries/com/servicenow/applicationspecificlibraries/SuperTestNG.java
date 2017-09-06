@@ -25,6 +25,13 @@ import com.servicenow.genericlibraries.ScreenShot;
 
 public class SuperTestNG {
 	
+	
+	 static{
+		 
+	        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss");
+	        System.setProperty("current.date.time", dateFormat.format(new Date()));
+	    }
+	
 	/*
 	 * Author : Samujjal Das Choudhury
 	 * Objective : BeforeMethod launches the browser and presents user with Login Page
@@ -32,12 +39,6 @@ public class SuperTestNG {
 	 */
 	public static WebDriver driver = null;
 	String browserType;
-	 static{
-		 
-	        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss");
-	        System.setProperty("current.date.time", dateFormat.format(new Date()));
-	    }
-	 
 	@BeforeMethod
 	public void preCondition() throws IOException
 	{	

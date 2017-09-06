@@ -10,7 +10,7 @@ public class Capabilities {
 	
 	public static String getPropertyValue(String propertyKey) throws IOException{
 		String value = "";
-		File deviceProperty = new File(".\\properties\\Capabilities.properties");
+		File deviceProperty = new File(".\\properties\\Constants.properties");
 		BufferedReader reader = new BufferedReader(new FileReader(deviceProperty));
 		String line;
 		Iterator<String> lines = reader.lines().iterator();
