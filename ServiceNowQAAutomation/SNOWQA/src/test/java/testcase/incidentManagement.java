@@ -68,11 +68,16 @@ public class incidentManagement extends SuperTestNG {
 		SafeLogin.logInUser(driver);
 		WaitUtils.waitForPageToLoad(driver, 10);
 		ServiceNowUtils.navigateToAllQueueForDesiredModule(driver, "Incident");	
-		IncidentReusables.resolveIncident(driver);
-		
-			
-		
-		
+		IncidentReusables.resolveIncident(driver);		
 	}
 	
+	
+	@Test(priority=3,description="Cancelling Incident Ticket",groups="Incidents")
+	public void testCancelIncidentTicket() throws Exception{
+		ExtentReport.startReport(Capabilities.getPropertyValue("IncidentReports"), "Test Cancel Incident Ticket", "Cancelling the Incident Ticket");
+		SafeLogin.logInUser(driver);
+		WaitUtils.waitForPageToLoad(driver, 10);
+		ServiceNowUtils.navigateToAllQueueForDesiredModule(driver, "Incident");	
+		IncidentReusables.resolveIncident(driver);		
+	}
 }
