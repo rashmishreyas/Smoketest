@@ -97,7 +97,7 @@ public class SuperTestNG {
 	
 	
 	/*
-	 * Author : Sathyanarayanan
+	 * Author : Sathyanarayanan V
 	 * AfterMethod captures screenshots on failure. Also in case of Pass it logsout of the application
 	 * 
 	 */
@@ -120,6 +120,9 @@ public class SuperTestNG {
 	     finally {
 	               Frames.switchToDefaultContent(driver);
 	  	    	   SafeLogin.logOut(driver);
+	  	    	   ReporterLogs.log("Test Case Executed: "+result.getName(), "info");
+		           ReporterLogs.log("                                                                                                                                                                                   ", "info");
+		           ReporterLogs.log("**************************************************************************************************************************************","info");
 	  		       //driver.close();
 	               ExtentReport.endReport();
 	  		}
