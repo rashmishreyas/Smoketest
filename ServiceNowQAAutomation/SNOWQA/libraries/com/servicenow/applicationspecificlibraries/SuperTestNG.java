@@ -120,7 +120,7 @@ public class SuperTestNG {
 	     finally {
 	               Frames.switchToDefaultContent(driver);
 	  	    	   SafeLogin.logOut(driver);
-	  		       driver.close();
+	  		       //driver.close();
 	               ExtentReport.endReport();
 	  		}
 	                  

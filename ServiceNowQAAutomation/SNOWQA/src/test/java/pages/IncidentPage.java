@@ -44,6 +44,12 @@ public class IncidentPage {
 		return element;
 	}
 	
+	public static WebElement getAssignmentGroupReadOnly(WebDriver driver) throws Exception
+	{
+		element=driver.findElement(By.id("incident.assignment_group_label"));
+		return element;
+	}
+	
 	public static WebElement getAssignedToEdt(WebDriver driver) throws Exception
 	{
 		element=driver.findElement(By.xpath("//input[@id='sys_display.incident.assigned_to']"));
@@ -74,6 +80,12 @@ public class IncidentPage {
 		return element;
 	}
 	
+	public static WebElement getBusinessServiceReadOnly(WebDriver driver) throws Exception
+	{
+		element=driver.findElement(By.id("incident.u_business_service_label"));
+		return element;
+	}
+	
 	public static WebElement getImpactDropdown(WebDriver driver) throws Exception
 	{
 		element=driver.findElement(By.xpath("//select[@id='incident.impact']"));
@@ -86,12 +98,10 @@ public class IncidentPage {
 		return element;
 	}
 	
-	public static String getPriorityValue(WebDriver driver) throws Exception
+	public static WebElement getPriorityValue(WebDriver driver) throws Exception
 	{
 		element=driver.findElement(By.xpath("//select[@id='incident.priority']"));
-		Select priorityValueDropdown=new Select(element);
-		String priorityValue=priorityValueDropdown.getFirstSelectedOption().getText();
-		return priorityValue;
+		return element;
 	}
 	
 	public static WebElement getUserImpactDropdown(WebDriver driver) throws Exception
@@ -167,6 +177,12 @@ public class IncidentPage {
 	public static WebElement getShortDescriptionEdt(WebDriver driver) throws Exception
 	{
 		element=driver.findElement(By.xpath("//input[@id='incident.short_description']"));
+		return element;
+	}
+	
+	public static WebElement getShortDescriptionReadOnly(WebDriver driver) throws Exception
+	{
+		element=driver.findElement(By.id("sys_readonly.incident.short_description"));
 		return element;
 	}
 	
@@ -308,6 +324,12 @@ public class IncidentPage {
 		return element;
 	}
 	
+	public static WebElement getReasonForCancellationEdt(WebDriver driver) throws Exception
+	{
+		element=driver.findElement(By.id("incident.u_reason_for_cancellation"));
+		return element;
+	}
+	
 	public static WebElement getReassignmentCountEdt(WebDriver driver) throws Exception
 	{
 		element=driver.findElement(By.id("sys_readonly.incident.reassignment_count"));
@@ -339,6 +361,8 @@ public class IncidentPage {
 		element=driver.findElement(By.id("sys_readonly.incident.u_set_to_p1"));
 		return element;
 	}
+	
+	
 	
 	public static WebElement getExternalReferenceTab(WebDriver driver) throws Exception
 	{

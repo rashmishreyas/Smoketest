@@ -51,9 +51,9 @@ public class HomePage {
     }
     
     public static WebElement getAllLnk(WebDriver driver){
-       element = driver.findElement(By.xpath("//a[text()='All']"));
-       return element;
-    }
+        element = driver.findElement(By.xpath("//a[text()='All']"));
+        return element;
+     }
     
     public static WebElement getOverviewLnk(WebDriver driver){
        element = driver.findElement(By.xpath("//a[text()='Overview']"));

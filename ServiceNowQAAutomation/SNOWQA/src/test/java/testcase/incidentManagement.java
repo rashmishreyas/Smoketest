@@ -6,6 +6,7 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
+import com.servicenow.applicationspecificlibraries.ChangeReusables;
 import com.servicenow.applicationspecificlibraries.Frames;
 import com.servicenow.applicationspecificlibraries.IncidentReusables;
 import com.servicenow.applicationspecificlibraries.SafeLogin;
@@ -24,18 +25,19 @@ import pages.IncidentPage;
 @Listeners(value=SnowReporter.class)
 public class incidentManagement extends SuperTestNG {
 
-	
-	@Test(priority=0,description="Create standalone incident ticket", groups="Incidents")
+	static String incNumber=null;
+	@Test(priority=0,description="Create standalone incident ticket", groups="Incidents",enabled=true)
 	public void testCreateStandAloneIncidentTicket() throws Exception{
 		
 		//ExtentReport.startReport(Capabilities.getPropertyValue("IncidentReports"),"testCreateStandAloneIncidentTicket","CreateStandAloneIncident");
-		
+		ExtentReport.startReport(Capabilities.getPropertyValue("IncidentReports"),"Test Create Standalone Incident Ticket","Create Standalone Incident Ticket");
 		try {
 			SafeLogin.logInUser(driver);			
 			WaitUtils.waitForPageToLoad(driver, 10);			
 			ServiceNowUtils.navigateToModuleName(driver,"incident");
-			IncidentReusables.createIncident(driver, false);	
-			
+			incNumber=IncidentReusables.createIncident(driver, false, 1, 2);
+			IncidentReusables.verifyIncidentCreation(driver, incNumber);
+			//incNumber=null;
 			}
 		catch (Exception e) {
 			ReporterLogs.log("Exception "+e.getMessage(), "info");
@@ -44,16 +46,17 @@ public class incidentManagement extends SuperTestNG {
 	}
 	
 
-	@Test(priority=1,description="Create managed incident ticket",groups="Incidents",enabled=false)
+	@Test(priority=1,description="Create managed incident ticket",groups="Incidents",enabled=true)
 	public void testCreateManagedIncidentTicket() throws Exception{
 		
 		//ExtentReport.startReport(Capabilities.getPropertyValue("IncidentReports"),"testCreateManagedIncidentTicket","Create Managed Incident");
-		
+		ExtentReport.startReport(Capabilities.getPropertyValue("IncidentReports"),"Test Create Managed Incident Ticket","Create Managed Incident");
 		try {
 			SafeLogin.logInUser(driver);			
 			WaitUtils.waitForPageToLoad(driver, 10);			
 			ServiceNowUtils.navigateToModuleName(driver,"incident");
-			IncidentReusables.createIncident(driver, true);	
+			incNumber=IncidentReusables.createIncident(driver, true,2,2);
+			IncidentReusables.verifyManagedIncidentCreation(driver, incNumber);
 			
 			}
 		catch (Exception e) {
@@ -62,7 +65,7 @@ public class incidentManagement extends SuperTestNG {
 		
 	}
 	
-	@Test(priority=2,description="Progression of Incident ticket to Resolved state",groups="Incidents",dependsOnMethods={"testCreateStandAloneIncidentTicket"})
+	@Test(priority=2,description="Progression of Incident ticket to Resolved state",enabled=true,groups="Incidents",dependsOnMethods={"testCreateStandAloneIncidentTicket"})
 	public void testResolveIncidentTicket() throws Exception{
 		ExtentReport.startReport(Capabilities.getPropertyValue("IncidentReports"), "Test Resolve Incident Ticket", "Progress Incident ticket to Resolved state");
 		SafeLogin.logInUser(driver);
@@ -72,12 +75,15 @@ public class incidentManagement extends SuperTestNG {
 	}
 	
 	
-	@Test(priority=3,description="Cancelling Incident Ticket",groups="Incidents")
+	@Test(priority=3,description="Cancelling Incident Ticket",groups="Incidents", enabled=true)
 	public void testCancelIncidentTicket() throws Exception{
 		ExtentReport.startReport(Capabilities.getPropertyValue("IncidentReports"), "Test Cancel Incident Ticket", "Cancelling the Incident Ticket");
 		SafeLogin.logInUser(driver);
 		WaitUtils.waitForPageToLoad(driver, 10);
-		ServiceNowUtils.navigateToAllQueueForDesiredModule(driver, "Incident");	
-		IncidentReusables.resolveIncident(driver);		
+		ServiceNowUtils.navigateToModuleName(driver,"incident");
+		incNumber=IncidentReusables.createIncident(driver, false, 4, 2);
+		IncidentReusables.cancelIncident(driver, incNumber);
+		
+		
 	}
 }

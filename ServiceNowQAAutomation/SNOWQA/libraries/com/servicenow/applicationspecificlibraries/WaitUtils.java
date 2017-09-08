@@ -50,6 +50,11 @@ public class WaitUtils {
         wait.until(ExpectedConditions.elementToBeClickable(wbLocator));
         }
 	
+	public static void waitForElementToBeVisible(WebDriver driver, WebElement element){
+        WebDriverWait wait=new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.visibilityOf(element));
+        }
+	
 	public static void waitForTitleContains(WebDriver driver, String wbTitle){
         WebDriverWait wait=new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.titleContains(wbTitle));
