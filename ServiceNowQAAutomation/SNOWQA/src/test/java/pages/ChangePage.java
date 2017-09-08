@@ -1,12 +1,17 @@
 package pages;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import com.servicenow.genericlibraries.ReporterLogs;
+
 public class ChangePage {
 
 	private static WebElement element=null;
+	private static List<WebElement> elements =null;
 	
     public static WebElement getNormalLnk(WebDriver driver) {
         element = driver.findElement(By.xpath("//a[contains(text(),'Normal: Planned')]"));
@@ -45,7 +50,7 @@ public class ChangePage {
     
     
     public static WebElement getPlanningTab(WebDriver driver){
-    	element = driver.findElement(By.xpath("//span[contains(text(),'Planning')"));
+    	element = driver.findElement(By.xpath("//span[contains(text(),'Planning') and @class='tab_caption_text']"));
     	return element;
     }
     
@@ -217,6 +222,56 @@ public class ChangePage {
     
     public static WebElement getRequestImpementationApprovalBtn(WebDriver driver){
     	element = driver.findElement(By.xpath("//button[contains(text(),'Request') and contains(text(),'Implementation') and contains(text(),'Approval')]"));
+    	return element;
+    }
+    
+    public static WebElement getGroupApprovalTab(WebDriver driver){
+    	element = driver.findElement(By.xpath("//div[@id='tabs2_list']//span[contains(text(),'Group') and contains(text(),'Approvals')]"));
+    	return element;
+    }
+    
+    public static WebElement getChangeRequestedLnk(WebDriver driver){
+    	element = driver.findElement(By.xpath("//a[text()='Requested']"));
+    	return element;
+    }
+    
+    public static WebElement getChangeApproveBtn(WebDriver driver){
+    	element = driver.findElement(By.id("approve"));
+    	return element;
+    }
+    
+    public static WebElement getChangeTaskLnk(WebDriver driver, String changeNumber){
+    	element = driver.findElement(By.xpath("//a[text()='"+changeNumber+"']"));
+    	return element;
+    }
+  
+    public static WebElement getChangeTaskTab(WebDriver driver){
+    	element = driver.findElement(By.xpath("//div[@id='tabs2_list']//span[contains(text(),'Change') and contains(text(),'Tasks')]"));
+    	return element;
+    }
+        
+    public static List<WebElement> getChangeTaskLnkFromChangeQueue(WebDriver driver){
+    	elements = driver.findElements(By.xpath("//table[@list_name='change_request.change_task.change_request']//tbody//tr"));
+    	return elements;
+    }
+    
+    public static WebElement getChangeTaskLnk(WebDriver driver, int i){
+    	element = driver.findElement(By.xpath("//table[@list_name='change_request.change_task.change_request']//tbody//tr["+i+"]//a[starts-with(text(),'CTASK')]"));
+    	return element;
+    }
+    
+    public static WebElement getChangeRequestedByEdt(WebDriver driver){
+    	element = driver.findElement(By.id("sys_display.change_request.requested_by"));
+    	return element;
+    }
+  
+    public static List<WebElement> getPendingApproversFromGroupApprovalsQueue(WebDriver driver){
+    	elements = driver.findElements(By.xpath("//table[@list_name='change_request.sysapproval_group.parent']//tbody//tr"));
+    	return elements;
+    }
+    
+    public static WebElement getChangeRequestedLnk(WebDriver driver, int k){
+    	element = driver.findElement(By.xpath("//table[@list_name='change_request.sysapproval_group.parent']//tbody//tr["+k+"]//a[starts-with(text(),'Requested')]"));
     	return element;
     }
 }
