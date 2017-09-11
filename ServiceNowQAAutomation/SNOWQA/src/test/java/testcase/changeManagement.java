@@ -57,8 +57,7 @@ public class changeManagement extends SuperTestNG{
 			ChangePage.getChangeNumberFromQueue(driver, crNumber).click();	
 			WaitUtils.waitForPageToLoad(driver, 10);
 			ChangeReusables.verifyStateOfChangeTicket(driver, "Draft", crNumber,1,2);
-			ReporterLogs.log("---Create Change Test Case is Passed---", "info");
-	}catch(Exception ex){
+			}catch(Exception ex){
 		ReporterLogs.log("Exception in closure "+ex, "error");
 	}
 	}
@@ -80,8 +79,7 @@ public class changeManagement extends SuperTestNG{
 				ChangeReusables.moveToImplementationState(driver);
 				ChangeReusables.moveToClosedState(driver);
 				ChangeReusables.verifyStateOfChangeTicket(driver, "Closed", crNumber,5,2);		
-				ReporterLogs.log("---Closure Change Test Case is Passed---", "info");
-		}catch(Exception ex){
+				}catch(Exception ex){
 			ReporterLogs.log("Exception in closure "+ex, "error");
 		}		
 	}
@@ -99,8 +97,7 @@ public class changeManagement extends SuperTestNG{
 		ChangePage.getSubmitForPlanningBtn(driver).click();
 		Thread.sleep(10000);
 		ChangeReusables.verifyStateOfChangeTicket(driver, "Planning", crNumber,2,2);
-		ReporterLogs.log("---Update Change Test Case is Passed---", "info");
-	}
+		}
 	
 	@Test(priority=3,description="-----Change Ticket Approval-----",enabled=true)
 	public void testChangeTicketApproval() throws IOException, InterruptedException{
