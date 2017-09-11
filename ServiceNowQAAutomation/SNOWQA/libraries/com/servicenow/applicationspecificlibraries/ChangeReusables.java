@@ -206,22 +206,22 @@ public class ChangeReusables {
 	
 	public static void verifyStateOfChangeTicket(WebDriver driver, String expectedStateOfTicket,String crNum,int reqRow, int reqcol) {
 		try{
-				String stateOfTicket = DropDowns.getFirstSelectedOptionName(ChangePage.getChangeStateEdtDropDown(driver), "State Drop Down");
-				ReporterLogs.log("State of the Change is :"+stateOfTicket);
-				if(stateOfTicket.equalsIgnoreCase(expectedStateOfTicket)){
-					Assert.assertEquals(stateOfTicket, expectedStateOfTicket);
-					ExtentReport.reportLog(LogStatus.PASS, "Successfully updated change : "+crNum);
+				String actualStateOfTicket = DropDowns.getFirstSelectedOptionName(ChangePage.getChangeStateEdtDropDown(driver), "State Drop Down");
+				ReporterLogs.log("State of the Change is :"+actualStateOfTicket);
+				if(actualStateOfTicket.equalsIgnoreCase(expectedStateOfTicket)){
+					Assert.assertEquals(actualStateOfTicket, expectedStateOfTicket);
+					ExtentReport.reportLog(LogStatus.PASS, "Actual State of the Change Ticket : "+actualStateOfTicket);
 					ReporterLogs.log("Successfully updated Change with Id "+crNum, "info");
 					ExcelUtils.writeDataIntoCell("Change_Management_TestData.xlsx", "Smoke_Suite", reqRow, reqcol, crNum);
-					ExcelUtils.writeDataIntoCell("Change_Management_TestData.xlsx", "Smoke_Suite", reqRow, 3, stateOfTicket);
+					ExcelUtils.writeDataIntoCell("Change_Management_TestData.xlsx", "Smoke_Suite", reqRow, 3, actualStateOfTicket);
 					ExcelUtils.writeDataIntoCell("Change_Management_TestData.xlsx", "Smoke_Suite", reqRow, 4, "Passed");
 				}else{
-					ExtentReport.reportLog(LogStatus.FAIL, "Unable to update change : "+crNum);
+					ExtentReport.reportLog(LogStatus.FAIL, "State of the Change ticket are not same : "+actualStateOfTicket);
 					ReporterLogs.log("Unable to update Change with Id "+crNum, "error");
 					ExcelUtils.writeDataIntoCell("Change_Management_TestData.xlsx", "Smoke_Suite", reqRow, reqcol, crNum);
-					ExcelUtils.writeDataIntoCell("Change_Management_TestData.xlsx", "Smoke_Suite", reqRow, 3, stateOfTicket);
+					ExcelUtils.writeDataIntoCell("Change_Management_TestData.xlsx", "Smoke_Suite", reqRow, 3, actualStateOfTicket);
 					ExcelUtils.writeDataIntoCell("Change_Management_TestData.xlsx", "Smoke_Suite", reqRow, 4, "Failed");
-					Assert.assertEquals(stateOfTicket, expectedStateOfTicket);
+					Assert.assertEquals(actualStateOfTicket, expectedStateOfTicket);
 	}
 		}catch(Exception e){
 			ReporterLogs.log("Exception :"+e.getMessage(),"error");
