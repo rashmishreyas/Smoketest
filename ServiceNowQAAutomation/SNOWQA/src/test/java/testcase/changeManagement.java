@@ -47,7 +47,7 @@ public class changeManagement extends SuperTestNG{
 	@Test(priority=0,description="-----Create Change Test Case-----",enabled=true)
 	public void testCreateChangeTicket() throws IOException, InterruptedException{
 		try{
-			ExtentReport.startReport(Capabilities.getPropertyValue("ChangeReports"), "Test Create Change Ticket", "Create Change Ticket");
+			ExtentReport.startReport(Capabilities.getPropertyValue("ChangeReports"), "Test Create Change Ticket", "Create Change Ticket Report");
 			SafeLogin.logInUser(driver);
 			WaitUtils.waitForPageToLoad(driver, 10);
 			ServiceNowUtils.navigateToModuleName(driver, "change");
@@ -65,7 +65,7 @@ public class changeManagement extends SuperTestNG{
 	@Test(priority=1,description="-----Change Ticket Closure-----",enabled=true)
 	public void testChangeTicketClosure() throws IOException, InterruptedException{
 		try{
-				ExtentReport.startReport(Capabilities.getPropertyValue("ChangeReports"), "Test Close Change Ticket", "Create Change Ticket");
+				ExtentReport.startReport(Capabilities.getPropertyValue("ChangeReports"), "Test Close Change Ticket", "Close Change Ticket Report");
 				SafeLogin.logInUser(driver);
 				crNumber = ExcelUtils.getData("Change_Management_TestData.xlsx", "Smoke_Suite", 1, 2);
 				ServiceNowUtils.navigateToAllQueueForDesiredModule(driver, "change");
@@ -86,7 +86,7 @@ public class changeManagement extends SuperTestNG{
 
 	@Test(priority=2,description="-----Update Change Test Case-----",enabled=true)
 	public void testChangeTicketUpdation() throws IOException, InterruptedException{
-		ExtentReport.startReport(Capabilities.getPropertyValue("ChangeReports"), "Test Update Change Ticket", "Create Change Ticket");
+		ExtentReport.startReport(Capabilities.getPropertyValue("ChangeReports"), "Test Update Change Ticket", "Update Change Ticket Report");
 		SafeLogin.logInUser(driver);
 		WaitUtils.waitForPageToLoad(driver, 10);
 		ServiceNowUtils.navigateToModuleName(driver, "change");
@@ -101,7 +101,7 @@ public class changeManagement extends SuperTestNG{
 	
 	@Test(priority=3,description="-----Change Ticket Approval-----",enabled=true)
 	public void testChangeTicketApproval() throws IOException, InterruptedException{
-			ExtentReport.startReport(Capabilities.getPropertyValue("ChangeReports"), "Test Approve Change Ticket", "Create Change Ticket");
+			ExtentReport.startReport(Capabilities.getPropertyValue("ChangeReports"), "Test Approve Change Ticket", "Approve Change Ticket Report");
 			SafeLogin.logInUser(driver);
 			crNumber = ExcelUtils.getData("Change_Management_TestData.xlsx", "Smoke_Suite", 2, 2);
 			ServiceNowUtils.navigateToAllQueueForDesiredModule(driver, "change");
@@ -116,7 +116,7 @@ public class changeManagement extends SuperTestNG{
 	
 	@Test(priority=4,description="-----Cancel Change Test Case-----",enabled=true)
 	public void testChangeTicketCancellation() throws IOException, InterruptedException{
-		ExtentReport.startReport(Capabilities.getPropertyValue("ChangeReports"), "Test Cancel Change Ticket", "Create Change Ticket");
+		ExtentReport.startReport(Capabilities.getPropertyValue("ChangeReports"), "Test Cancel Change Ticket", "Cancel Change Ticket Report");
 		SafeLogin.logInUser(driver);
 		WaitUtils.waitForPageToLoad(driver, 10);
 		ServiceNowUtils.navigateToModuleName(driver, "change");
