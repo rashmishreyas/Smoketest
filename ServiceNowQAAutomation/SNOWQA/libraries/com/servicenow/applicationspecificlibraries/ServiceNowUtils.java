@@ -10,6 +10,7 @@ import org.testng.Assert;
 import pages.ChangePage;
 import pages.HomePage;
 import pages.IncidentPage;
+import pages.ProblemPage;
 
 import com.relevantcodes.extentreports.LogStatus;
 import com.servicenow.genericlibraries.DropDowns;
@@ -55,7 +56,7 @@ public class ServiceNowUtils {
 		}
 }
 	
-	public static void searchTicketFromQueue(WebDriver driver, String ticketNumber) throws Exception{
+	public static void searchIncidentTicketFromQueue(WebDriver driver, String ticketNumber) throws Exception{
 		try{
 		Thread.sleep(2000);
 		WaitUtils.waitForXpathPresent(driver, "//div[@class='input-group']/label[text()='Search']/following-sibling::input");
@@ -67,5 +68,19 @@ public class ServiceNowUtils {
 			ReporterLogs.log(e.getMessage(), "info");
 		}
 	}
+	
+	public static void searchProblemTicketFromQueue(WebDriver driver, String ticketNumber) throws Exception{
+		try{
+		Thread.sleep(2000);
+		WaitUtils.waitForXpathPresent(driver, "//div[@class='input-group']/label[text()='Search']/following-sibling::input");
+		TextBoxes.enterTextValue(ProblemPage.getSearchProblemEdt(driver), ticketNumber, "Search Ticket");
+		ProblemPage.getSearchProblemEdt(driver).sendKeys(Keys.ENTER);
+		
+	}
+		catch (Exception e) {
+			ReporterLogs.log(e.getMessage(), "info");
+		}
+	}
+	
 	
 	}

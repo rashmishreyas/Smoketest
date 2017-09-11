@@ -37,8 +37,8 @@ public class incidentManagement extends SuperTestNG {
 			ServiceNowUtils.navigateToModuleName(driver,"incident");
 			incNumber=IncidentReusables.createIncident(driver, false, 1, 2);
 			IncidentReusables.verifyIncidentCreation(driver, incNumber);
-			//incNumber=null;
-			}
+			ReporterLogs.log("--- Test Case Create standalone incident ticket is Completed---", "info");
+		}
 		catch (Exception e) {
 			ReporterLogs.log("Exception "+e.getMessage(), "info");
 			}		
@@ -53,11 +53,11 @@ public class incidentManagement extends SuperTestNG {
 		ExtentReport.startReport(Capabilities.getPropertyValue("IncidentReports"),"Test Create Managed Incident Ticket","Create Managed Incident");
 		try {
 			SafeLogin.logInUser(driver);			
-			WaitUtils.waitForPageToLoad(driver, 10);			
+			WaitUtils.waitForPageToLoad(driver, 30);			
 			ServiceNowUtils.navigateToModuleName(driver,"incident");
 			incNumber=IncidentReusables.createIncident(driver, true,2,2);
 			IncidentReusables.verifyManagedIncidentCreation(driver, incNumber);
-			
+			ReporterLogs.log("--- Test Case Create managed incident ticket is Completed---", "info");
 			}
 		catch (Exception e) {
 			ReporterLogs.log("Exception "+e.getMessage(), "info");
@@ -71,7 +71,8 @@ public class incidentManagement extends SuperTestNG {
 		SafeLogin.logInUser(driver);
 		WaitUtils.waitForPageToLoad(driver, 10);
 		ServiceNowUtils.navigateToAllQueueForDesiredModule(driver, "Incident");	
-		IncidentReusables.resolveIncident(driver);		
+		IncidentReusables.resolveIncident(driver);	
+		ReporterLogs.log("--- Test Case Progression of Incident ticket to Resolved state is Completed---", "info");
 	}
 	
 	
@@ -83,7 +84,7 @@ public class incidentManagement extends SuperTestNG {
 		ServiceNowUtils.navigateToModuleName(driver,"incident");
 		incNumber=IncidentReusables.createIncident(driver, false, 4, 2);
 		IncidentReusables.cancelIncident(driver, incNumber);
-		
+		ReporterLogs.log("--- Test Case Cancelling Incident Ticket is Completed---", "info");
 		
 	}
 }

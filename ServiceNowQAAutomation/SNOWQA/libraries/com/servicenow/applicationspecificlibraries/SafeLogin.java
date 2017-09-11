@@ -48,7 +48,7 @@ public class SafeLogin {
 	 */
 	public static void logOut(WebDriver driver) throws InterruptedException{
 		try {
-				Thread.sleep(2000);
+				Thread.sleep(3000);
 				WaitUtils.waitForXpathPresent(driver, "//button[@id='user_info_dropdown']");
 		        String username=HomePage.getLoggedInUserInfo(driver).getText(); 
 		        HomePage.getUserNameDropDown(driver).click();

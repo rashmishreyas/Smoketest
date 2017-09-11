@@ -62,8 +62,8 @@ public class IncidentReusables {
 	{
 		
 		try{
-		WaitUtils.waitForPageToLoad(driver, 10);
-		
+		WaitUtils.waitForPageToLoad(driver, 30);
+				
 		//if ManagedIncident is true, creates managed Incident ticket
 		if (ManagedIncident) {
 			
@@ -80,7 +80,7 @@ public class IncidentReusables {
 			reasonForIncidentManager=ExcelUtils.getData("Incident_Management_TestData.xlsx","Smoke_Suite", 2, 12);			
 			
 			//Store the Incident number in a variable
-			WaitUtils.waitForPageToLoad(driver, 10);
+			WaitUtils.waitForPageToLoad(driver, 30);
 			WaitUtils.waitForIdPresent(driver, "sys_readonly.incident.number");
 			incidentNumber=driver.findElement(By.xpath("//input[@id='sys_readonly.incident.number']")).getAttribute("value");
 			ExcelUtils.writeDataIntoCell("Incident_Management_TestData.xlsx","Smoke_Suite", sNum, cellNum, incidentNumber);
@@ -127,6 +127,16 @@ public class IncidentReusables {
 			//Click on Submit button
 			WaitUtils.waitForXpathPresent(driver, "//button[text()='Submit']");
 			driver.findElement(By.xpath("//button[text()='Submit']")).click();	
+			try {
+		        Alert alert = driver.switchTo().alert();
+		        String alertText = alert.getText();
+		        ReporterLogs.log("Alert message: " + alertText, "error");
+		        ExtentReport.reportLog(LogStatus.FAIL, "Alert message: " + alertText);
+		        Assert.fail("Unexpected alert !!!! ");
+		        } 
+		    catch (NoAlertPresentException e) {
+		        e.printStackTrace();
+		    }	
 		}
 		
 		else {			
@@ -140,7 +150,7 @@ public class IncidentReusables {
 			description=ExcelUtils.getData("Incident_Management_TestData.xlsx","Smoke_Suite", 1, 11);			
 			
 			//Store the Incident number in a variable
-			WaitUtils.waitForPageToLoad(driver, 10);
+			WaitUtils.waitForPageToLoad(driver, 30);
 			WaitUtils.waitForIdPresent(driver, "sys_readonly.incident.number");
 			incidentNumber=driver.findElement(By.xpath("//input[@id='sys_readonly.incident.number']")).getAttribute("value");
 			ExcelUtils.writeDataIntoCell("Incident_Management_TestData.xlsx","Smoke_Suite", sNum, cellNum, incidentNumber);
@@ -182,14 +192,24 @@ public class IncidentReusables {
 			
 			//Click on Submit button
 			WaitUtils.waitForXpathPresent(driver, "//button[text()='Submit']");
-			driver.findElement(By.xpath("//button[text()='Submit']")).click();	
+			driver.findElement(By.xpath("//button[text()='Submit']")).click();
+			try {
+		        Alert alert = driver.switchTo().alert();
+		        String alertText = alert.getText();
+		        ReporterLogs.log("Alert message: " + alertText, "error");
+		        ExtentReport.reportLog(LogStatus.FAIL, "Alert message: " + alertText);
+		        Assert.fail("Unexpected alert !!!! ");
+		        } 
+		    catch (NoAlertPresentException e) {
+		        e.printStackTrace();
+		    }
 		}
 	}catch (UnhandledAlertException f) {
 	    try {
 	        Alert alert = driver.switchTo().alert();
 	        String alertText = alert.getText();
 	        System.out.println("Alert data: " + alertText);
-	         Assert.fail("Unhandled alert");
+	        Assert.fail("Unhandled alert");
 	        
 	        } 
 	    catch (NoAlertPresentException e) {
@@ -201,16 +221,16 @@ public class IncidentReusables {
 		
 		public static void verifyManagedIncidentCreation(WebDriver driver, String incNumber) throws Exception
 		{
-			WaitUtils.waitForPageToLoad(driver, 10);
+			WaitUtils.waitForPageToLoad(driver, 30);
 			WaitUtils.waitForTitleIs(driver, "Incidents | ServiceNow");
 			 if(IncidentPage.getSearchDropDown(driver).getAttribute("value").equalsIgnoreCase("number")){
 				 	Thread.sleep(1000);
 			        WaitUtils.waitForXpathPresent(driver, "//div[@class='input-group']/label[text()='Search']/following-sibling::input");
 			        TextBoxes.enterTextValue(IncidentPage.getSearchIncidentEdt(driver),incNumber,"Search Incident");
 			        IncidentPage.getSearchIncidentEdt(driver).sendKeys(Keys.ENTER);			            
-			        WaitUtils.waitForPageToLoad(driver, 10);            
+			        WaitUtils.waitForPageToLoad(driver, 30);            
 			        IncidentPage.getIncidentNumberfromQueue(driver, incNumber).click();
-			        WaitUtils.waitForPageToLoad(driver, 10);
+			        WaitUtils.waitForPageToLoad(driver, 30);
 			        WaitUtils.waitForTitleIs(driver, incNumber+" | ServiceNow");
 			        ReporterLogs.log("Title of the page after searching the incident: "+driver.getTitle(), "info");
 			        incMgrReqdValue=IncidentPage.getIncidentManagerRequiredValueFromNotesTab(driver).getText();
@@ -235,9 +255,9 @@ public class IncidentReusables {
 				   TextBoxes.enterTextValue(IncidentPage.getSearchIncidentEdt(driver), incNumber, "Search Incident ");
 				   ReporterLogs.log("Entering Incident Id in the Search Text "+incNumber, "info");
 				   IncidentPage.getSearchIncidentEdt(driver).sendKeys(Keys.ENTER);
-				   WaitUtils.waitForPageToLoad(driver, 10);            
+				   WaitUtils.waitForPageToLoad(driver, 30);            
 				   IncidentPage.getIncidentNumberfromQueue(driver, incNumber).click();
-				   WaitUtils.waitForPageToLoad(driver, 10);
+				   WaitUtils.waitForPageToLoad(driver, 30);
 				   WaitUtils.waitForTitleIs(driver, incNumber+" | ServiceNow");
 				   incMgrReqdValue=IncidentPage.getIncidentManagerRequiredValueFromNotesTab(driver).getText();
 				   ReporterLogs.log("Incident Manager Required value is: "+incMgrReqdValue, "info");
@@ -260,7 +280,7 @@ public class IncidentReusables {
 		
 		public static void verifyIncidentCreation(WebDriver driver, String incNumber) throws Exception
 		{
-			WaitUtils.waitForPageToLoad(driver, 10);
+			WaitUtils.waitForPageToLoad(driver, 30);
 			WaitUtils.waitForTitleIs(driver, "Incidents | ServiceNow");
 	        if(IncidentPage.getSearchDropDown(driver).getAttribute("value").equalsIgnoreCase("number"))
 	        {
@@ -269,7 +289,7 @@ public class IncidentReusables {
 	            TextBoxes.enterTextValue(IncidentPage.getSearchIncidentEdt(driver),incNumber,"Search Incident");
 	            IncidentPage.getSearchIncidentEdt(driver).sendKeys(Keys.ENTER);
 	            //Thread.sleep(3000);
-	            WaitUtils.waitForPageToLoad(driver, 10);
+	            WaitUtils.waitForPageToLoad(driver, 30);
 	            incidentState=IncidentPage.getIncidentStatusfromQueue(driver, incNumber).getText();
 	            
 	            if(incidentState.equalsIgnoreCase("New"))
@@ -318,7 +338,7 @@ public class IncidentReusables {
 		public static void resolveIncident(WebDriver driver) throws Exception
 			{
 			try{
-				WaitUtils.waitForPageToLoad(driver, 10);
+				WaitUtils.waitForPageToLoad(driver, 30);
 				
 				//Search for the Incident Ticket
 				incNumber=ExcelUtils.getData("Incident_Management_TestData.xlsx","Smoke_Suite", 1, 2);
@@ -331,12 +351,12 @@ public class IncidentReusables {
 					 WaitUtils.waitForXpathPresent(driver, "//div[@class='input-group']//select");
 			         DropDowns.selectDropdownByVisibleText(IncidentPage.getSearchDropDown(driver), "Number", "Search Drop Down");
 				}
-		        ServiceNowUtils.searchTicketFromQueue(driver, incNumber);
+		        ServiceNowUtils.searchIncidentTicketFromQueue(driver, incNumber);
 		        incidentState=IncidentPage.getIncidentStatusfromQueue(driver, incNumber).getText();
 		        if (incidentState.equalsIgnoreCase("New")) {
 		        	Thread.sleep(3000);
 		        	IncidentPage.getIncidentNumberfromQueue(driver, incNumber).click();
-		        	WaitUtils.waitForPageToLoad(driver, 10);
+		        	WaitUtils.waitForPageToLoad(driver, 30);
 		        	WaitUtils.waitForTitleIs(driver, incNumber+" | ServiceNow");
 		        	ReporterLogs.log("Current State of Incident " + incNumber + " is "+ incidentState, "info");
 		        	ExtentReport.reportLog(LogStatus.INFO, "Current State of Incident " + incNumber + " is "+ incidentState);
@@ -347,11 +367,21 @@ public class IncidentReusables {
 		        	IncidentPage.getAssignedToEdt(driver).sendKeys(Keys.ENTER);
 		        	Thread.sleep(2000);
 		        	IncidentPage.getUpdateBtn(driver).click();						
+		        	try {
+				        Alert alert = driver.switchTo().alert();
+				        String alertText = alert.getText();
+				        ReporterLogs.log("Alert message: " + alertText, "error");
+				        ExtentReport.reportLog(LogStatus.FAIL, "Alert message: " + alertText);
+				        Assert.fail("Unexpected alert !!!! ");
+				        } 
+				    catch (NoAlertPresentException e) {
+				        e.printStackTrace();
+				    }
 		        	WaitUtils.waitForTitleIs(driver, "Incidents | ServiceNow");
 		        	 
 		        	//Search for the incident ticket
 		        	DropDowns.selectDropdownByVisibleText(IncidentPage.getSearchDropDown(driver), "Number", "Search Drop Down");
-		        	ServiceNowUtils.searchTicketFromQueue(driver, incNumber);
+		        	ServiceNowUtils.searchIncidentTicketFromQueue(driver, incNumber);
 		        	WaitUtils.waitForTitleIs(driver, "Incidents | ServiceNow");
 		        	incidentStateWIP=IncidentPage.getIncidentStatusfromQueue(driver, incNumber).getText();
 		        	ReporterLogs.log("Current State of Incident " + incNumber + " is "+ incidentStateWIP, "info");
@@ -361,7 +391,7 @@ public class IncidentReusables {
 		        	if (incidentStateWIP.equalsIgnoreCase("Work in Progress")) {					
 		        		Thread.sleep(3000);
 						IncidentPage.getIncidentNumberfromQueue(driver, incNumber).click();
-						WaitUtils.waitForPageToLoad(driver, 10);
+						WaitUtils.waitForPageToLoad(driver, 30);
 						WaitUtils.waitForTitleIs(driver, incNumber+" | ServiceNow");
 						DropDowns.selectDropdownByVisibleText(IncidentPage.getStateDropdown(driver), "Resolved", "State");					
 						configurationItem=ExcelUtils.getData("Incident_Management_TestData.xlsx","Smoke_Suite", 3, 13);
@@ -378,11 +408,21 @@ public class IncidentReusables {
 						Thread.sleep(4000);
 						TextBoxes.enterTextValue(IncidentPage.getMitigationAndSolutionStepsEdt(driver), mitigationSolutionSteps + incNumber, "Mitigation and Solution Steps");
 						IncidentPage.getUpdateBtn(driver).click();	
+						try {
+					        Alert alert = driver.switchTo().alert();
+					        String alertText = alert.getText();
+					        ReporterLogs.log("Alert message: " + alertText, "error");
+					        ExtentReport.reportLog(LogStatus.FAIL, "Alert message: " + alertText);
+					        Assert.fail("Unexpected alert !!!! ");
+					        } 
+					    catch (NoAlertPresentException e) {
+					        e.printStackTrace();
+					    }
 						WaitUtils.waitForTitleIs(driver, "Incidents | ServiceNow");
 			        	 
 			        	//Search for the incident ticket
 						DropDowns.selectDropdownByVisibleText(IncidentPage.getSearchDropDown(driver), "Number", "Search Drop Down");
-						ServiceNowUtils.searchTicketFromQueue(driver, incNumber);
+						ServiceNowUtils.searchIncidentTicketFromQueue(driver, incNumber);
 						WaitUtils.waitForTitleIs(driver, "Incidents | ServiceNow");
 						incidentStateResolved=IncidentPage.getIncidentStatusfromQueue(driver, incNumber).getText();
 						ReporterLogs.log("Current State of Incident " + incNumber + " is "+incidentStateResolved, "info");
@@ -436,7 +476,7 @@ public class IncidentReusables {
 		{
 			
 			try{
-			WaitUtils.waitForPageToLoad(driver, 10);
+			WaitUtils.waitForPageToLoad(driver, 30);
 			WaitUtils.waitForTitleIs(driver, "Incidents | ServiceNow");	
 			
 			//Search for the Incident Ticket
@@ -447,14 +487,14 @@ public class IncidentReusables {
 				 WaitUtils.waitForXpathPresent(driver, "//div[@class='input-group']//select");
 		         DropDowns.selectDropdownByVisibleText(IncidentPage.getSearchDropDown(driver), "Number", "Search Drop Down");
 			}
-		         	 ServiceNowUtils.searchTicketFromQueue(driver, incNumber);
-		         	 WaitUtils.waitForPageToLoad(driver, 10);
+		         	 ServiceNowUtils.searchIncidentTicketFromQueue(driver, incNumber);
+		         	 WaitUtils.waitForPageToLoad(driver, 30);
 		         	 WaitUtils.waitForTitleIs(driver, "Incidents | ServiceNow");
 		         	 incidentState=IncidentPage.getIncidentStatusfromQueue(driver, incNumber).getText();
 		         	 if (!incidentState.equalsIgnoreCase("Cancelled")) {					
 		             Thread.sleep(3000);
 		        	 IncidentPage.getIncidentNumberfromQueue(driver, incNumber).click();
-		        	 WaitUtils.waitForPageToLoad(driver, 10);
+		        	 WaitUtils.waitForPageToLoad(driver, 30);
 		        	 WaitUtils.waitForTitleIs(driver, incNumber+" | ServiceNow");
 		        	 ReporterLogs.log("Current State of Incident " + incNumber + " is "+incidentState, "info");
 		        	 ExtentReport.reportLog(LogStatus.INFO, "Current State of Incident " + incNumber + " is "+ incidentState);
@@ -466,15 +506,27 @@ public class IncidentReusables {
 		        	 //WaitUtils.waitForElementToBeVisible(driver, IncidentPage.getReasonForCancellationEdt(driver));
 		        	 WaitUtils.waitForXpathPresent(driver, "//textarea[@id='incident.u_reason_for_cancellation']");
 		        	 IncidentPage.getReasonForCancellationEdt(driver).sendKeys(reasonForCancellation);		        	 
+		        	 WaitUtils.waitForXpathPresent(driver, "//span[text()='Closure']");
+		        	 Thread.sleep(2000);
 		        	 IncidentPage.getClosureTab(driver).click();
 		        	 DropDowns.selectDropdownByVisibleText(IncidentPage.getSubCauseCodeDropdown(driver),subCauseCode,"Sub Cause Code");		        	 
-		        	 Thread.sleep(1000);
+		        	 Thread.sleep(2000);
 		        	 IncidentPage.getUpdateBtn(driver).click();						
+		        	 try {
+		 		        Alert alert = driver.switchTo().alert();
+		 		        String alertText = alert.getText();
+		 		        ReporterLogs.log("Alert message: " + alertText, "error");
+		 		        ExtentReport.reportLog(LogStatus.FAIL, "Alert message: " + alertText);
+		 		        Assert.fail("Unexpected alert !!!! ");
+		 		        } 
+		 		    catch (NoAlertPresentException e) {
+		 		        e.printStackTrace();
+		 		    }
 		        	 WaitUtils.waitForTitleIs(driver, "Incidents | ServiceNow");
 		        	 
 		        	 //Search for the incident ticket
 		        	 DropDowns.selectDropdownByVisibleText(IncidentPage.getSearchDropDown(driver), "Number", "Search Drop Down");
-		        	 ServiceNowUtils.searchTicketFromQueue(driver, incNumber);
+		        	 ServiceNowUtils.searchIncidentTicketFromQueue(driver, incNumber);
 		        	 WaitUtils.waitForTitleIs(driver, "Incidents | ServiceNow");
 		        	 incidentStateCancelled=IncidentPage.getIncidentStatusfromQueue(driver, incNumber).getText();
 		        	 ReporterLogs.log("Current State of Incident " + incNumber + " is "+ incidentStateCancelled, "info");
@@ -484,7 +536,7 @@ public class IncidentReusables {
 		        	 if (incidentStateCancelled.equalsIgnoreCase("Cancelled")) {					
 						Thread.sleep(3000);
 						IncidentPage.getIncidentNumberfromQueue(driver, incNumber).click();
-						WaitUtils.waitForPageToLoad(driver, 10);
+						WaitUtils.waitForPageToLoad(driver, 30);
 						WaitUtils.waitForTitleIs(driver, incNumber+" | ServiceNow");
 						if ((!IncidentPage.getStateDropdown(driver).isEnabled()) || (!IncidentPage.getBusinessServiceReadOnly(driver).isEnabled())
 								|| (!IncidentPage.getShortDescriptionReadOnly(driver).isEnabled())) {
