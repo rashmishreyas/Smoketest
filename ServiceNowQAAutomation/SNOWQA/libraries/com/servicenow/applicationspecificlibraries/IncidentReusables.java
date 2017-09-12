@@ -351,7 +351,7 @@ public class IncidentReusables {
 					 WaitUtils.waitForXpathPresent(driver, "//div[@class='input-group']//select");
 			         DropDowns.selectDropdownByVisibleText(IncidentPage.getSearchDropDown(driver), "Number", "Search Drop Down");
 				}
-		        ServiceNowUtils.searchIncidentTicketFromQueue(driver, incNumber);
+		        IncidentReusables.searchIncidentTicketFromQueue(driver, incNumber);
 		        incidentState=IncidentPage.getIncidentStatusfromQueue(driver, incNumber).getText();
 		        if (incidentState.equalsIgnoreCase("New")) {
 		        	Thread.sleep(3000);
@@ -381,7 +381,7 @@ public class IncidentReusables {
 		        	 
 		        	//Search for the incident ticket
 		        	DropDowns.selectDropdownByVisibleText(IncidentPage.getSearchDropDown(driver), "Number", "Search Drop Down");
-		        	ServiceNowUtils.searchIncidentTicketFromQueue(driver, incNumber);
+		        	IncidentReusables.searchIncidentTicketFromQueue(driver, incNumber);
 		        	WaitUtils.waitForTitleIs(driver, "Incidents | ServiceNow");
 		        	incidentStateWIP=IncidentPage.getIncidentStatusfromQueue(driver, incNumber).getText();
 		        	ReporterLogs.log("Current State of Incident " + incNumber + " is "+ incidentStateWIP, "info");
@@ -422,7 +422,7 @@ public class IncidentReusables {
 			        	 
 			        	//Search for the incident ticket
 						DropDowns.selectDropdownByVisibleText(IncidentPage.getSearchDropDown(driver), "Number", "Search Drop Down");
-						ServiceNowUtils.searchIncidentTicketFromQueue(driver, incNumber);
+						IncidentReusables.searchIncidentTicketFromQueue(driver, incNumber);
 						WaitUtils.waitForTitleIs(driver, "Incidents | ServiceNow");
 						incidentStateResolved=IncidentPage.getIncidentStatusfromQueue(driver, incNumber).getText();
 						ReporterLogs.log("Current State of Incident " + incNumber + " is "+incidentStateResolved, "info");
@@ -487,7 +487,7 @@ public class IncidentReusables {
 				 WaitUtils.waitForXpathPresent(driver, "//div[@class='input-group']//select");
 		         DropDowns.selectDropdownByVisibleText(IncidentPage.getSearchDropDown(driver), "Number", "Search Drop Down");
 			}
-		         	 ServiceNowUtils.searchIncidentTicketFromQueue(driver, incNumber);
+					IncidentReusables.searchIncidentTicketFromQueue(driver, incNumber);
 		         	 WaitUtils.waitForPageToLoad(driver, 30);
 		         	 WaitUtils.waitForTitleIs(driver, "Incidents | ServiceNow");
 		         	 incidentState=IncidentPage.getIncidentStatusfromQueue(driver, incNumber).getText();
@@ -526,7 +526,7 @@ public class IncidentReusables {
 		        	 
 		        	 //Search for the incident ticket
 		        	 DropDowns.selectDropdownByVisibleText(IncidentPage.getSearchDropDown(driver), "Number", "Search Drop Down");
-		        	 ServiceNowUtils.searchIncidentTicketFromQueue(driver, incNumber);
+		        	 IncidentReusables.searchIncidentTicketFromQueue(driver, incNumber);
 		        	 WaitUtils.waitForTitleIs(driver, "Incidents | ServiceNow");
 		        	 incidentStateCancelled=IncidentPage.getIncidentStatusfromQueue(driver, incNumber).getText();
 		        	 ReporterLogs.log("Current State of Incident " + incNumber + " is "+ incidentStateCancelled, "info");
@@ -583,6 +583,19 @@ public class IncidentReusables {
 			        e.printStackTrace();
 			    }		
 			}		
+		}
+		
+		public static void searchIncidentTicketFromQueue(WebDriver driver, String ticketNumber) throws Exception{
+			try{
+			Thread.sleep(2000);
+			WaitUtils.waitForXpathPresent(driver, "//div[@class='input-group']/label[text()='Search']/following-sibling::input");
+			TextBoxes.enterTextValue(IncidentPage.getIncidentSearchTicketEdt(driver), ticketNumber, "Search Ticket");
+			IncidentPage.getIncidentSearchTicketEdt(driver).sendKeys(Keys.ENTER);
+			
+		}
+			catch (Exception e) {
+				ReporterLogs.log(e.getMessage(), "info");
+			}
 		}
 	}
 

@@ -112,7 +112,7 @@ public class ProblemReusables {
 		       DropDowns.selectDropdownByVisibleText(IncidentPage.getSearchDropDown(driver), "Number", "Search Drop Down");
 			}
 	        
-	        ServiceNowUtils.searchProblemTicketFromQueue(driver, problemId);
+	        ProblemReusables.searchProblemTicketFromQueue(driver, problemId);
 	        problemState=ProblemPage.getProblemStatusfromQueue(driver, problemId).getText();
 	        ReporterLogs.log("Current state of the problem ticket "+problemId+" is "+problemState, "info");
 	        ExtentReport.reportLog(LogStatus.INFO, "Current state of the problem ticket "+problemId+" is "+problemState);
@@ -134,7 +134,41 @@ public class ProblemReusables {
          	 }
 	  	}    
        
+       public static void searchProblemTicketFromQueue(WebDriver driver, String ticketNumber) throws Exception{
+   		try{
+   		Thread.sleep(2000);
+   		WaitUtils.waitForXpathPresent(driver, "//div[@class='input-group']/label[text()='Search']/following-sibling::input");
+   		TextBoxes.enterTextValue(ProblemPage.getSearchProblemEdt(driver), ticketNumber, "Search Ticket");
+   		ProblemPage.getSearchProblemEdt(driver).sendKeys(Keys.ENTER);
+   		
+   	}
+   		catch (Exception e) {
+   			ReporterLogs.log(e.getMessage(), "info");
+   		}
+   	}
        
-       
+       public static void verifyStateOfProblemTicket(WebDriver driver, String expectedStateOfTicket,String crNum,int reqRow, int reqcol) {
+   		try{
+   				String actualStateOfTicket = DropDowns.getFirstSelectedOptionName(ProblemPage.getProblemStateEdtDropDown(driver), "State Drop Down");
+   				ReporterLogs.log("State of the Change is :"+actualStateOfTicket);
+   				if(actualStateOfTicket.equalsIgnoreCase(expectedStateOfTicket)){
+   					Assert.assertEquals(actualStateOfTicket, expectedStateOfTicket);
+   					ExtentReport.reportLog(LogStatus.PASS, "Actual State of the Change Ticket : "+actualStateOfTicket);
+   					ReporterLogs.log("Successfully updated Change with Id "+crNum, "info");
+   					ExcelUtils.writeDataIntoCell("Change_Management_TestData.xlsx", "Smoke_Suite", reqRow, reqcol, crNum);
+   					ExcelUtils.writeDataIntoCell("Change_Management_TestData.xlsx", "Smoke_Suite", reqRow, 3, actualStateOfTicket);
+   					ExcelUtils.writeDataIntoCell("Change_Management_TestData.xlsx", "Smoke_Suite", reqRow, 4, "Passed");
+   				}else{
+   					ExtentReport.reportLog(LogStatus.FAIL, "State of the Change ticket are not same : "+actualStateOfTicket);
+   					ReporterLogs.log("Unable to update Change with Id "+crNum, "error");
+   					ExcelUtils.writeDataIntoCell("Change_Management_TestData.xlsx", "Smoke_Suite", reqRow, reqcol, crNum);
+   					ExcelUtils.writeDataIntoCell("Change_Management_TestData.xlsx", "Smoke_Suite", reqRow, 3, actualStateOfTicket);
+   					ExcelUtils.writeDataIntoCell("Change_Management_TestData.xlsx", "Smoke_Suite", reqRow, 4, "Failed");
+   					Assert.assertEquals(actualStateOfTicket, expectedStateOfTicket);
+   	}
+   		}catch(Exception e){
+   			ReporterLogs.log("Exception :"+e.getMessage(),"error");
+   		}
+   	}
        
 }

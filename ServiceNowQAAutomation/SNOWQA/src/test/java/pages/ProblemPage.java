@@ -241,7 +241,28 @@ public class ProblemPage {
     	   return element;
        }
        
-       
+       public static WebElement getProblemNumberFromQueue(WebDriver driver, String problemNumber){
+       	element = driver.findElement(By.xpath("//tbody[@class='list2_body']//a[text()='"+problemNumber+"']"));
+       	return element;
+       }
 
-                 
+       public static WebElement getProblemApproversTab(WebDriver driver){
+       	element = driver.findElement(By.xpath("//div[@id='tabs2_list']//span[contains(text(),'Approvers')]"));
+       	return element;
+       }
+       
+       public static WebElement getProblemPendingApproverLnk(WebDriver driver,String usrName){
+          	element = driver.findElement(By.xpath("//table[@id='problem.sysapproval_approver.sysapproval_table']//a[text()='"+usrName+"']//parent::td//preceding-sibling::td[3]"));
+          	return element;
+          }
+        
+       public static WebElement getProblemApproveBtn(WebDriver driver){
+       	element = driver.findElement(By.id("approve"));
+       	return element;
+       }
+       
+       public static WebElement getProblemStateEdtDropDown(WebDriver driver){
+       	element = driver.findElement(By.id("problem.state"));
+       	return element;
+       }
 }

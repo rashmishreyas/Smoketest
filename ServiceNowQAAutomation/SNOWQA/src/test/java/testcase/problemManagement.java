@@ -4,6 +4,9 @@ import java.io.IOException;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import pages.HomePage;
+import pages.ProblemPage;
+
 import com.servicenow.applicationspecificlibraries.ProblemReusables;
 import com.servicenow.applicationspecificlibraries.SafeLogin;
 import com.servicenow.applicationspecificlibraries.ServiceNowUtils;
@@ -27,6 +30,14 @@ public class problemManagement extends SuperTestNG{
                      ServiceNowUtils.navigateToModuleName(driver, "Problem");
                      prNumber=ProblemReusables.createProblem(driver,1,2);
                      ProblemReusables.verifyProblemCreation(driver, prNumber);
+                     ProblemPage.getProblemNumberFromQueue(driver, prNumber).click();
+                     WaitUtils.waitForXpathPresent(driver, "//div[@id='tabs2_list']//span[contains(text(),'Approvers')]");
+                     ProblemPage.getProblemApproversTab(driver).click();
+                     String loogedinUser = HomePage.getLoggedInUserInfo(driver).getText();
+                     ProblemPage.getProblemPendingApproverLnk(driver, loogedinUser).click();
+                     ProblemPage.getProblemApproveBtn(driver).click();
+                     ProblemReusables.verifyStateOfProblemTicket(driver, "Accepted", prNumber, 1, 3);
+                     
                      
        }
 }

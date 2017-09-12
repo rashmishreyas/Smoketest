@@ -40,47 +40,4 @@ public class ServiceNowUtils {
 		WaitUtils.waitForPageToLoad(driver, 10);
 	}
 	
-	public static void searchDesiredTicket(WebDriver driver,String ticketNumber,String moduleName){
-		if(ChangePage.getSearchDropDown(driver).getAttribute("value").equalsIgnoreCase("number")){
-			WaitUtils.waitForXpathPresent(driver, "//div[@class='input-group']/label[text()='Search']/following-sibling::input");
-			TextBoxes.enterTextValue(ChangePage.getSearchChangeEdt(driver), ticketNumber, "Searching for "+moduleName);
-			ChangePage.getSearchChangeEdt(driver).sendKeys(Keys.ENTER);
-			WaitUtils.waitForPageToLoad(driver, 10);
-		}else{
-				WaitUtils.waitForXpathPresent(driver, "//div[@class='input-group']//select");
-				DropDowns.selectDropdownByVisibleText(ChangePage.getSearchDropDown(driver), "Number", "Search Drop Down");
-				TextBoxes.enterTextValue(ChangePage.getSearchChangeEdt(driver), ticketNumber, "Search Change ");
-				ReporterLogs.log("Entering "+moduleName+" in the Search Text "+ticketNumber, "info");
-				ChangePage.getSearchChangeEdt(driver).sendKeys(Keys.ENTER);
-				WaitUtils.waitForPageToLoad(driver, 10);
-		}
 }
-	
-	public static void searchIncidentTicketFromQueue(WebDriver driver, String ticketNumber) throws Exception{
-		try{
-		Thread.sleep(2000);
-		WaitUtils.waitForXpathPresent(driver, "//div[@class='input-group']/label[text()='Search']/following-sibling::input");
-		TextBoxes.enterTextValue(IncidentPage.getIncidentSearchTicketEdt(driver), ticketNumber, "Search Ticket");
-		IncidentPage.getIncidentSearchTicketEdt(driver).sendKeys(Keys.ENTER);
-		
-	}
-		catch (Exception e) {
-			ReporterLogs.log(e.getMessage(), "info");
-		}
-	}
-	
-	public static void searchProblemTicketFromQueue(WebDriver driver, String ticketNumber) throws Exception{
-		try{
-		Thread.sleep(2000);
-		WaitUtils.waitForXpathPresent(driver, "//div[@class='input-group']/label[text()='Search']/following-sibling::input");
-		TextBoxes.enterTextValue(ProblemPage.getSearchProblemEdt(driver), ticketNumber, "Search Ticket");
-		ProblemPage.getSearchProblemEdt(driver).sendKeys(Keys.ENTER);
-		
-	}
-		catch (Exception e) {
-			ReporterLogs.log(e.getMessage(), "info");
-		}
-	}
-	
-	
-	}
