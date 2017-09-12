@@ -228,9 +228,9 @@ public class ChangeReusables {
 		}
 	}
 	
-	public static void searchDesiredChangeTicket(WebDriver driver,String ticketNumber){
+	public static void searchDesiredChangeTicket(WebDriver driver,String ticketNumber) throws InterruptedException{
 		if(ChangePage.getSearchDropDown(driver).getAttribute("value").equalsIgnoreCase("number")){
-			WaitUtils.waitForXpathPresent(driver, "//div[@class='input-group']/label[text()='Search']/following-sibling::input");
+			Thread.sleep(5000);
 			TextBoxes.enterTextValue(ChangePage.getSearchChangeEdt(driver), ticketNumber, "Searching for change "+ticketNumber);
 			ChangePage.getSearchChangeEdt(driver).sendKeys(Keys.ENTER);
 			WaitUtils.waitForPageToLoad(driver, 10);

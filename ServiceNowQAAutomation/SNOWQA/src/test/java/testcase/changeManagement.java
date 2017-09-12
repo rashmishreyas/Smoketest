@@ -45,8 +45,8 @@ public class changeManagement extends SuperTestNG{
 	static String crNumber=null;
 
 	@Test(priority=0,description="-----Create Change Test Case-----",enabled=true)
-	public void testCreateChangeTicket() throws IOException, InterruptedException{
-		try{
+	public void testCreateChangeTicket() throws IOException, InterruptedException {
+		
 			ExtentReport.startReport(Capabilities.getPropertyValue("ChangeReports"), "Test Create Change Ticket", "Create Change Ticket Report");
 			SafeLogin.logInUser(driver);
 			WaitUtils.waitForPageToLoad(driver, 10);
@@ -57,14 +57,11 @@ public class changeManagement extends SuperTestNG{
 			ChangePage.getChangeNumberFromQueue(driver, crNumber).click();	
 			WaitUtils.waitForPageToLoad(driver, 10);
 			ChangeReusables.verifyStateOfChangeTicket(driver, "Draft", crNumber,1,2);
-			}catch(Exception ex){
-		ReporterLogs.log("Exception in closure "+ex, "error");
-	}
 	}
 	
 	@Test(priority=1,description="-----Change Ticket Closure-----",enabled=true)
 	public void testChangeTicketClosure() throws IOException, InterruptedException{
-		try{
+		
 				ExtentReport.startReport(Capabilities.getPropertyValue("ChangeReports"), "Test Close Change Ticket", "Close Change Ticket Report");
 				SafeLogin.logInUser(driver);
 				crNumber = ExcelUtils.getData("Change_Management_TestData.xlsx", "Smoke_Suite", 1, 2);
@@ -79,9 +76,7 @@ public class changeManagement extends SuperTestNG{
 				ChangeReusables.moveToImplementationState(driver);
 				ChangeReusables.moveToClosedState(driver);
 				ChangeReusables.verifyStateOfChangeTicket(driver, "Closed", crNumber,5,2);		
-				}catch(Exception ex){
-			ReporterLogs.log("Exception in closure "+ex, "error");
-		}		
+				
 	}
 
 	@Test(priority=2,description="-----Update Change Test Case-----",enabled=true)
