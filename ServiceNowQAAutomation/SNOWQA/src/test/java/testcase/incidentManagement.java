@@ -29,40 +29,26 @@ public class incidentManagement extends SuperTestNG {
 	@Test(priority=0,description="Create standalone incident ticket", groups="Incidents",enabled=true)
 	public void testCreateStandAloneIncidentTicket() throws Exception{
 		
-		//ExtentReport.startReport(Capabilities.getPropertyValue("IncidentReports"),"testCreateStandAloneIncidentTicket","CreateStandAloneIncident");
 		ExtentReport.startReport(Capabilities.getPropertyValue("IncidentReports"),"Test Create Standalone Incident Ticket","Create Standalone Incident Ticket");
-		try {
-			SafeLogin.logInUser(driver);			
-			WaitUtils.waitForPageToLoad(driver, 10);			
-			ServiceNowUtils.navigateToModuleName(driver,"incident");
-			incNumber=IncidentReusables.createIncident(driver, false, 1, 2);
-			IncidentReusables.verifyIncidentCreation(driver, incNumber);
-			
-		}
-		catch (Exception e) {
-			ReporterLogs.log("Exception "+e.getMessage(), "info");
-			}		
-		
+		SafeLogin.logInUser(driver);			
+		WaitUtils.waitForPageToLoad(driver, 10);			
+		ServiceNowUtils.navigateToModuleName(driver,"incident");
+		incNumber=IncidentReusables.createIncident(driver, false, 1, 2);
+		IncidentReusables.verifyIncidentCreation(driver, incNumber);
 	}
 	
 
 	@Test(priority=1,description="Create managed incident ticket",groups="Incidents",enabled=true)
 	public void testCreateManagedIncidentTicket() throws Exception{
 		
-		//ExtentReport.startReport(Capabilities.getPropertyValue("IncidentReports"),"testCreateManagedIncidentTicket","Create Managed Incident");
-		ExtentReport.startReport(Capabilities.getPropertyValue("IncidentReports"),"Test Create Managed Incident Ticket","Create Managed Incident");
-		try {
-			SafeLogin.logInUser(driver);			
-			WaitUtils.waitForPageToLoad(driver, 30);			
-			ServiceNowUtils.navigateToModuleName(driver,"incident");
-			incNumber=IncidentReusables.createIncident(driver, true,2,2);
-			IncidentReusables.verifyManagedIncidentCreation(driver, incNumber);
-			}
-		catch (Exception e) {
-			ReporterLogs.log("Exception "+e.getMessage(), "info");
-		}		
-		
+		ExtentReport.startReport(Capabilities.getPropertyValue("IncidentReports"),"Test Create Managed Incident Ticket","Create Managed Incident");		
+		SafeLogin.logInUser(driver);			
+		WaitUtils.waitForPageToLoad(driver, 30);			
+		ServiceNowUtils.navigateToModuleName(driver,"incident");
+		incNumber=IncidentReusables.createIncident(driver, true,2,2);
+		IncidentReusables.verifyManagedIncidentCreation(driver, incNumber);
 	}
+	
 	
 	@Test(priority=2,description="Progression of Incident ticket to Resolved state",enabled=true,groups="Incidents",dependsOnMethods={"testCreateStandAloneIncidentTicket"})
 	public void testResolveIncidentTicket() throws Exception{
@@ -81,7 +67,6 @@ public class incidentManagement extends SuperTestNG {
 		WaitUtils.waitForPageToLoad(driver, 10);
 		ServiceNowUtils.navigateToModuleName(driver,"incident");
 		incNumber=IncidentReusables.createIncident(driver, false, 4, 2);
-		IncidentReusables.cancelIncident(driver, incNumber);
-		
+		IncidentReusables.cancelIncident(driver, incNumber);		
 	}
 }

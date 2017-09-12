@@ -8,7 +8,7 @@ public class TextBoxes {
     {
            try
            {
-                  ReporterLogs.log("Entering " + fieldName, "info");
+                  ReporterLogs.log("Entering the value "+ textData +" in the field " + fieldName, "info");
                   element.sendKeys(textData);
                   
            }
