@@ -42,6 +42,12 @@ public class ProblemPage {
         element = driver.findElement(By.id("sysverb_insert"));
         return element;
        }
+     
+     public static WebElement getUpdateBtn(WebDriver driver) {
+         element = driver.findElement(By.id("sysverb_update"));
+         return element;
+        }
+     
     public static WebElement getMajorProblemChkbox(WebDriver driver) {
     	element = driver.findElement(By.id("label.ni.problem.u_major_problem"));
     	return element;
@@ -61,6 +67,16 @@ public class ProblemPage {
  		element=driver.findElement(By.xpath("//tbody[@class='list2_body']//a[text()='"+problemId+"']/following::td[2]"));
  		return element;
  	   }
+     
+     public static WebElement getProblemPriorityfromQueue(WebDriver driver, String problemId) throws Exception{
+  		element=driver.findElement(By.xpath("//tbody[@class='list2_body']//a[text()='"+problemId+"']/following::td[1]"));
+  		return element;
+  	   }
+     
+     public static WebElement getProblemTicketfromQueue(WebDriver driver, String problemId) throws Exception{
+  		element=driver.findElement(By.xpath("//tbody[@class='list2_body']//a[text()='"+problemId+"']"));
+  		return element;
+  	   }
      
      public static WebElement getServiceForumTab(WebDriver driver) throws Exception {
     	 element=driver.findElement(By.xpath("//span[contains(text(),'Service') and contains(text(),'Forum')]"));
@@ -252,7 +268,7 @@ public class ProblemPage {
        }
        
        public static WebElement getProblemPendingApproverLnk(WebDriver driver,String usrName){
-          	element = driver.findElement(By.xpath("//table[@id='problem.sysapproval_approver.sysapproval_table']//a[text()='"+usrName+"']//parent::td//preceding-sibling::td[3]"));
+          	element = driver.findElement(By.xpath("//table[@id='problem.sysapproval_approver.sysapproval_table']//a[text()='"+usrName+"']//parent::td//preceding-sibling::td//a[text()='Requested']"));
           	return element;
           }
         
