@@ -36,6 +36,7 @@ public class ProblemReusables {
        static String impactValue=null;
        static String complexityValue=null;
        static String updatedPriority=null;
+       static String actualStateOfTicket=null;
        
        public static String createProblem(WebDriver driver, int sNum, int cellNum) throws Exception{
            
@@ -58,7 +59,7 @@ public class ProblemReusables {
                  WaitUtils.waitForIdPresent(driver, "sys_display.problem.assignment_group");
                  TextBoxes.enterTextValue(ProblemPage.getAssignmentGrpEdt(driver), assignmentGroup, "Assignment Group");                    
                  ProblemPage.getAssignmentGrpEdt(driver).sendKeys(Keys.ENTER);
-                 Thread.sleep(4000);
+                 Thread.sleep(5000);
                  ReporterLogs.log("Entering Assignment group field value "+assignmentGroup, "info");                 
                  TextBoxes.enterTextValue(ProblemPage.getShortdescriptionEdt(driver), shortDescription, "Short Description");
                  Thread.sleep(2000);
@@ -154,19 +155,19 @@ public class ProblemReusables {
        
        public static void verifyStateOfProblemTicket(WebDriver driver, String expectedStateOfTicket,String prNum,int sNum, int cellNum) {
    			try{
-   					String actualStateOfTicket = DropDowns.getFirstSelectedOptionName(ProblemPage.getProblemStateEdtDropDown(driver), "State Drop Down");
+   					actualStateOfTicket = DropDowns.getFirstSelectedOptionName(ProblemPage.getProblemStateEdtDropDown(driver), "State Drop Down");
    					ReporterLogs.log("State of the Problem is :"+actualStateOfTicket);
    					if(actualStateOfTicket.equalsIgnoreCase(expectedStateOfTicket))
    				    {
    						Assert.assertEquals(actualStateOfTicket, expectedStateOfTicket);
-   						ExtentReport.reportLog(LogStatus.PASS, "Actual State of the Problem Ticket : "+actualStateOfTicket);
-   						ReporterLogs.log("Successfully updated Problem with Id "+prNum, "info");
+   						ExtentReport.reportLog(LogStatus.PASS, "Successfully updated Problem "+prNum+" with state as "+actualStateOfTicket);
+   						ReporterLogs.log("Successfully updated Problem "+prNum+" with state as "+actualStateOfTicket, "info");
    						ExcelUtils.writeDataIntoCell("Problem_Management_TestData.xlsx", "Smoke_Suite", sNum, cellNum, prNum);
    						ExcelUtils.writeDataIntoCell("Problem_Management_TestData.xlsx", "Smoke_Suite", sNum, 3, actualStateOfTicket);
    						ExcelUtils.writeDataIntoCell("Problem_Management_TestData.xlsx", "Smoke_Suite", sNum, 4, "Passed");
    				    }else{
-   				    	ExtentReport.reportLog(LogStatus.FAIL, "State of the Problem ticket are not same : "+actualStateOfTicket);
-   				    	ReporterLogs.log("Unable to update Problem with Id "+prNum, "error");
+   				    	ExtentReport.reportLog(LogStatus.FAIL, "State of the Problem ticket is not : "+actualStateOfTicket);
+   				    	ReporterLogs.log("Unable to update Problem "+prNum+" with state as "+expectedStateOfTicket, "error");
    				    	ExcelUtils.writeDataIntoCell("Problem_Management_TestData.xlsx", "Smoke_Suite", sNum, cellNum, prNum);
    				    	ExcelUtils.writeDataIntoCell("Problem_Management_TestData.xlsx", "Smoke_Suite", sNum, 3, actualStateOfTicket);
    				    	ExcelUtils.writeDataIntoCell("Problem_Management_TestData.xlsx", "Smoke_Suite", sNum, 4, "Failed");
@@ -249,12 +250,22 @@ public class ProblemReusables {
                     System.out.println("Logged in user :"+loggedinUser); 
                     Thread.sleep(3000);
                     Frames.switchToFrameById("gsft_main", driver);
+                   
+                    WaitUtils.waitForPageToLoad(driver, 20);
+                    WaitUtils.waitForTitleIs(driver, problemId+ " | ServiceNow");
                     Thread.sleep(3000);
                     ProblemPage.getProblemApproversTab(driver).click();
+                    ReporterLogs.log("Clicking on Approvers tab", "info");
                     Thread.sleep(3000);
                     ProblemPage.getProblemPendingApproverLnk(driver, loggedinUser).click();
-                    Thread.sleep(3000);
+                    ReporterLogs.log("Clicking on the 'Requested' link for the user "+ loggedinUser, "info");
+                    //Thread.sleep(3000);
+                    WaitUtils.waitForPageToLoad(driver, 20);
+                    WaitUtils.waitForTitleIs(driver, "Approval | ServiceNow");
                     ProblemPage.getProblemApproveBtn(driver).click();
+                    ReporterLogs.log("Approving the problem ticket "+ problemId, "info");
+                    WaitUtils.waitForPageToLoad(driver, 20);
+                    WaitUtils.waitForTitleIs(driver, problemId+ " | ServiceNow");
                     ProblemReusables.verifyStateOfProblemTicket(driver, "Accepted", problemId, 3, 2);
                   }
      		catch (Exception e) {
