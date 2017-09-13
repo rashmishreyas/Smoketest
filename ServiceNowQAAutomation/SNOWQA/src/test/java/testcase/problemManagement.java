@@ -23,7 +23,7 @@ public class problemManagement extends SuperTestNG{
        
        static String prNumber=null;
 
-       @Test(priority=0,description="-----Create Problem Test Case-----",enabled=false, groups="Problems")
+       @Test(priority=0,description="-----Create Problem Test Case-----",enabled=true, groups="Problems")
        public void testCreateProblemTicket() throws Exception{
     	   ExtentReport.startReport(Capabilities.getPropertyValue("ProblemReports"), "Test Create Problem Ticket", "Create Problem Ticket");
     	   SafeLogin.logInUser(driver);

@@ -152,24 +152,24 @@ public class ProblemReusables {
       			}
       		}
        
-       public static void verifyStateOfProblemTicket(WebDriver driver, String expectedStateOfTicket,String crNum,int reqRow, int reqcol) {
+       public static void verifyStateOfProblemTicket(WebDriver driver, String expectedStateOfTicket,String prNum,int sNum, int cellNum) {
    			try{
    					String actualStateOfTicket = DropDowns.getFirstSelectedOptionName(ProblemPage.getProblemStateEdtDropDown(driver), "State Drop Down");
-   					ReporterLogs.log("State of the Change is :"+actualStateOfTicket);
+   					ReporterLogs.log("State of the Problem is :"+actualStateOfTicket);
    					if(actualStateOfTicket.equalsIgnoreCase(expectedStateOfTicket))
    				    {
    						Assert.assertEquals(actualStateOfTicket, expectedStateOfTicket);
-   						ExtentReport.reportLog(LogStatus.PASS, "Actual State of the Change Ticket : "+actualStateOfTicket);
-   						ReporterLogs.log("Successfully updated Change with Id "+crNum, "info");
-   						ExcelUtils.writeDataIntoCell("Problem_Management_TestData.xlsx", "Smoke_Suite", reqRow, reqcol, crNum);
-   						ExcelUtils.writeDataIntoCell("Problem_Management_TestData.xlsx", "Smoke_Suite", reqRow, 3, actualStateOfTicket);
-   						ExcelUtils.writeDataIntoCell("Problem_Management_TestData.xlsx", "Smoke_Suite", reqRow, 4, "Passed");
+   						ExtentReport.reportLog(LogStatus.PASS, "Actual State of the Problem Ticket : "+actualStateOfTicket);
+   						ReporterLogs.log("Successfully updated Problem with Id "+prNum, "info");
+   						ExcelUtils.writeDataIntoCell("Problem_Management_TestData.xlsx", "Smoke_Suite", sNum, cellNum, prNum);
+   						ExcelUtils.writeDataIntoCell("Problem_Management_TestData.xlsx", "Smoke_Suite", sNum, 3, actualStateOfTicket);
+   						ExcelUtils.writeDataIntoCell("Problem_Management_TestData.xlsx", "Smoke_Suite", sNum, 4, "Passed");
    				    }else{
-   				    	ExtentReport.reportLog(LogStatus.FAIL, "State of the Change ticket are not same : "+actualStateOfTicket);
-   				    	ReporterLogs.log("Unable to update Change with Id "+crNum, "error");
-   				    	ExcelUtils.writeDataIntoCell("Problem_Management_TestData.xlsx", "Smoke_Suite", reqRow, reqcol, crNum);
-   				    	ExcelUtils.writeDataIntoCell("Problem_Management_TestData.xlsx", "Smoke_Suite", reqRow, 3, actualStateOfTicket);
-   				    	ExcelUtils.writeDataIntoCell("Problem_Management_TestData.xlsx", "Smoke_Suite", reqRow, 4, "Failed");
+   				    	ExtentReport.reportLog(LogStatus.FAIL, "State of the Problem ticket are not same : "+actualStateOfTicket);
+   				    	ReporterLogs.log("Unable to update Problem with Id "+prNum, "error");
+   				    	ExcelUtils.writeDataIntoCell("Problem_Management_TestData.xlsx", "Smoke_Suite", sNum, cellNum, prNum);
+   				    	ExcelUtils.writeDataIntoCell("Problem_Management_TestData.xlsx", "Smoke_Suite", sNum, 3, actualStateOfTicket);
+   				    	ExcelUtils.writeDataIntoCell("Problem_Management_TestData.xlsx", "Smoke_Suite", sNum, 4, "Failed");
    				    	Assert.assertEquals(actualStateOfTicket, expectedStateOfTicket);
    				    }
    			}catch(Exception e)
