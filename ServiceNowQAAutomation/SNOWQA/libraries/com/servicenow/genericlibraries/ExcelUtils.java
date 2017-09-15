@@ -10,6 +10,9 @@ import org.apache.log4j.Logger;
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -82,27 +85,43 @@ public class ExcelUtils {
      * This method will write data to the desired cell in the data sheet
      */
 	public static void writeDataIntoCell(String fileName, String sheetName,int serialNo, int cellNo,String dataToSet) throws IOException, FileNotFoundException{
-		
-		String filePath = Capabilities.getPropertyValue("DataDir") + fileName;
-		try{
-				ReporterLogs.log("Writing Data to :"+filePath, "info");
-				File file=new File(filePath);
-			    FileInputStream ioFile=new FileInputStream(file);
-			    Workbook wb = WorkbookFactory.create(ioFile);
-				Sheet sheet=wb.getSheet(sheetName);
-				Row row=sheet.getRow(serialNo);
-				Cell cell=row.createCell(cellNo);
-				cell.setCellType(cell.CELL_TYPE_STRING);
-				ReporterLogs.log("Writing data : " + dataToSet, "info");
-				cell.setCellValue(dataToSet);	
-				FileOutputStream outFile=new FileOutputStream(filePath);
-				wb.write(outFile);
-				outFile.close();
-		}catch(Exception e){
-			ReporterLogs.log("Unable to write Data to XLS or XLSX File", "error");
-			ReporterLogs.log("Exception encountered :"+e.getCause(), "error");
-	    }
-	}
+        
+        String filePath = Capabilities.getPropertyValue("DataDir") + fileName;
+        try{
+                      ReporterLogs.log("Writing Data to :"+filePath, "info");
+                      File file=new File(filePath);
+                   FileInputStream ioFile=new FileInputStream(file);
+                   Workbook wb = WorkbookFactory.create(ioFile);
+                      Sheet sheet=wb.getSheet(sheetName);
+                      Row row=sheet.getRow(serialNo);
+                      Cell cell=row.createCell(cellNo);
+                      cell.setCellType(cell.CELL_TYPE_STRING);
+                      ReporterLogs.log("Writing data : " + dataToSet, "info");
+                      cell.setCellValue(dataToSet);    
+                      CellStyle headerStyle = wb.createCellStyle();
+                      Font headerFont = wb.createFont();
+                      if (dataToSet.equalsIgnoreCase("Passed")) {
+                            headerStyle.setFillForegroundColor(IndexedColors.GREEN.getIndex());
+                            headerFont.setColor(IndexedColors.WHITE.getIndex());
+                            headerStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
+                            headerStyle.setFont(headerFont);
+                            cell.setCellStyle(headerStyle);
+                      } else if(dataToSet.equalsIgnoreCase("Failed")){
+                            headerStyle.setFillForegroundColor(IndexedColors.RED.getIndex());
+                            headerFont.setColor(IndexedColors.WHITE.getIndex());
+                            headerStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
+                            headerStyle.setFont(headerFont);
+                            cell.setCellStyle(headerStyle);
+                      }                          
+                      FileOutputStream outFile=new FileOutputStream(filePath);
+                      wb.write(outFile);
+                      outFile.close();
+        }catch(Exception e){
+               ReporterLogs.log("Unable to write Data to XLS or XLSX File", "error");
+               ReporterLogs.log("Exception encountered :"+e.getCause(), "error");
+      }
+  }
+
 	
 	
 }

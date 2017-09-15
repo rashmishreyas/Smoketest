@@ -1,5 +1,7 @@
 package pages;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,6 +10,7 @@ public class ProblemPage {
 
 
      private static WebElement element;
+     private static List<WebElement> elements=null;
                 
      public static WebElement getAssignmentGrpEdt(WebDriver driver) {
         element = driver.findElement(By.id("sys_display.problem.assignment_group"));
@@ -97,15 +100,15 @@ public class ProblemPage {
     	 element = driver.findElement(By.id("problem.u_sf_update"));
     	 return element;
        }
-     public static WebElement getImpactAndAnalysisTab(WebDriver driver) throws Exception {
+       public static WebElement getImpactAndAnalysisTab(WebDriver driver) throws Exception {
     	 element=driver.findElement(By.xpath("//span[contains(text(),'Impact') and contains(text(),'Analysis')]"));
     	 return element;
        }
-     public static WebElement getNumberOfCustomerCallsEdt(WebDriver driver) {
+       public static WebElement getNumberOfCustomerCallsEdt(WebDriver driver) {
     	 element = driver.findElement(By.id("problem.u_number_of_customer_calls"));
     	 return element;
        }
-     public static WebElement getIncidentStartTimeEdt(WebDriver driver) {
+       public static WebElement getIncidentStartTimeEdt(WebDriver driver) {
          element = driver.findElement(By.id("problem.u_incident_start_time"));
          return element;
        }
@@ -129,38 +132,33 @@ public class ProblemPage {
     	   element=driver.findElement(By.xpath("//div[@id='tabs2_list']//span[contains(text(),'Problem') and contains(text(),'Tasks')]"));
     	   return element;
        }
-       
        public static WebElement getIncidentsTab(WebDriver driver) throws Exception {
     	   element=driver.findElement(By.xpath("//div[@id='tabs2_list']//span[contains(text(),'Incidents')]"));
     	   return element;
        }
-       
        public static WebElement getChildProblemsTab(WebDriver driver) throws Exception {
     	   element=driver.findElement(By.xpath("//div[@id='tabs2_list']//span[contains(text(),'Child') and contains(text(),'Problems')]"));
     	   return element;
        }
-       
        public static WebElement getKnowledgeTab(WebDriver driver) throws Exception {
     	   element=driver.findElement(By.xpath("//div[@id='tabs2_list']//span[contains(text(),'Knowledge')]"));
     	   return element;
        }
-       
        public static WebElement getApproversTab(WebDriver driver) throws Exception {
     	   element=driver.findElement(By.xpath("//div[@id='tabs2_list']//span[contains(text(),'Approvers')]"));
     	   return element;
        }
-       
        public static WebElement getMetricsTab(WebDriver driver) throws Exception {
     	   element=driver.findElement(By.xpath("//div[@id='tabs2_list']//span[contains(text(),'Metrics')]"));
     	   return element;
        }
-       
        public static WebElement getServiceForumsTab(WebDriver driver) throws Exception {
     	   element=driver.findElement(By.xpath("//div[@id='tabs2_list']//span[contains(text(),'Service') and contains(text(),'Forums')]"));
     	   return element;
        }
        
        //Problem Approvers is pending
+       
        public static WebElement getProblemTaskNewBtn(WebDriver driver) throws Exception {
     	   element = driver.findElement(By.id("sysverb_new"));
     	   return element;
@@ -172,52 +170,42 @@ public class ProblemPage {
     	   element = driver.findElement(By.id("label.ni.problem.u_root_cause_analysis_complete"));
     	   return element;
        }
-       
        public static WebElement getWorkaroundEdt(WebDriver driver) {
     	   element = driver.findElement(By.id("problem.u_work_around_str"));
     	   return element;
        }
-       
        public static WebElement getTriggerCategoryDropDown(WebDriver driver) {
     	   element = driver.findElement(By.id("problem.u_trigger_category"));
     	   return element;
        }
-       
        public static WebElement getTriggerDetailsEdt(WebDriver driver) {
     	   element = driver.findElement(By.id("problem.u_trigger_details"));
     	   return element;
        }
-       
        public static WebElement getRootCauseCategoryDropDown(WebDriver driver) {
     	   element = driver.findElement(By.id("problem.u_root_cause_category"));
     	   return element;
        }
-       
        public static WebElement getRootCauseSubCategoryDropDown(WebDriver driver) {
     	   element = driver.findElement(By.id("problem.u_root_cause_subcategory"));
     	   return element;
        }
-       
        public static WebElement getRootCauseDetailsEdt(WebDriver driver) {
     	   element = driver.findElement(By.id("problem.u_root_cause"));
     	   return element;
        }
-       
        public static WebElement getRootCauseCIEdt(WebDriver driver) {
     	   element = driver.findElement(By.id("sys_display.problem.u_root_cause_ci"));
     	   return element;
        }
-       
        public static WebElement getAvoidanceFailureCategoryDropDown(WebDriver driver) {
     	   element = driver.findElement(By.id("problem.u_avoidance_failure_category"));
     	   return element;
        }
-       
        public static WebElement getAvoidanceFailureDetailsEdt(WebDriver driver) {
     	   element = driver.findElement(By.id("problem.u_avoidance_failure_details"));
     	   return element;
        }
-       
        public static WebElement getResolutionEdt(WebDriver driver) {
     	   element = driver.findElement(By.id("problem.u_resolution"));
     	   return element;
@@ -228,49 +216,65 @@ public class ProblemPage {
     	   element=driver.findElement(By.xpath("//span[contains(text(),'Notes') and contains(text(),'Notes')]"));
     	   return element;
        }
-       
        public static WebElement getStakeholderListUnlockBtn(WebDriver driver) {
     	   element = driver.findElement(By.id("problem.watch_list_unlock"));
     	   return element;
        }
-       
        public static WebElement getStakeholderListEdt(WebDriver driver) {
     	   element = driver.findElement(By.id("sys_display.problem.watch_list"));
     	   return element;
        }
-       
        public static WebElement getStakeholderListLockBtn(WebDriver driver) {
     	   element = driver.findElement(By.id("problem.watch_list_lock"));
     	   return element;
        }
-       
        public static WebElement getProblemNumberFromQueue(WebDriver driver, String problemNumber){
        	element = driver.findElement(By.xpath("//tbody[@class='list2_body']//a[text()='"+problemNumber+"']"));
        	return element;
        }
-
        public static WebElement getProblemApproversTab(WebDriver driver){
        	element = driver.findElement(By.xpath("//div[@id='tabs2_list']//span[contains(text(),'Approvers')]"));
        	return element;
        }
-       
        public static WebElement getProblemPendingApproverLnk(WebDriver driver,String usrName){
           	element = driver.findElement(By.xpath("//table[@id='problem.sysapproval_approver.sysapproval_table']//a[text()='"+usrName+"']//parent::td//preceding-sibling::td//a[text()='Requested']"));
           	return element;
           }
-        
        public static WebElement getProblemApproveBtn(WebDriver driver){
        	element = driver.findElement(By.id("approve"));
        	return element;
        }
-       
        public static WebElement getProblemStateEdtDropDown(WebDriver driver){
        	element = driver.findElement(By.id("problem.state"));
        	return element;
-       }
-       
+       } 
        public static WebElement getInvestigationDiagnosisTab(WebDriver driver) throws Exception {
     	   element=driver.findElement(By.xpath("//span[contains(text(),'Investigation') and contains(text(),'Diagnosis')]"));
+    	   return element;
+       }
+       
+       //Problem Task Closure
+       public static WebElement getProblemTaskLnk(WebDriver driver){
+    	   element = driver.findElement(By.xpath("//table[@id='problem.problem_task.problem_table']//a[starts-with(text(),'PTASK')]"));
+    	   return element;
+       }
+       
+       //Problem Closure
+       public static WebElement getProblemStateDropdown(WebDriver driver){
+           element = driver.findElement(By.id("problem.state"));
+           return element;
+          }
+       
+
+
+       public static List<WebElement> getNumberOfTasksFromProblemTaskTab(WebDriver driver){
+    	   elements = driver.findElements(By.xpath("//table[@id='problem.problem_task.problem_table']//tbody//tr"));
+    	   return elements;
+       	}
+
+
+       public static WebElement getMultipleProblemTaskLnk(WebDriver driver, int k){
+    	   element = driver.findElement(By.xpath("//table[@id='problem.problem_task.problem_table']//tbody//tr["+k+"]//a[starts-with(text(),'PTASK')]"));
     	   return element;
        }
        

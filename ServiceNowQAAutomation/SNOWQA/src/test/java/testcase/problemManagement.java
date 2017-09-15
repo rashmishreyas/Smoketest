@@ -54,17 +54,9 @@ public class problemManagement extends SuperTestNG{
     	   ProblemReusables.moveProblemTicketToAcceptedPhase(driver, prNumber);
     	   ProblemReusables.moveProblemTicketToInProgressPhase(driver, prNumber);
     	   ProblemReusables.moveProblemTicketToKnownErrorPhase(driver, prNumber);
-    	   
-    	   
-    	   
-    	   
-    	   
+    	   ProblemReusables.closeProblemTask(driver, prNumber);
+    	   ProblemReusables.closeProblemTicket(driver, prNumber);
     	   
     	  }
 
-  
-    	     
-          
-       
-       
 }

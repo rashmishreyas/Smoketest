@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 public class ProblemTaskPage {
 
 	private static WebElement element;
+	private static WebElement elementOfTask=null;
 	
     public static WebElement getAssignmentGrpEdt(WebDriver driver) {
         element = driver.findElement(By.id("sys_display.problem_task.assignment_group"));
@@ -44,7 +45,7 @@ public class ProblemTaskPage {
     }
     
     public static WebElement getWorkNotesEdt(WebDriver driver) {
-        element = driver.findElement(By.id("problem_task.work_notes"));
+        element = driver.findElement(By.id("activity-stream-work_notes-textarea"));
         return element;
     }  
     
@@ -64,6 +65,23 @@ public class ProblemTaskPage {
         element = driver.findElement(By.id("problem_task.state"));
         return element;
        }
+    public static WebElement getUpdateBtn(WebDriver driver) {
+        element = driver.findElement(By.id("sysverb_update"));
+        return element;
+       }
+    
+    public static WebElement getProblemTaskBackBtn(WebDriver driver){
+        elementOfTask = driver.findElement(By.xpath("//button[@class='btn btn-default icon-chevron-left navbar-btn']"));
+        return elementOfTask;
+       }
+       
+       public static WebElement getSaveBtn(WebDriver driver) {
+           element = driver.findElement(By.id("sysverb_update_and_stay"));
+           return element;
+          }
+    
+    
+    
 }
     
     

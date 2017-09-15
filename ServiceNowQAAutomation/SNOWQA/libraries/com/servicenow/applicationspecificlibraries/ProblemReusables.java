@@ -50,6 +50,8 @@ public class ProblemReusables {
        static String rootcauseDetail = null;
        static String rootcauseCI = null;
        static String resolution = null;
+       static String state = null;
+       static String workNotes = null;
        
        public static String createProblem(WebDriver driver, int sNum, int cellNum) throws Exception{
            
@@ -269,10 +271,10 @@ public class ProblemReusables {
                    
                     WaitUtils.waitForPageToLoad(driver, 20);
                     WaitUtils.waitForTitleIs(driver, problemId+ " | ServiceNow");
-                    Thread.sleep(2000);
+                    Thread.sleep(3000);
                     ProblemPage.getProblemApproversTab(driver).click();
                     ReporterLogs.log("Clicking on Approvers tab", "info");
-                    Thread.sleep(2000);
+                    Thread.sleep(3000);
                     ProblemPage.getProblemPendingApproverLnk(driver, loggedinUser).click();
                     ReporterLogs.log("Clicking on the 'Requested' link for the user "+ loggedinUser, "info");
                     //Thread.sleep(3000);
@@ -324,10 +326,23 @@ public class ProblemReusables {
                 
                 TextBoxes.enterTextValue(ProblemTaskPage.getDescriptionEdt(driver), description, "Description");
                 ProblemTaskPage.getAssignedToEdt(driver).sendKeys(Keys.ENTER);
-                Thread.sleep(3000);
-                ProblemPage.getSubmitBtn(driver).click();                  
+                Thread.sleep(4000);
+                ProblemPage.getSubmitBtn(driver).click();   
+                try {
+               	 Alert alert = driver.switchTo().alert();
+               	 String alertText = alert.getText();
+               	 ReporterLogs.log("Alert message: " + alertText, "error");
+               	 ExtentReport.reportLog(LogStatus.FAIL, "Alert message: " + alertText);
+               	 ExcelUtils.writeDataIntoCell("Problem_Management_TestData.xlsx", "Smoke_Suite", 3, 4, "Failed");
+               	 Assert.fail("Unexpected alert !!!! ");
+                   } 
+                catch (NoAlertPresentException e) {
+               	 e.printStackTrace();
+                }
+                
                 WaitUtils.waitForPageToLoad(driver, 20);
                 ProblemTaskPage.getProblemTasksTab(driver).click();
+                
 
           	   	 actualProblemTask=ProblemReusables.getProblemTaskNumberFromTaskTable(driver);
           	   	 if (actualProblemTask.equalsIgnoreCase(problemTaskNum)) {
@@ -380,6 +395,17 @@ public class ProblemReusables {
     			TextBoxes.enterTextValue(ProblemPage.getResolutionEdt(driver), resolution, "Resolution");
     			Thread.sleep(2000);
     			ProblemPage.getSaveBtn(driver).click();
+    			try {
+                  	 Alert alert = driver.switchTo().alert();
+                  	 String alertText = alert.getText();
+                  	 ReporterLogs.log("Alert message: " + alertText, "error");
+                  	 ExtentReport.reportLog(LogStatus.FAIL, "Alert message: " + alertText);
+                  	 ExcelUtils.writeDataIntoCell("Problem_Management_TestData.xlsx", "Smoke_Suite", 3, 4, "Failed");
+                  	 Assert.fail("Unexpected alert !!!! ");
+                      } 
+                   catch (NoAlertPresentException e) {
+                  	 e.printStackTrace();
+                   }
     			WaitUtils.waitForPageToLoad(driver, 20);
     			ProblemReusables.verifyStateOfProblemTicket(driver, "Known Error", problemId, 3, 2);
     		}
@@ -387,4 +413,79 @@ public class ProblemReusables {
   			   ReporterLogs.log(e.getMessage(), "info");
   			}
     		}
+       
+      /* public static void closeProblemTask(WebDriver driver, String problemId) throws Exception{
+   		try{
+   			ProblemTaskPage.getProblemTasksTab(driver).click();
+   			Thread.sleep(5000);
+   			ProblemPage.getProblemTaskLnk(driver).click();
+   			state=ExcelUtils.getData("Problem_Management_TestData.xlsx", "ProblemTask",1 , 8);
+   			workNotes=ExcelUtils.getData("Problem_Management_TestData.xlsx", "ProblemTask",1 , 7);
+   			DropDowns.selectDropdownByVisibleText(ProblemTaskPage.getProblemTasksSateDropdown(driver), state, "State");
+   			Thread.sleep(3000);
+   			TextBoxes.enterTextValue(ProblemTaskPage.getWorkNotesEdt(driver), workNotes, "Work Notes");
+   			ProblemPage.getUpdateBtn(driver).click();
+   			WaitUtils.waitForPageToLoad(driver, 20);
+   		}
+   		catch (Exception e) {
+ 			   ReporterLogs.log(e.getMessage(), "info");
+ 			}
+   		}*/
+       
+       
+       public static void closeProblemTask(WebDriver driver, String problemId) throws Exception{
+    	     try{
+    	        Thread.sleep(5000);
+    	        ProblemPage.getProblemTasksTab(driver).click();
+    	        String problemTaskState=ExcelUtils.getData("Problem_Management_TestData.xlsx", "ProblemTask", 1, 8);
+    	        String workNotes=ExcelUtils.getData("Problem_Management_TestData.xlsx", "ProblemTask", 1, 7);
+    	        Thread.sleep(2000);
+    	        int rowCount = ProblemPage.getNumberOfTasksFromProblemTaskTab(driver).size();
+    	        System.out.println(rowCount);
+    	        ReporterLogs.log("Number of Tasks for the problem :"+problemId+" is "+rowCount/2, "info");
+    	        for (int c = 1; c <= rowCount; c=c+2) {
+    	        ProblemPage.getMultipleProblemTaskLnk(driver, c).click();
+    	        WaitUtils.waitForPageToLoad(driver, 10);
+    	        DropDowns.selectDropdownByVisibleText(ProblemTaskPage.getProblemTasksSateDropdown(driver),problemTaskState , "Problem Task State");
+    	        Thread.sleep(1000);
+    	        TextBoxes.enterTextValue(ProblemTaskPage.getWorkNotesEdt(driver), workNotes, "Work Notes");
+    	        ProblemTaskPage.getSaveBtn(driver).click();
+    	        WaitUtils.waitForPageToLoad(driver, 10);
+    	        ProblemTaskPage.getProblemTaskBackBtn(driver).click();
+    	        WaitUtils.waitForPageToLoad(driver, 10);
+    	        //Thread.sleep(5000);     
+    	        }
+    	     }
+    	     catch (Exception e) {
+    	        ReporterLogs.log(e.getMessage(), "info");
+    	     }
+
+    	     }
+       
+       
+       public static void closeProblemTicket(WebDriver driver, String problemId) throws Exception{
+      		try{
+      			Thread.sleep(2000);
+      			state=ExcelUtils.getData("Problem_Management_TestData.xlsx", "Smoke_Suite", 4, 18);
+      			DropDowns.selectDropdownByVisibleText(ProblemPage.getProblemStateDropdown(driver), state, "State");
+      			Thread.sleep(3000);
+      			ProblemPage.getSaveBtn(driver).click();
+      			try {
+                  	 Alert alert = driver.switchTo().alert();
+                  	 String alertText = alert.getText();
+                  	 ReporterLogs.log("Alert message: " + alertText, "error");
+                  	 ExtentReport.reportLog(LogStatus.FAIL, "Alert message: " + alertText);
+                  	 ExcelUtils.writeDataIntoCell("Problem_Management_TestData.xlsx", "Smoke_Suite", 3, 4, "Failed");
+                  	 Assert.fail("Unexpected alert !!!! ");
+                      } 
+                   catch (NoAlertPresentException e) {
+                  	 e.printStackTrace();
+                   }
+      			WaitUtils.waitForPageToLoad(driver, 20);
+      			ProblemReusables.verifyStateOfProblemTicket(driver, "Closed", problemId, 3, 2);
+      		}
+      		catch (Exception e) {
+    			   ReporterLogs.log(e.getMessage(), "info");
+    			}
+      		}
 }

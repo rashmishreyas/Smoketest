@@ -119,7 +119,7 @@ public class SuperTestNG {
 		     }
 	     finally {
 	               Frames.switchToDefaultContent(driver);
-	  	    	   SafeLogin.logOut(driver);
+	  	    	   //SafeLogin.logOut(driver);
 	  	    	   ReporterLogs.log("Test Case Executed: "+result.getName(), "info");
 		           ReporterLogs.log("                                                                                                                                      ", "info");
 		           ReporterLogs.log("**************************************************************************************************************************************","info");
