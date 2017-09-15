@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 
 import pages.HomePage;
 import pages.ProblemPage;
+import pages.ProblemTaskPage;
 
 import com.servicenow.applicationspecificlibraries.ProblemReusables;
 import com.servicenow.applicationspecificlibraries.SafeLogin;
@@ -19,10 +20,10 @@ import com.servicenow.genericlibraries.ExtentReport;
 
 @Listeners(value=SnowReporter.class)
 public class problemManagement extends SuperTestNG{
-       
-       
+              
        static String prNumber=null;
-
+       static String prTaskNumber=null;
+       
        @Test(priority=0,description="-----Create Problem Test Case-----",enabled=true, groups="Problems")
        public void testCreateProblemTicket() throws Exception{
     	   ExtentReport.startReport(Capabilities.getPropertyValue("ProblemReports"), "Test Create Problem Ticket", "Create Problem Ticket");
@@ -49,11 +50,20 @@ public class problemManagement extends SuperTestNG{
     	   SafeLogin.logInUser(driver);
     	   WaitUtils.waitForPageToLoad(driver, 10);
     	   ServiceNowUtils.navigateToAllQueueForDesiredModule(driver, "Problem");
-    	   prNumber=ExcelUtils.getData("Problem_Management_TestData.xlsx", "Smoke_Suite", 1, 2);
+    	   prNumber=ExcelUtils.getData("Problem_Management_TestData.xlsx", "Smoke_Suite", 1, 2);    	   
     	   ProblemReusables.moveProblemTicketToAcceptedPhase(driver, prNumber);
+    	   ProblemReusables.moveProblemTicketToInProgressPhase(driver, prNumber);
+    	   ProblemReusables.moveProblemTicketToKnownErrorPhase(driver, prNumber);
+    	   
+    	   
+    	   
+    	   
+    	   
     	   
     	  }
-       
+
+  
+    	     
           
        
        

@@ -1,5 +1,7 @@
 package com.servicenow.applicationspecificlibraries;
 
+import java.awt.Checkbox;
+
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -19,6 +21,7 @@ import pages.ChangePage;
 import pages.HomePage;
 import pages.IncidentPage;
 import pages.ProblemPage;
+import pages.ProblemTaskPage;
 
 public class ProblemReusables {
        
@@ -32,11 +35,21 @@ public class ProblemReusables {
        static String configurationItem = null;
        static String shortDescription = null;
        static String description = null;
-       static String initialPriority=null;
-       static String impactValue=null;
-       static String complexityValue=null;
-       static String updatedPriority=null;
-       static String actualStateOfTicket=null;
+       static String priority = null;
+       static String initialPriority = null;
+       static String impactValue = null;
+       static String complexityValue = null;
+       static String updatedPriority = null;
+       static String actualStateOfTicket = null;
+       static String assignedTo = null;
+       static String problemTaskNum = null;
+       static String actualProblemTask = null;
+       static String workaround = null;
+       static String rootcauseCategory = null;
+       static String rootcauseSubCategory = null;
+       static String rootcauseDetail = null;
+       static String rootcauseCI = null;
+       static String resolution = null;
        
        public static String createProblem(WebDriver driver, int sNum, int cellNum) throws Exception{
            
@@ -244,19 +257,22 @@ public class ProblemReusables {
      					DropDowns.selectDropdownByVisibleText(IncidentPage.getSearchDropDown(driver), "Number", "Search Drop Down");
      				}   
      				ProblemReusables.searchProblemTicketFromQueue(driver, problemId);
+     				problemState=ProblemPage.getProblemStatusfromQueue(driver, problemId).getText();
+    		        ReporterLogs.log("Current state of the problem ticket "+problemId+" is "+problemState, "info");
+    		        ExtentReport.reportLog(LogStatus.INFO, "Current state of the problem ticket "+problemId+" is "+problemState);
      				ProblemReusables.clickProblemTicketFromQueue(driver, problemId);    
      				Frames.switchToDefaultContent(driver);
                     String loggedinUser = HomePage.getLoggedInUserInfo(driver).getText();
                     System.out.println("Logged in user :"+loggedinUser); 
-                    Thread.sleep(3000);
+                    Thread.sleep(2000);
                     Frames.switchToFrameById("gsft_main", driver);
                    
                     WaitUtils.waitForPageToLoad(driver, 20);
                     WaitUtils.waitForTitleIs(driver, problemId+ " | ServiceNow");
-                    Thread.sleep(3000);
+                    Thread.sleep(2000);
                     ProblemPage.getProblemApproversTab(driver).click();
                     ReporterLogs.log("Clicking on Approvers tab", "info");
-                    Thread.sleep(3000);
+                    Thread.sleep(2000);
                     ProblemPage.getProblemPendingApproverLnk(driver, loggedinUser).click();
                     ReporterLogs.log("Clicking on the 'Requested' link for the user "+ loggedinUser, "info");
                     //Thread.sleep(3000);
@@ -273,5 +289,102 @@ public class ProblemReusables {
      			}
      		}
        
+     //---------------------------------------Problem Task------------------------------------------------
        
+       public static String moveProblemTicketToInProgressPhase(WebDriver driver, String problemId) throws Exception{
+    		try{
+    			ProblemTaskPage.getProblemTasksTab(driver).click();
+                ReporterLogs.log("Clicking on Problem Tasks Tab", "info");
+                ProblemTaskPage.getProblemTasksCreateBtn(driver).click();
+                ReporterLogs.log("-----Creating New Problem Tasks-----", "info");
+                WaitUtils.waitForPageToLoad(driver, 20);
+                problemTaskNum = ProblemTaskPage.getProblemTaskNumberEdt(driver).getAttribute("value");
+                WaitUtils.waitForTitleIs(driver, problemTaskNum+" | ServiceNow");
+                ReporterLogs.log("Problem Task Number Captured is " +problemTaskNum, "info");
+                ExtentReport.reportLog(LogStatus.INFO, "Problem Task Number Captured is " +problemTaskNum);
+                configurationItem=ExcelUtils.getData("Problem_Management_TestData.xlsx", "ProblemTask",1 , 1);
+                assignmentGroup=ExcelUtils.getData("Problem_Management_TestData.xlsx", "ProblemTask",1 , 3);
+                priority=ExcelUtils.getData("Problem_Management_TestData.xlsx", "ProblemTask",1 , 2);
+                assignedTo=ExcelUtils.getData("Problem_Management_TestData.xlsx", "ProblemTask",1 , 4);
+                shortDescription=ExcelUtils.getData("Problem_Management_TestData.xlsx", "ProblemTask",1 , 5);
+                description=ExcelUtils.getData("Problem_Management_TestData.xlsx", "ProblemTask",1 , 6);
+                
+                TextBoxes.enterTextValue(ProblemTaskPage.getConfigurationItemEdt(driver), configurationItem, "Configuration Item");
+                ProblemTaskPage.getConfigurationItemEdt(driver).sendKeys(Keys.ENTER);
+                
+                TextBoxes.enterTextValue(ProblemTaskPage.getAssignmentGrpEdt(driver), assignmentGroup, "Assignment Group");
+                ProblemTaskPage.getAssignmentGrpEdt(driver).sendKeys(Keys.ENTER);
+                
+                DropDowns.selectDropdownByVisibleText(ProblemTaskPage.getPriorityDropdown(driver), priority, "Priority");
+                
+                TextBoxes.enterTextValue(ProblemTaskPage.getAssignedToEdt(driver), assignedTo, "Assigned To");
+                ProblemTaskPage.getAssignedToEdt(driver).sendKeys(Keys.ENTER);
+                
+                TextBoxes.enterTextValue(ProblemTaskPage.getShortDescriptionEdt(driver), shortDescription, "Short Description");
+                
+                TextBoxes.enterTextValue(ProblemTaskPage.getDescriptionEdt(driver), description, "Description");
+                ProblemTaskPage.getAssignedToEdt(driver).sendKeys(Keys.ENTER);
+                Thread.sleep(3000);
+                ProblemPage.getSubmitBtn(driver).click();                  
+                WaitUtils.waitForPageToLoad(driver, 20);
+                ProblemTaskPage.getProblemTasksTab(driver).click();
+
+          	   	 actualProblemTask=ProblemReusables.getProblemTaskNumberFromTaskTable(driver);
+          	   	 if (actualProblemTask.equalsIgnoreCase(problemTaskNum)) {
+          	   		 ReporterLogs.log("Successfully created Problem task "+actualProblemTask+" for the problem "+problemId, "pass");
+          	   		 ExtentReport.reportLog(LogStatus.PASS, "Successfully created Problem task "+actualProblemTask+" for the problem "+problemId);				
+          	   	}else {
+          	   		 ReporterLogs.log("Created Problem Task "+actualProblemTask+" is different from the expected problem task "+problemTaskNum, "error");
+          	   		 ExtentReport.reportLog(LogStatus.FAIL, "Created Problem Task "+actualProblemTask+" is different from the expected problem task "+problemTaskNum);
+          	   	}  
+          	   	 	 ProblemReusables.verifyStateOfProblemTicket(driver, "Work in Progress", problemId, 3, 2);
+      	}
+       		
+       		   catch (Exception e) {
+       			   ReporterLogs.log(e.getMessage(), "info");
+       			}
+  			return problemTaskNum;
+    			
+    }      
+       
+       public static String getProblemTaskNumberFromTaskTable(WebDriver driver) throws Exception{
+     		try{
+     			   Thread.sleep(2000);
+     			   actualProblemTask=ProblemPage.getProblemTaskFromTaskTable(driver, problemTaskNum).getText();     		
+     		   }
+     		catch (Exception e) {
+     			   ReporterLogs.log(e.getMessage(), "info");
+     			}
+			return actualProblemTask;
+     		}
+       
+       public static void moveProblemTicketToKnownErrorPhase(WebDriver driver, String problemId) throws Exception{
+    		try{
+    			Thread.sleep(2000);
+    			ProblemPage.getInvestigationDiagnosisTab(driver).click();
+    			Thread.sleep(2000);
+    			ProblemPage.getRootCauseAnalysisCompleteChkbox(driver).click();
+    			workaround=ExcelUtils.getData("Problem_Management_TestData.xlsx", "Smoke_Suite", 3, 12);
+    			rootcauseCategory=ExcelUtils.getData("Problem_Management_TestData.xlsx", "Smoke_Suite", 3, 13);
+    			rootcauseSubCategory=ExcelUtils.getData("Problem_Management_TestData.xlsx", "Smoke_Suite", 3, 14);
+    		    rootcauseDetail=ExcelUtils.getData("Problem_Management_TestData.xlsx", "Smoke_Suite", 3, 15);
+    		    rootcauseCI=ExcelUtils.getData("Problem_Management_TestData.xlsx", "Smoke_Suite", 3, 16);
+    		    resolution=ExcelUtils.getData("Problem_Management_TestData.xlsx", "Smoke_Suite", 3, 17);
+    		    WaitUtils.waitForXpathPresent(driver, "//textarea[@id='problem.u_work_around_str']");
+    			TextBoxes.enterTextValue(ProblemPage.getWorkaroundEdt(driver), workaround, "Workaround");
+    			DropDowns.selectDropdownByVisibleText(ProblemPage.getRootCauseCategoryDropDown(driver), rootcauseCategory, "Root cause Category");
+    			DropDowns.selectDropdownByVisibleText(ProblemPage.getRootCauseSubCategoryDropDown(driver), rootcauseSubCategory, "Root cause SubCategory");
+    			TextBoxes.enterTextValue(ProblemPage.getRootCauseDetailsEdt(driver), rootcauseDetail, "Root cause Detail");
+    			TextBoxes.enterTextValue(ProblemPage.getRootCauseCIEdt(driver), rootcauseCI, "Root cause CI");
+    			ProblemPage.getRootCauseCIEdt(driver).sendKeys(Keys.ENTER);
+    			TextBoxes.enterTextValue(ProblemPage.getResolutionEdt(driver), resolution, "Resolution");
+    			Thread.sleep(2000);
+    			ProblemPage.getSaveBtn(driver).click();
+    			WaitUtils.waitForPageToLoad(driver, 20);
+    			ProblemReusables.verifyStateOfProblemTicket(driver, "Known Error", problemId, 3, 2);
+    		}
+    		catch (Exception e) {
+  			   ReporterLogs.log(e.getMessage(), "info");
+  			}
+    		}
 }

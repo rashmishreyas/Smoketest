@@ -37,107 +37,94 @@ public class ProblemPage {
         element = driver.findElement(By.id("problem.description"));
         return element;
        }
-  
      public static WebElement getSubmitBtn(WebDriver driver) {
         element = driver.findElement(By.id("sysverb_insert"));
         return element;
        }
-     
+     public static WebElement getSaveBtn(WebDriver driver) {
+         element = driver.findElement(By.id("sysverb_update_and_stay"));
+         return element;
+        }
      public static WebElement getUpdateBtn(WebDriver driver) {
          element = driver.findElement(By.id("sysverb_update"));
          return element;
         }
-     
-    public static WebElement getMajorProblemChkbox(WebDriver driver) {
+     public static WebElement getMajorProblemChkbox(WebDriver driver) {
     	element = driver.findElement(By.id("label.ni.problem.u_major_problem"));
     	return element;
        }
-    
      public static WebElement getSearchDropDown(WebDriver driver) throws Exception {
     	 element=driver.findElement(By.xpath("//div[@class='input-group']//select"));
     	 return element;
        }
-     
      public static WebElement getSearchProblemEdt(WebDriver driver) throws Exception {
     	 element=driver.findElement(By.xpath("//div[@class='input-group']/label[text()='Search']/following-sibling::input"));
     	 return element;
        }
-     
      public static WebElement getProblemStatusfromQueue(WebDriver driver, String problemId) throws Exception{
  		element=driver.findElement(By.xpath("//tbody[@class='list2_body']//a[text()='"+problemId+"']/following::td[2]"));
  		return element;
  	   }
-     
      public static WebElement getProblemPriorityfromQueue(WebDriver driver, String problemId) throws Exception{
   		element=driver.findElement(By.xpath("//tbody[@class='list2_body']//a[text()='"+problemId+"']/following::td[1]"));
   		return element;
   	   }
-     
      public static WebElement getProblemTicketfromQueue(WebDriver driver, String problemId) throws Exception{
   		element=driver.findElement(By.xpath("//tbody[@class='list2_body']//a[text()='"+problemId+"']"));
   		return element;
   	   }
-     
-     public static WebElement getServiceForumTab(WebDriver driver) throws Exception {
+     public static WebElement getProblemTaskFromTaskTable(WebDriver driver, String problemTaskId) throws Exception{
+   		element=driver.findElement(By.xpath("//table[@id='problem.problem_task.problem_table']//a[text()='"+problemTaskId+"']"));
+   		return element;
+   	   }
+      public static WebElement getServiceForumTab(WebDriver driver) throws Exception {
     	 element=driver.findElement(By.xpath("//span[contains(text(),'Service') and contains(text(),'Forum')]"));
     	 return element;
        }
-     
      public static WebElement getDivisionDropDown(WebDriver driver) {
     	 element = driver.findElement(By.id("problem.u_division"));
     	 return element;
        }
-       
      public static WebElement getForumDropDown(WebDriver driver) {
     	 element = driver.findElement(By.id("problem.u_forum"));
     	 return element;
        }
-       
      public static WebElement getSeverityDropDown(WebDriver driver) {
     	 element = driver.findElement(By.id("problem.u_severity"));
     	 return element;
        }
-       
      public static WebElement getSFUpdateEdt(WebDriver driver) {
     	 element = driver.findElement(By.id("problem.u_sf_update"));
     	 return element;
        }
-     
      public static WebElement getImpactAndAnalysisTab(WebDriver driver) throws Exception {
     	 element=driver.findElement(By.xpath("//span[contains(text(),'Impact') and contains(text(),'Analysis')]"));
     	 return element;
        }
-     
      public static WebElement getNumberOfCustomerCallsEdt(WebDriver driver) {
     	 element = driver.findElement(By.id("problem.u_number_of_customer_calls"));
     	 return element;
        }
-     
      public static WebElement getIncidentStartTimeEdt(WebDriver driver) {
          element = driver.findElement(By.id("problem.u_incident_start_time"));
          return element;
        }
-     
        public static WebElement getIncidentDetectedTimeEdt(WebDriver driver) {
          element = driver.findElement(By.id("problem.u_incident_detected_time"));
          return element;
        }
-       
        public static WebElement getIncidentMitigationTimeEdt(WebDriver driver) {
          element = driver.findElement(By.id("problem.u_incident_mitigation_time"));
          return element;
        }
-       
        public static WebElement getIncidentResolvedTimeEdt(WebDriver driver) {
          element = driver.findElement(By.id("problem.u_incident_resolved_time"));
          return element;
        }
-       
        public static WebElement getImpactedServicesTab(WebDriver driver) throws Exception {
          element=driver.findElement(By.xpath("//div[@id='tabs2_list']//span[contains(text(),'Impacted') and contains(text(),'Services')]"));
          return element;
        }
-       
        public static WebElement getProblemTasksTab(WebDriver driver) throws Exception {
     	   element=driver.findElement(By.xpath("//div[@id='tabs2_list']//span[contains(text(),'Problem') and contains(text(),'Tasks')]"));
     	   return element;
@@ -281,4 +268,12 @@ public class ProblemPage {
        	element = driver.findElement(By.id("problem.state"));
        	return element;
        }
+       
+       public static WebElement getInvestigationDiagnosisTab(WebDriver driver) throws Exception {
+    	   element=driver.findElement(By.xpath("//span[contains(text(),'Investigation') and contains(text(),'Diagnosis')]"));
+    	   return element;
+       }
+       
+       
+     
 }
