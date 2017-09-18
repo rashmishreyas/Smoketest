@@ -75,12 +75,15 @@ public class ProblemTaskPage {
         return elementOfTask;
        }
        
-       public static WebElement getSaveBtn(WebDriver driver) {
+    public static WebElement getSaveBtn(WebDriver driver) {
            element = driver.findElement(By.id("sysverb_update_and_stay"));
            return element;
-          }
+       }
     
-    
+    public static WebElement getErrorValidationTxt(WebDriver driver) {
+        element = driver.findElement(By.xpath("//*[contains(text(),'Match not found, reset to original')]"));
+        return element;
+       }
     
 }
     

@@ -8,6 +8,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
 import com.relevantcodes.extentreports.LogStatus;
@@ -73,6 +74,8 @@ public class ProblemReusables {
                  //Thread.sleep(3000);                                 
                  WaitUtils.waitForIdPresent(driver, "sys_display.problem.assignment_group");
                  TextBoxes.enterTextValue(ProblemPage.getAssignmentGrpEdt(driver), assignmentGroup, "Assignment Group");                    
+                 ProblemPage.getAssignmentGrpEdt(driver).sendKeys(Keys.ENTER);
+                 ProblemPage.getAssignmentGrpEdt(driver).sendKeys(Keys.DOWN);
                  ProblemPage.getAssignmentGrpEdt(driver).sendKeys(Keys.ENTER);
                  Thread.sleep(5000);
                  ReporterLogs.log("Entering Assignment group field value "+assignmentGroup, "info");                 
@@ -320,23 +323,24 @@ public class ProblemReusables {
                 DropDowns.selectDropdownByVisibleText(ProblemTaskPage.getPriorityDropdown(driver), priority, "Priority");
                 
                 TextBoxes.enterTextValue(ProblemTaskPage.getAssignedToEdt(driver), assignedTo, "Assigned To");
+                Thread.sleep(2000);
                 ProblemTaskPage.getAssignedToEdt(driver).sendKeys(Keys.ENTER);
                 
                 TextBoxes.enterTextValue(ProblemTaskPage.getShortDescriptionEdt(driver), shortDescription, "Short Description");
                 
                 TextBoxes.enterTextValue(ProblemTaskPage.getDescriptionEdt(driver), description, "Description");
                 ProblemTaskPage.getAssignedToEdt(driver).sendKeys(Keys.ENTER);
-                Thread.sleep(4000);
+                Thread.sleep(3000);
                 ProblemPage.getSubmitBtn(driver).click();   
                 try {
-               	 Alert alert = driver.switchTo().alert();
-               	 String alertText = alert.getText();
-               	 ReporterLogs.log("Alert message: " + alertText, "error");
-               	 ExtentReport.reportLog(LogStatus.FAIL, "Alert message: " + alertText);
-               	 ExcelUtils.writeDataIntoCell("Problem_Management_TestData.xlsx", "Smoke_Suite", 3, 4, "Failed");
-               	 Assert.fail("Unexpected alert !!!! ");
-                   } 
-                catch (NoAlertPresentException e) {
+               	 if (ProblemTaskPage.getErrorValidationTxt(driver).isDisplayed()) {
+               		 ReporterLogs.log("Field Validation error message: " + ProblemTaskPage.getErrorValidationTxt(driver).getText(), "error");
+               		 ExtentReport.reportLog(LogStatus.FAIL, "Field Validation error message: " + ProblemTaskPage.getErrorValidationTxt(driver).getText());
+                  	 ExcelUtils.writeDataIntoCell("Problem_Management_TestData.xlsx", "Smoke_Suite", 3, 4, "Failed");
+                  	 Assert.fail("Field Validation Error Message !!!! "); 
+               	 	} 
+               	 } 
+                catch (Exception e) {
                	 e.printStackTrace();
                 }
                 
@@ -465,8 +469,10 @@ public class ProblemReusables {
        
        public static void closeProblemTicket(WebDriver driver, String problemId) throws Exception{
       		try{
-      			Thread.sleep(2000);
-      			state=ExcelUtils.getData("Problem_Management_TestData.xlsx", "Smoke_Suite", 4, 18);
+      			WaitUtils.waitForPageToLoad(driver, 10);
+      			WaitUtils.waitForTitleIs(driver, problemId+" | ServiceNow");
+      			//Thread.sleep(2000);
+      			state=ExcelUtils.getData("Problem_Management_TestData.xlsx", "Smoke_Suite", 3, 18);
       			DropDowns.selectDropdownByVisibleText(ProblemPage.getProblemStateDropdown(driver), state, "State");
       			Thread.sleep(3000);
       			ProblemPage.getSaveBtn(driver).click();
