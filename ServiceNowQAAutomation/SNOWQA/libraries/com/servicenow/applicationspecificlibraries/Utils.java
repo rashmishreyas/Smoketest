@@ -13,10 +13,6 @@ import com.servicenow.genericlibraries.ReporterLogs;
 
 public class Utils {
 	
-	/*
-	 * Author : Sathyanarayanan V
-	 * Objective : Capture current system time
-	 */
 	public static String getCurrentDateTime() throws Exception {
 	DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");	 
 	 //get current date time with Date()

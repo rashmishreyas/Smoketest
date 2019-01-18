@@ -43,6 +43,21 @@ import com.servicenow.genericlibraries.TextBoxes;
 public class changeManagement extends SuperTestNG{
 	
 	static String crNumber=null;
+	static String plannedStartDate = null;
+	static String plannedEndtDate=null;
+	static String changeId=null;
+	static String assignmentGroup = null;
+	static String configurationItem = null;
+	static String shortDescription = null;
+	static String description = null;
+	static String reasonForChange = null;
+	static String customerImpactDuringChange = null;
+	static String implementationPlan= null;
+	static String testPlan = null;
+	static String backoutPlan = null;
+	int serialnum;
+	int cnum;
+
 
 	@Test(priority=0,description="-----Create Change Test Case-----",enabled=true)
 	public void testCreateChangeTicket() throws IOException, InterruptedException {
@@ -57,6 +72,7 @@ public class changeManagement extends SuperTestNG{
 			ChangePage.getChangeNumberFromQueue(driver, crNumber).click();	
 			WaitUtils.waitForPageToLoad(driver, 10);
 			ChangeReusables.verifyStateOfChangeTicket(driver, "Draft", crNumber,1,2);
+			
 	}
 	
 	@Test(priority=1,description="-----Change Ticket Closure-----",enabled=true)
@@ -68,6 +84,7 @@ public class changeManagement extends SuperTestNG{
 				ServiceNowUtils.navigateToAllQueueForDesiredModule(driver, "change");
 				ChangeReusables.searchDesiredChangeTicket(driver, crNumber);
 				ChangePage.getChangeNumberFromQueue(driver, crNumber).click();	
+				//WaitUtils.waitForPageToLoad(driver, 10);
 				WaitUtils.waitForPageToLoad(driver, 10);
 				ChangePage.getSubmitForPlanningBtn(driver).click();
 				Thread.sleep(10000);
@@ -95,18 +112,45 @@ public class changeManagement extends SuperTestNG{
 		}
 	
 	@Test(priority=3,description="-----Change Ticket Approval-----",enabled=true)
-	public void testChangeTicketApproval() throws IOException, InterruptedException{
+	
+		public void testChangeTicketApproval() throws IOException, InterruptedException{
 			ExtentReport.startReport(Capabilities.getPropertyValue("ChangeReports"), "Test Approve Change Ticket", "Approve Change Ticket Report");
 			SafeLogin.logInUser(driver);
-			crNumber = ExcelUtils.getData("Change_Management_TestData.xlsx", "Smoke_Suite", 2, 2);
-			ServiceNowUtils.navigateToAllQueueForDesiredModule(driver, "change");
+			WaitUtils.waitForPageToLoad(driver, 10);
+			ServiceNowUtils.navigateToModuleName(driver, "change");
+			crNumber = ChangeReusables.createChange(driver,2,2);
 			ChangeReusables.searchDesiredChangeTicket(driver, crNumber);
 			ChangePage.getChangeNumberFromQueue(driver, crNumber).click();	
 			WaitUtils.waitForPageToLoad(driver, 10);
+			ChangePage.getSubmitForPlanningBtn(driver).click();
+			Thread.sleep(10000);
+			ChangeReusables.verifyStateOfChangeTicket(driver, "Planning", crNumber,2,2);
 			ChangeReusables.moveToAssessmentState(driver);
-			ChangeReusables.verifyStateOfChangeTicket(driver, "Assessment", crNumber,3,2);
-			ChangeReusables.moveToApprovalState(driver);
-			ChangeReusables.verifyStateOfChangeTicket(driver, "Approval", crNumber,3,2);				
+			plannedStartDate = Utils.getDesiredDateAndTime(1);
+			plannedEndtDate= Utils.getDesiredDateAndTime(2);
+			WaitUtils.waitForXpathPresent(driver, "//span[contains(text(),'Schedule')]");
+			ChangePage.getScheduleTab(driver).click();
+			WaitUtils.waitForIdPresent(driver, "change_request.start_date");
+			TextBoxes.enterTextValue(ChangePage.getPlannedStartDateEdt(driver), plannedStartDate, "Planned Start Date");
+			ReporterLogs.log("Requested By Date field is entered successfully "+ plannedStartDate, "info");
+			WaitUtils.waitForIdPresent(driver, "change_request.end_date");
+			TextBoxes.enterTextValue(ChangePage.getPlannedEndDateEdt(driver), plannedEndtDate, "Planned End Date");
+			 driver.findElement(By.xpath("//button[text()='Update']")).click();
+			 ChangeReusables.searchDesiredChangeTicket(driver, crNumber);
+				ChangePage.getChangeNumberFromQueue(driver, crNumber).click();
+				ChangeReusables.moveToApprovalState(driver);
+				 driver.findElement(By.xpath("//button[text()='Update']")).click();
+				 ChangeReusables.searchDesiredChangeTicket(driver, crNumber);
+					ChangePage.getChangeNumberFromQueue(driver, crNumber).click();
+					ChangePage.getGroupApprovalTab(driver).click();
+					Thread.sleep(5000);
+					//ChangeReusables.verifyStateOfChangeTicket(driver, "Approval", crNumber,3,2);
+					driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/div[2]/span/div[2]/div[4]/table/tbody/tr/td/div/table/tbody/tr/td[3]/a")).click();
+					Thread.sleep(5000);
+					driver.findElement(By.xpath("//button[text()='Approve']")).click();
+			 
+			 
+		
 	}
 	
 	@Test(priority=4,description="-----Cancel Change Test Case-----",enabled=true)
@@ -120,7 +164,17 @@ public class changeManagement extends SuperTestNG{
 		ChangePage.getChangeNumberFromQueue(driver, crNumber).click();
 		WaitUtils.waitForPageToLoad(driver, 10);
 		ChangePage.getSubmitForPlanningBtn(driver).click();
-		Thread.sleep(10000);
+		ChangeReusables.moveToAssessmentState(driver);
+		plannedStartDate = Utils.getDesiredDateAndTime(1);
+		plannedEndtDate= Utils.getDesiredDateAndTime(2);
+		WaitUtils.waitForXpathPresent(driver, "//span[contains(text(),'Schedule')]");
+		ChangePage.getScheduleTab(driver).click();
+		WaitUtils.waitForIdPresent(driver, "change_request.start_date");
+		TextBoxes.enterTextValue(ChangePage.getPlannedStartDateEdt(driver), plannedStartDate, "Planned Start Date");
+		ReporterLogs.log("Requested By Date field is entered successfully "+ plannedStartDate, "info");
+		WaitUtils.waitForIdPresent(driver, "change_request.end_date");
+		TextBoxes.enterTextValue(ChangePage.getPlannedEndDateEdt(driver), plannedEndtDate, "Planned End Date");
+		//Thread.sleep(10000);
 		ChangeReusables.moveToCancelledState(driver, crNumber);		
 		ChangeReusables.verifyStateOfChangeTicket(driver, "Cancelled", crNumber,4,2);
 		

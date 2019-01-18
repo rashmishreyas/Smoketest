@@ -24,6 +24,16 @@ public class ProblemPage {
         element = driver.findElement(By.id("problem.impact"));
         return element;
        }
+     public static WebElement getStateDropdown(WebDriver driver) {
+         element = driver.findElement(By.id("problem.state"));
+         return element;
+        }
+     public static WebElement getStateCodeDropdown(WebDriver driver) {
+         element = driver.findElement(By.id("problem.u_state_code"));
+         return element;
+        }
+     
+     
      public static WebElement getComplexityDropdown(WebDriver driver) {
         element = driver.findElement(By.id("problem.urgency"));
         return element;
@@ -198,6 +208,7 @@ public class ProblemPage {
     	   element = driver.findElement(By.id("sys_display.problem.u_root_cause_ci"));
     	   return element;
        }
+       
        public static WebElement getAvoidanceFailureCategoryDropDown(WebDriver driver) {
     	   element = driver.findElement(By.id("problem.u_avoidance_failure_category"));
     	   return element;
@@ -265,6 +276,9 @@ public class ProblemPage {
            return element;
           }
        
+       
+       
+       
 
 
        public static List<WebElement> getNumberOfTasksFromProblemTaskTab(WebDriver driver){
@@ -275,6 +289,14 @@ public class ProblemPage {
 
        public static WebElement getMultipleProblemTaskLnk(WebDriver driver, int k){
     	   element = driver.findElement(By.xpath("//table[@id='problem.problem_task.problem_table']//tbody//tr["+k+"]//a[starts-with(text(),'PTASK')]"));
+    	   return element;
+       }
+       public static WebElement getDueDate(WebDriver driver) {
+    	   element = driver.findElement(By.id("problem_task.due_date"));
+    	   return element;
+       }
+       public static WebElement getActuallDueDate(WebDriver driver) {
+    	   element = driver.findElement(By.id("problem_task.u_actual_due_date"));
     	   return element;
        }
        

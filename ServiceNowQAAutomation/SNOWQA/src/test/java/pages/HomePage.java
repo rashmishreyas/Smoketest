@@ -26,9 +26,31 @@ public class HomePage {
     }
     
     public static WebElement getCreateNewBtn(WebDriver driver){
-       element = driver.findElement(By.xpath("//a[text()='Create New']"));
+    //   element = driver.findElement(By.xpath("/html/body/div/div/div/nav/div/div[3]/div/div/concourse-application-tree/ul/li[12]/ul/li[1]/div/ul/li/a/div[1]/div"));
+    	element=driver.findElement(By.id("323bb07bc611227a018aea9eb8f3b35e"));
+    	//element=driver.findElement(By.xpath("//a[text()='Create New']"));
+    	
        return element;
     }
+    //new code for incident
+    
+    public static WebElement getCreateNewBtn1(WebDriver driver){
+//element = driver.findElement(By.xpath("/html/body/div/div/div/nav/div/div[3]/div/div/concourse-application-tree/ul/li[11]/ul/li[1]/div/ul/li[1]/a/div[1]/div"));
+    	/*element=driver.findElement(By.className("sn-widget-list-title ng-binding"));*/
+    	//element=driver.findElement(By.xpath("//a[text()='Create New']"));
+    	element=driver.findElement(By.linkText("Create New"));
+        return element;
+     }
+    //new code for problem
+    public static WebElement getCreateNewBtn2(WebDriver driver){
+       // element = driver.findElement(By.xpath("/html/body/div/div/div/nav/div/div[3]/div/div/magellan-favorites-list/div/div[2]/div/div[2]/div[1]/a/div/div[2]/span"));
+    	//element=driver.findElement(By.xpath("/html/body/div/div/div/nav/div/div[3]/div/div/concourse-application-tree/ul/li[13]/ul/li[1]/div/ul/li/a/div[1]/div"));
+    	//element=driver.findElement(By.xpath("//a[text()='Create New']"));
+    	//element=driver.findElement(By.xpath("//a[normalize-space(.)='Create New']"));
+    	element=driver.findElement(By.linkText("Create New"));
+        return element;
+     }
+
   
     public static WebElement getAssignedToMyGroupsLnk(WebDriver driver){
        element = driver.findElement(By.xpath("//a[text()='Assigned to my groups']"));
@@ -51,9 +73,22 @@ public class HomePage {
     }
     
     public static WebElement getAllLnk(WebDriver driver){
-        element = driver.findElement(By.xpath("//a[text()='All']"));
+        //element = driver.findElement(By.xpath("//a[text()='All']"));
+    	element = driver.findElement(By.xpath("/html/body/div/div/div/nav/div/div[3]/div/div/concourse-application-tree/ul/li[12]/ul/li[4]/div/ul/li/a/div[1]/div"));
         return element;
      }
+    public static WebElement getAllLnk1(WebDriver driver){
+       // element = driver.findElement(By.xpath("//a[text()='All']"));
+    	element = driver.findElement(By.xpath("/html/body/div/div/div/nav/div/div[3]/div/div/concourse-application-tree/ul/li[14]/ul/li[4]/div/ul/li/a/div[1]/div"));
+        return element;
+     }
+    public static WebElement getAllLnk2(WebDriver driver){
+        // element = driver.findElement(By.xpath("//a[text()='All']"));
+     	element = driver.findElement(By.xpath("/html/body/div/div/div/nav/div/div[3]/div/div/concourse-application-tree/ul/li[13]/ul/li[9]/div/ul/li/a/div[1]/div"));
+         return element;
+      }
+     
+    
     
     public static WebElement getOverviewLnk(WebDriver driver){
        element = driver.findElement(By.xpath("//a[text()='Overview']"));

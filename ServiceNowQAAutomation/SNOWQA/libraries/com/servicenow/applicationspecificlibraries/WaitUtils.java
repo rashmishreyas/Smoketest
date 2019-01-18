@@ -16,8 +16,12 @@ import com.servicenow.genericlibraries.ReporterLogs;
 public class WaitUtils {
 
 	public static void waitForPageToLoad(WebDriver driver, int timeout){
+		
 		ReporterLogs.log("Wait for page to load", "info");
 		driver.manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
+			
+
+		
 	}
 	
 	public static void waitForIdPresent(WebDriver driver, String wbId){

@@ -14,10 +14,11 @@ import pages.loginPage;
 public class SafeLogin {
 	
 	/*
-	 * Author : Samujjal Das Choudhury
+	 
 	 * Objective : Login to the application and credential taken from Property Files
 	 */
 	public static void logInUser(WebDriver driver) throws IOException{
+		
 		
 				WaitUtils.waitForPageToLoad(driver, 10);
 				WaitUtils.waitForIdPresent(driver, "USER");
@@ -26,11 +27,13 @@ public class SafeLogin {
 					loginPage.getsafePasswordEdt(driver).sendKeys(Capabilities.getPropertyValue("Password"));
 					loginPage.getsafeLoginbtn(driver).click();	
 					ReporterLogs.log("Logged in successfully", "info");
-				}		
-	}
+				}	
+			
+}
+	
 	
 	/*
-	 * Author : Samujjal Das Choudhury
+	
 	 * Objective : Login to the application and credential can be passed from the script
 	 */
 	public static void logInSnow(WebDriver driver, String usrID, String pwd){
@@ -43,7 +46,7 @@ public class SafeLogin {
 	}
 	
 	/*
-	 * Author : Sathyanarayanan V
+	
 	 * Objective : Log out of the application and verifes successful logout
 	 */
 	public static void logOut(WebDriver driver) throws InterruptedException{

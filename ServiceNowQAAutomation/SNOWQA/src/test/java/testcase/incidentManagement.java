@@ -32,8 +32,9 @@ public class incidentManagement extends SuperTestNG {
 		ExtentReport.startReport(Capabilities.getPropertyValue("IncidentReports"),"Test Create Standalone Incident Ticket","Create Standalone Incident Ticket");
 		SafeLogin.logInUser(driver);			
 		WaitUtils.waitForPageToLoad(driver, 10);			
-		ServiceNowUtils.navigateToModuleName(driver,"incident");
+		ServiceNowUtils.navigateToModuleName1(driver,"incident");
 		incNumber=IncidentReusables.createIncident(driver, false, 1, 2);
+		System.out.println("pass");
 		IncidentReusables.verifyIncidentCreation(driver, incNumber);
 	}
 	
@@ -44,19 +45,42 @@ public class incidentManagement extends SuperTestNG {
 		ExtentReport.startReport(Capabilities.getPropertyValue("IncidentReports"),"Test Create Managed Incident Ticket","Create Managed Incident");		
 		SafeLogin.logInUser(driver);			
 		WaitUtils.waitForPageToLoad(driver, 30);			
-		ServiceNowUtils.navigateToModuleName(driver,"incident");
+		ServiceNowUtils.navigateToModuleName1(driver,"incident");
 		incNumber=IncidentReusables.createIncident(driver, true,2,2);
 		IncidentReusables.verifyManagedIncidentCreation(driver, incNumber);
 	}
 	
 	
-	@Test(priority=2,description="Progression of Incident ticket to Resolved state",enabled=true,groups="Incidents",dependsOnMethods={"testCreateStandAloneIncidentTicket"})
+	/*@Test(priority=2,description="Progression of Incident ticket to Resolved state",enabled=true,groups="Incidents",dependsOnMethods={"testCreateStandAloneIncidentTicket"})
 	public void testResolveIncidentTicket() throws Exception{
 		ExtentReport.startReport(Capabilities.getPropertyValue("IncidentReports"), "Test Resolve Incident Ticket", "Progress Incident ticket to Resolved state");
 		SafeLogin.logInUser(driver);
 		WaitUtils.waitForPageToLoad(driver, 10);
 		ServiceNowUtils.navigateToAllQueueForDesiredModule(driver, "Incident");	
 		IncidentReusables.resolveIncident(driver);	
+	}
+	*/
+	/*@Test(priority=2,description="resolve incident",groups="incidents",enabled=true)
+	public void testResolveIncidentTicket()throws Exception
+	
+	{
+		SafeLogin.logInUser(driver);
+		WaitUtils.waitForPageToLoad(driver,10);
+		//ServiceNowUtils.navigateToAllQueueForDesiredModule(driver,"Incident");
+		ServiceNowUtils.navigateToModuleName1(driver,"incident");
+		incNumber=IncidentReusables.createIncident(driver, false, 4, 2);
+		
+	}*/
+	@Test(priority=2,description="resolving Incident Ticket",groups="Incidents", enabled=true)
+	public void testResolveIncidentTicket() throws Exception{
+		ExtentReport.startReport(Capabilities.getPropertyValue("IncidentReports"), "Test Cancel Incident Ticket", "Cancelling the Incident Ticket");
+		SafeLogin.logInUser(driver);
+		WaitUtils.waitForPageToLoad(driver, 10);
+		ServiceNowUtils.navigateToModuleName1(driver,"incident");
+		incNumber=IncidentReusables.createIncident(driver, false, 4, 2);
+		IncidentReusables.resolve1Incident(driver, incNumber);
+	
+		//IncidentReusables.resolveIncident(driver);	
 	}
 	
 	
@@ -65,7 +89,7 @@ public class incidentManagement extends SuperTestNG {
 		ExtentReport.startReport(Capabilities.getPropertyValue("IncidentReports"), "Test Cancel Incident Ticket", "Cancelling the Incident Ticket");
 		SafeLogin.logInUser(driver);
 		WaitUtils.waitForPageToLoad(driver, 10);
-		ServiceNowUtils.navigateToModuleName(driver,"incident");
+		ServiceNowUtils.navigateToModuleName1(driver,"incident");
 		incNumber=IncidentReusables.createIncident(driver, false, 4, 2);
 		IncidentReusables.cancelIncident(driver, incNumber);		
 	}

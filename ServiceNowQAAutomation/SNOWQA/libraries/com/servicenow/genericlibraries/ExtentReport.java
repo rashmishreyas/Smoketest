@@ -25,7 +25,8 @@ public class ExtentReport {
 	public static void startReport(String reportPath, String reportName, String reportTitle){
 	
 		report=new ExtentReports(reportPath+reportName+".html", false);
-		logger=report.startTest(reportTitle);	
+		logger=report.startTest(reportTitle);
+		report.flush();
 
 	}
 	
@@ -65,5 +66,11 @@ public class ExtentReport {
 		report.endTest(logger);
 		report.flush();
 	
+	}
+
+
+	public static void endTest() {
+		// TODO Auto-generated method stub
+		
 	}
 	}

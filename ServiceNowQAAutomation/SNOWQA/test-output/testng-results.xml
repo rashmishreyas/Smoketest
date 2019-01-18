@@ -1,36 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="1" total="1" passed="0">
+<testng-results skipped="1" failed="0" total="1" passed="0">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="67140" started-at="2017-08-24T08:32:46Z" finished-at="2017-08-24T08:33:53Z">
+  <suite name="Default suite" duration-ms="24243" started-at="2019-01-17T12:52:23Z" finished-at="2019-01-17T12:52:48Z">
     <groups>
+      <group name="Problems">
+        <method signature="problemManagement.testCreateProblemTicket()[pri:0, instance:testcase.problemManagement@5bcab519]" name="testCreateProblemTicket" class="testcase.problemManagement"/>
+      </group> <!-- Problems -->
     </groups>
-    <test name="Default test" duration-ms="67140" started-at="2017-08-24T08:32:46Z" finished-at="2017-08-24T08:33:53Z">
-      <class name="testcase.changeManagement">
-        <test-method status="PASS" signature="preCondition()[pri:0, instance:testcase.changeManagement@7a0ac6e3]" name="preCondition" is-config="true" duration-ms="16314" started-at="2017-08-24T14:02:46Z" finished-at="2017-08-24T14:03:02Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- preCondition -->
-        <test-method status="FAIL" signature="testCreateChangeTicket()[pri:0, instance:testcase.changeManagement@7a0ac6e3]" name="testCreateChangeTicket" duration-ms="50792" started-at="2017-08-24T14:03:02Z" description="-----Create Change Test Case-----" finished-at="2017-08-24T14:03:53Z">
-          <exception class="java.lang.AssertionError">
+    <test name="Default test" duration-ms="24243" started-at="2019-01-17T12:52:23Z" finished-at="2019-01-17T12:52:48Z">
+      <class name="testcase.problemManagement">
+        <test-method status="FAIL" signature="preCondition()[pri:0, instance:testcase.problemManagement@5bcab519]" name="preCondition" is-config="true" duration-ms="0" started-at="2019-01-17T18:22:23Z" finished-at="2019-01-17T18:22:23Z">
+          <exception class="org.openqa.selenium.WebDriverException">
             <message>
-              <![CDATA[expected [junk] but found [Draft]]]>
+              <![CDATA[newSession
+Build info: version: '3.13.0', revision: '2f0d292', time: '2018-06-25T15:24:21.231Z'
+System info: host: 'TP5VDIDEVTCM623', ip: '10.25.31.106', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_171'
+Driver info: driver.version: FirefoxDriver
+remote stacktrace: stack backtrace:
+   0:   0x4e6bd4 - <no info>
+   1:   0x43e83c - <no info>
+   2:   0x447641 - <no info>
+   3:   0x42b103 - <no info>
+   4:   0x40619b - <no info>
+   5:   0x40bf07 - <no info>
+   6:   0x69d92b - <no info>
+   7:   0x420476 - <no info>
+   8:   0x6989e1 - <no info>
+   9: 0x75ef343d - BaseThreadInitThunk
+  10: 0x77409802 - RtlInitializeExceptionChain]]>
             </message>
             <full-stacktrace>
-              <![CDATA[java.lang.AssertionError: expected [junk] but found [Draft]
-	at org.testng.Assert.fail(Assert.java:94)
-	at org.testng.Assert.failNotEquals(Assert.java:494)
-	at org.testng.Assert.assertEquals(Assert.java:123)
-	at org.testng.Assert.assertEquals(Assert.java:176)
-	at org.testng.Assert.assertEquals(Assert.java:186)
-	at com.servicenow.applicationspecificlibraries.ChangeReusables.createChange(ChangeReusables.java:95)
-	at testcase.changeManagement.testCreateChangeTicket(changeManagement.java:40)
+              <![CDATA[org.openqa.selenium.WebDriverException: newSession
+Build info: version: '3.13.0', revision: '2f0d292', time: '2018-06-25T15:24:21.231Z'
+System info: host: 'TP5VDIDEVTCM623', ip: '10.25.31.106', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_171'
+Driver info: driver.version: FirefoxDriver
+remote stacktrace: stack backtrace:
+   0:   0x4e6bd4 - <no info>
+   1:   0x43e83c - <no info>
+   2:   0x447641 - <no info>
+   3:   0x42b103 - <no info>
+   4:   0x40619b - <no info>
+   5:   0x40bf07 - <no info>
+   6:   0x69d92b - <no info>
+   7:   0x420476 - <no info>
+   8:   0x6989e1 - <no info>
+   9: 0x75ef343d - BaseThreadInitThunk
+  10: 0x77409802 - RtlInitializeExceptionChain
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at org.openqa.selenium.remote.W3CHandshakeResponse.lambda$new$0(W3CHandshakeResponse.java:57)
+	at org.openqa.selenium.remote.W3CHandshakeResponse.lambda$getResponseFunction$2(W3CHandshakeResponse.java:104)
+	at org.openqa.selenium.remote.ProtocolHandshake.lambda$createSession$0(ProtocolHandshake.java:123)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.Spliterators$ArraySpliterator.tryAdvance(Spliterators.java:958)
+	at java.util.stream.ReferencePipeline.forEachWithCancel(ReferencePipeline.java:126)
+	at java.util.stream.AbstractPipeline.copyIntoWithCancel(AbstractPipeline.java:498)
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:485)
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:471)
+	at java.util.stream.FindOps$FindOp.evaluateSequential(FindOps.java:152)
+	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.util.stream.ReferencePipeline.findFirst(ReferencePipeline.java:464)
+	at org.openqa.selenium.remote.ProtocolHandshake.createSession(ProtocolHandshake.java:126)
+	at org.openqa.selenium.remote.ProtocolHandshake.createSession(ProtocolHandshake.java:73)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:136)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:548)
+	at org.openqa.selenium.remote.RemoteWebDriver.startSession(RemoteWebDriver.java:212)
+	at org.openqa.selenium.remote.RemoteWebDriver.<init>(RemoteWebDriver.java:130)
+	at org.openqa.selenium.firefox.FirefoxDriver.<init>(FirefoxDriver.java:125)
+	at org.openqa.selenium.firefox.FirefoxDriver.<init>(FirefoxDriver.java:103)
+	at com.servicenow.applicationspecificlibraries.SuperTestNG.preCondition(SuperTestNG.java:87)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
-	at java.lang.reflect.Method.invoke(Unknown Source)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
 	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:80)
-	at org.testng.internal.Invoker.invokeMethod(Invoker.java:714)
+	at org.testng.internal.Invoker.invokeConfigurationMethod(Invoker.java:564)
+	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:213)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:653)
 	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:901)
 	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1231)
 	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)
@@ -46,16 +96,24 @@
 	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1198)
 	at org.testng.TestNG.runSuitesLocally(TestNG.java:1123)
 	at org.testng.TestNG.run(TestNG.java:1031)
-	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:115)
-	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:207)
-	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:178)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
 ]]>
             </full-stacktrace>
-          </exception> <!-- java.lang.AssertionError -->
+          </exception> <!-- org.openqa.selenium.WebDriverException -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testCreateChangeTicket -->
-      </class> <!-- testcase.changeManagement -->
+        </test-method> <!-- preCondition -->
+        <test-method status="SKIP" signature="postCondition(org.testng.ITestResult)[pri:0, instance:testcase.problemManagement@5bcab519]" name="postCondition" is-config="true" duration-ms="0" started-at="2019-01-17T18:22:48Z" finished-at="2019-01-17T18:22:48Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- postCondition -->
+        <test-method status="SKIP" signature="testCreateProblemTicket()[pri:0, instance:testcase.problemManagement@5bcab519]" name="testCreateProblemTicket" duration-ms="0" started-at="2019-01-17T18:22:48Z" description="-----Create Problem Test Case-----" finished-at="2019-01-17T18:22:48Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testCreateProblemTicket -->
+      </class> <!-- testcase.problemManagement -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

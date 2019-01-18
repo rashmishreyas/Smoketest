@@ -1,12 +1,14 @@
 package pages;
 
 import java.util.Base64;
-
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class IncidentPage {
 	
@@ -146,7 +148,25 @@ public class IncidentPage {
 	
 	public static WebElement getIncidentManagerRequiredChkbox(WebDriver driver) throws Exception
 	{
-		element=driver.findElement(By.xpath("//label[@id='label.ni.incident.u_incident_manager_required']"));
+		
+		//WebDriverWait wait2 = new WebDriverWait(driver, 10);
+		//wait2.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("xpath_of_element_to_be_invisible")));
+		//driver.findElement(By.xpath("xpath_element_to_be_clicked")).click();
+		//WebDriverWait wait2 = new WebDriverWait(driver, 30);
+		//wait2.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//label[@id='label.ni.incident.u_incident_manager_required']")));
+		//wait2.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//label[@id='label.ni.incident.u_incident_manager_required']")));
+		System.out.println("start");
+		//element=driver.findElement(By.xpath("//label[@id='label.ni.incident.u_incident_manager_required']"));
+		//element=driver.findElement(By.className(" checkbox-label"));
+		//element=driver.findElement(By.cssSelector("input[id$='label.ni.incident.u_incident_manager_required']"));
+		element=driver.findElement(By.id("label.ni.incident.u_incident_manager_required"));
+		element.click();
+		System.out.println("end");
+	
+//wait2.until(ExpectedConditions.invisibilityOfElementLocated(By.id("label.ni.incident.u_incident_manager_required")));
+//element=driver.findElement(By.id("label.ni.incident.u_incident_manager_required"));
+		//driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		
 		return element;
 	}
 	
@@ -492,7 +512,10 @@ public class IncidentPage {
 	
 	public static WebElement getIncidentStatusfromQueue(WebDriver driver, String incidentNumber) throws Exception
 	{
-		element=driver.findElement(By.xpath("//tbody[@class='list2_body']//a[text()='"+incidentNumber+"']/following::td"));
+		//element=driver.findElement(By.xpath("//tbody[@class='list2_body']//a[text()='"+incidentNumber+"']/following::td"));
+		element = driver.findElement(By.xpath("//tbody[@class='list2_body']//a[text()='"+incidentNumber+"']/following::td"));
+		//element=driver.findElement(By.xpath("/html/body/div[1]/div[1]/span/div/div[5]/table/tbody/tr/td/div/table/tbody/tr[1]/td[5]"));
+		System.out.println(element);
 		return element;
 	}
 	
