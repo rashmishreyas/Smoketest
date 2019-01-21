@@ -27,7 +27,7 @@ public class ServiceNowUtils {
 		TextBoxes.enterTextValue(HomePage.getfilterEdt(driver), moduleName, "Filter Edit box for searching : "+moduleName);
 		//WaitUtils.waitForXpathPresent(driver,"//a[text()='Create New']");
 		WaitUtils.waitForPageToLoad(driver, 10);
-		HomePage.getCreateNewBtn(driver).click();
+		HomePage.getCreateNewBtn1(driver).click();
 
 		Frames.switchToFrameById("gsft_main", driver);	
 		
@@ -48,7 +48,7 @@ public class ServiceNowUtils {
 		WaitUtils.waitForIdPresent(driver, "filter");
 		TextBoxes.enterTextValue(HomePage.getfilterEdt(driver), moduleName, "Filter Edit box for searching : "+moduleName);
 		//WaitUtils.waitForXpathPresent(driver,"//a[text()='Create New']");
-		WaitUtils.waitForPageToLoad(driver, 10);
+		WaitUtils.waitForPageToLoad(driver, 30);
 		HomePage.getCreateNewBtn2(driver).click();
 		Frames.switchToFrameById("gsft_main", driver);	
 	}

@@ -3,12 +3,15 @@
 <suite name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="testcase.problemManagement">
+      <class name="testcase.ChangeReport">
         <methods>
-          <include name="preCondition"/>
-          <include name="testCreateProblemTicket"/>
+          <include name="endReport"/>
+          <include name="getResult"/>
+          <include name="testMovingtoMultiplePhases"/>
+          <include name="afterSuite"/>
+          <include name="startReport"/>
         </methods>
-      </class> <!-- testcase.problemManagement -->
+      </class> <!-- testcase.ChangeReport -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

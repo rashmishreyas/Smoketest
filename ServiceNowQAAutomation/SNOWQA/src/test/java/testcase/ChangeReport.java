@@ -91,7 +91,7 @@ public class ChangeReport{
 	    driver.get("http://thomsonreutersqa.service-now.com");
 	    SafeLogin.logInUser(driver);
 		WaitUtils.waitForPageToLoad(driver, 10);
-		ServiceNowUtils.navigateToModuleName(driver, "change");
+		ServiceNowUtils.navigateToModuleName2(driver, "change");
 		crNumber = ChangeReusables.createChange(driver,1,2);
 		ChangeReusables.searchDesiredChangeTicket(driver, crNumber);
 	    ChangePage.getChangeNumberFromQueue(driver, crNumber).click();	
@@ -232,7 +232,7 @@ public class ChangeReport{
 		driver.get("http://thomsonreutersqa.service-now.com");
 		SafeLogin.logInUser(driver);
 		WaitUtils.waitForPageToLoad(driver, 10);
-		ServiceNowUtils.navigateToModuleName(driver, "change");
+		ServiceNowUtils.navigateToModuleName2(driver, "change");
 		crNumber = ChangeReusables.createChange(driver,1,2);
 		ChangeReusables.searchDesiredChangeTicket(driver, crNumber);
 		ChangePage.getChangeNumberFromQueue(driver, crNumber).click();	
@@ -440,10 +440,10 @@ public class ChangeReport{
 		extent.flush();
     }
 	
-	@AfterSuite
+	/*@AfterSuite
 	public void afterSuite() {
 		 final String username = "ax00506739@techmahindra.com";
-	        final String password ="ShahedA+220193";
+	        final String password ="ShahedA<220193";
 
 	        Properties props = new Properties();
 	        props.put("mail.smtp.auth", "true");
@@ -462,7 +462,7 @@ public class ChangeReport{
 	            Message message = new MimeMessage(session);
 	            message.setFrom(new InternetAddress("ax00506739@techmahindra.com"));
 	            message.setRecipients(Message.RecipientType.TO,
-	                InternetAddress.parse("KM00542435@TechMahindra.com"));
+	                InternetAddress.parse("rp00506732@techmahindra.com"));
 	            message.setSubject("Test");
 	            message.setText("HI");
 
@@ -495,5 +495,5 @@ public class ChangeReport{
 	    
 	}
 
-	
+	*/
 }
