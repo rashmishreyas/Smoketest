@@ -427,7 +427,7 @@ public class ChangeSmokeSuite {
 	@AfterSuite
 	public void afterSuite() {
 		 final String username = "ax00506739@techmahindra.com";
-	        final String password ="ShahedA)220193";
+	        final String password ="ShahedA>220193";
 
 	        Properties props = new Properties();
 	        props.put("mail.smtp.auth", "true");
@@ -446,7 +446,7 @@ public class ChangeSmokeSuite {
 	            Message message = new MimeMessage(session);
 	            message.setFrom(new InternetAddress("ax00506739@techmahindra.com"));
 	            message.setRecipients(Message.RecipientType.TO,
-	                InternetAddress.parse("KM00542435@TechMahindra.com"));
+	                InternetAddress.parse("rp00506732@TechMahindra.com"));
 	            message.setSubject("Test");
 	            message.setText("HI");
 

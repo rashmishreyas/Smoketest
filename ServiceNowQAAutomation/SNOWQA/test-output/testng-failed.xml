@@ -3,15 +3,12 @@
 <suite name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="testcase.ChangeReport">
+      <class name="testcase.ChangeReg">
         <methods>
-          <include name="endReport"/>
-          <include name="getResult"/>
-          <include name="testMovingtoMultiplePhases"/>
-          <include name="afterSuite"/>
           <include name="startReport"/>
+          <include name="testCreateNormalChnageRequestFromProblem"/>
         </methods>
-      </class> <!-- testcase.ChangeReport -->
+      </class> <!-- testcase.ChangeReg -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

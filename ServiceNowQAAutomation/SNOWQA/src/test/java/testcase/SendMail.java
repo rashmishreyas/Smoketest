@@ -21,8 +21,8 @@ public class SendMail {
 
     public static void main(String[]args) throws IOException {
 
-        final String username = "ax00506739@techmahindra.com";
-        final String password ="ShahedA)220193";
+        final String username = "amreen.noor@thomsonreuters.com";
+        final String password ="Numan@12";
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
@@ -39,7 +39,7 @@ public class SendMail {
         try {
 
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("ax00506739@techmahindra.com"));
+            message.setFrom(new InternetAddress("amreen.noor@thomsonreuters.com"));
             message.setRecipients(Message.RecipientType.TO,
                 InternetAddress.parse("rashmi.p@thomsonreuters.com"));
             message.setSubject("Test");

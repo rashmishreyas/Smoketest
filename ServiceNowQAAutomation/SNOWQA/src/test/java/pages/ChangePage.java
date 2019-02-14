@@ -24,6 +24,21 @@ public class ChangePage {
     	return element;
     }
     
+    public static WebElement getEmerChangeLnk(WebDriver driver){
+    	element = driver.findElement(By.xpath("//a[contains(text(),'Emergency: Changes')]"));
+    	return element;
+    }
+    
+    public static WebElement getdatabaseLnk(WebDriver driver){
+    	element = driver.findElement(By.xpath("/html/body/div[2]/table/tbody/tr/td[1]/table/tbody[3]/tr/td/div/table/tbody/tr/td[2]/table/tbody/tr/td/a/div/strong"));
+    	return element;
+    }
+    public static WebElement getAddSpace(WebDriver driver){
+    	element = driver.findElement(By.linkText("Add Space"));
+    	return element;
+    }
+    
+    
     public static WebElement getEmergencyChangeLnk(WebDriver driver){
     	element = driver.findElement(By.xpath("//a[contains(text(),'Emergency: Changes')]"));
     	return element;
@@ -135,6 +150,13 @@ public class ChangePage {
     	element=driver.findElement(By.xpath("//button[text()='Update']"));
     	return element;
     }
+    public static WebElement getRequestImplementationBtn(WebDriver driver)
+    {
+    	element=driver.findElement(By.xpath("//button[text()='Request  Implementation']"));
+    	return element;
+    }
+    
+    
     public static WebElement getApproveBtn(WebDriver driver)
     {
     	element=driver.findElement(By.xpath("//button[text()='Approve']"));

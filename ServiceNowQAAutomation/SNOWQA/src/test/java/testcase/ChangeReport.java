@@ -285,7 +285,7 @@ public class ChangeReport{
 		Assert.assertTrue(true);
 	    logger.log(Status.PASS, MarkupHelper.createLabel("Test Case Passed is Moving the Change to Multiple phases ", ExtentColor.GREEN));
 }
-	@Test(priority=5,description="Creating and updating  of a Change Task",enabled=false)
+	@Test(priority=5,description="Creating and updating  of a Change Task",enabled=true)
 	public void testChangeCreateTask() throws Exception{
 		logger = extent.createTest("Creating and updating  of a Change Task");
 		String FirefoxDriver = Capabilities.getPropertyValue("FirefoxDriver");
@@ -440,10 +440,10 @@ public class ChangeReport{
 		extent.flush();
     }
 	
-	/*@AfterSuite
+	@AfterSuite
 	public void afterSuite() {
 		 final String username = "ax00506739@techmahindra.com";
-	        final String password ="ShahedA<220193";
+	        final String password ="ShahedA>220193";
 
 	        Properties props = new Properties();
 	        props.put("mail.smtp.auth", "true");
@@ -495,5 +495,5 @@ public class ChangeReport{
 	    
 	}
 
-	*/
+	
 }

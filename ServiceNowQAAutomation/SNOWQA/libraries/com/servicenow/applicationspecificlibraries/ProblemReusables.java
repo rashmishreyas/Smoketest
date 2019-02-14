@@ -60,6 +60,7 @@ public class ProblemReusables {
            
            try{
                  WaitUtils.waitForPageToLoad(driver, 30);
+                 //Thread.sleep(3000);
                  source=ExcelUtils.getData("Problem_Management_TestData.xlsx","Smoke_Suite", 1, 5);
                  assignmentGroup=ExcelUtils.getData("Problem_Management_TestData.xlsx","Smoke_Suite", 1, 6);
                  configurationItem=ExcelUtils.getData("Problem_Management_TestData.xlsx","Smoke_Suite", 1, 7);
