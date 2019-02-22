@@ -136,6 +136,10 @@ public class ChangePage {
     	return element;
     }
     
+    public static WebElement getTaskChangeEdt(WebDriver driver){
+    	element = driver.findElement(By.id("sys_readonly.change_task.number"));
+    	return element;
+    }
     public static WebElement getcreatedChangeLnk(WebDriver driver, String changeNumber){
     	element = driver.findElement(By.xpath("//tbody[@class='list2_body']//a[text()='"+changeNumber+"']"));
     	return element;
@@ -160,6 +164,21 @@ public class ChangePage {
     public static WebElement getApproveBtn(WebDriver driver)
     {
     	element=driver.findElement(By.xpath("//button[text()='Approve']"));
+    	return element;
+    }
+    public static WebElement getUpdateCIBtn(WebDriver driver)
+    {
+    	element=driver.findElement(By.xpath("//button[text()='Update CI']"));
+    	return element;
+    }
+    public static WebElement getFollowUpBtn(WebDriver driver)
+    {
+    	element=driver.findElement(By.xpath("//button[text()='Follow Up']"));
+    	return element;
+    }
+    public static WebElement getStateField(WebDriver driver)
+    {
+    	element=driver.findElement(By.id("change_request.state"));
     	return element;
     }
     
