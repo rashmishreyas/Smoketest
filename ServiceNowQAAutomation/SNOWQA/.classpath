@@ -18,13 +18,18 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/UX011746/Desktop/mail.jar"/>
-	<classpathentry kind="lib" path="C:/Users/UX011746/Desktop/activation.jar"/>
 	<classpathentry kind="src" output="target/classes" path="src/main/java">
 		<attributes>
 			<attribute name="optional" value="true"/>
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/UX011974/Documents/jar_files/activation-1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/UX011974/Documents/jar_files/javax.mail-1.6.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/UX011974/Documents/commons-io-2.6-bin/commons-io-2.6/commons-io-2.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/UX011974/Documents/commons-io-2.6-bin/commons-io-2.6/commons-io-2.6-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/UX011974/Documents/commons-io-2.6-bin/commons-io-2.6/commons-io-2.6-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/UX011974/Documents/commons-io-2.6-bin/commons-io-2.6/commons-io-2.6-tests.jar"/>
+	<classpathentry kind="lib" path="C:/Users/UX011974/Documents/commons-io-2.6-bin/commons-io-2.6/commons-io-2.6-test-sources.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

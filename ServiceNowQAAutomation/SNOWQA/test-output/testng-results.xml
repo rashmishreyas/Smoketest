@@ -1,22 +1,270 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="1" total="1" passed="0">
+<testng-results skipped="0" failed="1" total="21" passed="20">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="33185" started-at="2019-02-13T11:05:28Z" finished-at="2019-02-13T11:06:01Z">
+  <suite name="Default suite" duration-ms="1502344" started-at="2019-06-06T06:59:53Z" finished-at="2019-06-06T07:24:55Z">
     <groups>
+      <group name="Incidents">
+        <method signature="IncidentReport.testreassignim()[pri:0, instance:testcase.IncidentReport@69ea3742]" name="testreassignim" class="testcase.IncidentReport"/>
+      </group> <!-- Incidents -->
     </groups>
-    <test name="Default test" duration-ms="33185" started-at="2019-02-13T11:05:28Z" finished-at="2019-02-13T11:06:01Z">
-      <class name="testcase.ChangeReg">
-        <test-method status="PASS" signature="startReport()[pri:0, instance:testcase.ChangeReg@239963d8]" name="startReport" is-config="true" duration-ms="410" started-at="2019-02-13T16:35:28Z" finished-at="2019-02-13T16:35:29Z">
+    <test name="Default test" duration-ms="1502344" started-at="2019-06-06T06:59:53Z" finished-at="2019-06-06T07:24:55Z">
+      <class name="testcase.IncidentReport">
+        <test-method status="PASS" signature="startReport()[pri:0, instance:testcase.IncidentReport@69ea3742]" name="startReport" is-config="true" duration-ms="452" started-at="2019-06-06T12:29:53Z" finished-at="2019-06-06T12:29:53Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- startReport -->
-        <test-method status="FAIL" signature="testCreateNormalChnageRequestFromProblem()[pri:0, instance:testcase.ChangeReg@239963d8]" name="testCreateNormalChnageRequestFromProblem" duration-ms="32739" started-at="2019-02-13T16:35:29Z" description="Creation of a CR Ticket" finished-at="2019-02-13T16:36:01Z">
-          <exception class="java.lang.NullPointerException">
+        <test-method status="PASS" signature="testCreateStandAloneIncidentTicket()[pri:0, instance:testcase.IncidentReport@69ea3742]" name="testCreateStandAloneIncidentTicket" duration-ms="46302" started-at="2019-06-06T12:29:53Z" description="Create standalone incident ticket" finished-at="2019-06-06T12:30:40Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testCreateStandAloneIncidentTicket -->
+        <test-method status="PASS" signature="getResult(org.testng.ITestResult)[pri:0, instance:testcase.IncidentReport@69ea3742]" name="getResult" is-config="true" duration-ms="1" started-at="2019-06-06T12:30:40Z" finished-at="2019-06-06T12:30:40Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=testCreateStandAloneIncidentTicket status=SUCCESS method=IncidentReport.testCreateStandAloneIncidentTicket()[pri:0, instance:testcase.IncidentReport@69ea3742] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getResult -->
+        <test-method status="PASS" signature="testCreateManagedIncidentTicket()[pri:0, instance:testcase.IncidentReport@69ea3742]" name="testCreateManagedIncidentTicket" duration-ms="43257" started-at="2019-06-06T12:30:40Z" description="Create managed incident ticket" finished-at="2019-06-06T12:31:23Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testCreateManagedIncidentTicket -->
+        <test-method status="PASS" signature="testverifymandatoryfieldWIP()[pri:0, instance:testcase.IncidentReport@69ea3742]" name="testverifymandatoryfieldWIP" duration-ms="44941" started-at="2019-06-06T12:31:23Z" description="Validate mandatory fields in WIP state" finished-at="2019-06-06T12:32:08Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testverifymandatoryfieldWIP -->
+        <test-method status="PASS" signature="getResult(org.testng.ITestResult)[pri:0, instance:testcase.IncidentReport@69ea3742]" name="getResult" is-config="true" duration-ms="0" started-at="2019-06-06T12:31:23Z" finished-at="2019-06-06T12:31:23Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=testCreateManagedIncidentTicket status=SUCCESS method=IncidentReport.testCreateManagedIncidentTicket()[pri:0, instance:testcase.IncidentReport@69ea3742] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getResult -->
+        <test-method status="PASS" signature="getResult(org.testng.ITestResult)[pri:0, instance:testcase.IncidentReport@69ea3742]" name="getResult" is-config="true" duration-ms="0" started-at="2019-06-06T12:32:08Z" finished-at="2019-06-06T12:32:08Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=testverifymandatoryfieldWIP status=SUCCESS method=IncidentReport.testverifymandatoryfieldWIP()[pri:0, instance:testcase.IncidentReport@69ea3742] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getResult -->
+        <test-method status="PASS" signature="testcreateIncidentfromIntake()[pri:0, instance:testcase.IncidentReport@69ea3742]" name="testcreateIncidentfromIntake" duration-ms="47047" started-at="2019-06-06T12:32:08Z" description="Creation of Incident from Intake" finished-at="2019-06-06T12:32:55Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testcreateIncidentfromIntake -->
+        <test-method status="PASS" signature="getResult(org.testng.ITestResult)[pri:0, instance:testcase.IncidentReport@69ea3742]" name="getResult" is-config="true" duration-ms="0" started-at="2019-06-06T12:32:55Z" finished-at="2019-06-06T12:32:55Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=testcreateIncidentfromIntake status=SUCCESS method=IncidentReport.testcreateIncidentfromIntake()[pri:0, instance:testcase.IncidentReport@69ea3742] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getResult -->
+        <test-method status="PASS" signature="testResolveIncidentTicket()[pri:0, instance:testcase.IncidentReport@69ea3742]" name="testResolveIncidentTicket" duration-ms="100438" started-at="2019-06-06T12:32:55Z" description="Progression of Incident ticket to Resolved state" finished-at="2019-06-06T12:34:35Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testResolveIncidentTicket -->
+        <test-method status="PASS" signature="getResult(org.testng.ITestResult)[pri:0, instance:testcase.IncidentReport@69ea3742]" name="getResult" is-config="true" duration-ms="1" started-at="2019-06-06T12:34:35Z" finished-at="2019-06-06T12:34:35Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=testResolveIncidentTicket status=SUCCESS method=IncidentReport.testResolveIncidentTicket()[pri:0, instance:testcase.IncidentReport@69ea3742] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getResult -->
+        <test-method status="PASS" signature="testCancelIncidentTicket()[pri:0, instance:testcase.IncidentReport@69ea3742]" name="testCancelIncidentTicket" duration-ms="61813" started-at="2019-06-06T12:34:35Z" description="Cancelling Incident Ticket" finished-at="2019-06-06T12:35:37Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testCancelIncidentTicket -->
+        <test-method status="PASS" signature="getResult(org.testng.ITestResult)[pri:0, instance:testcase.IncidentReport@69ea3742]" name="getResult" is-config="true" duration-ms="0" started-at="2019-06-06T12:35:37Z" finished-at="2019-06-06T12:35:37Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=testCancelIncidentTicket status=SUCCESS method=IncidentReport.testCancelIncidentTicket()[pri:0, instance:testcase.IncidentReport@69ea3742] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getResult -->
+        <test-method status="PASS" signature="testCreateStandardChangefromInc()[pri:0, instance:testcase.IncidentReport@69ea3742]" name="testCreateStandardChangefromInc" duration-ms="51822" started-at="2019-06-06T12:35:37Z" description="Create standard change from Incident " finished-at="2019-06-06T12:36:29Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testCreateStandardChangefromInc -->
+        <test-method status="PASS" signature="getResult(org.testng.ITestResult)[pri:0, instance:testcase.IncidentReport@69ea3742]" name="getResult" is-config="true" duration-ms="1" started-at="2019-06-06T12:36:29Z" finished-at="2019-06-06T12:36:29Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=testCreateStandardChangefromInc status=SUCCESS method=IncidentReport.testCreateStandardChangefromInc()[pri:0, instance:testcase.IncidentReport@69ea3742] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getResult -->
+        <test-method status="PASS" signature="testcreateProblemfromIncident()[pri:0, instance:testcase.IncidentReport@69ea3742]" name="testcreateProblemfromIncident" duration-ms="56923" started-at="2019-06-06T12:36:29Z" description="Createproblemfromincident" finished-at="2019-06-06T12:37:26Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testcreateProblemfromIncident -->
+        <test-method status="PASS" signature="getResult(org.testng.ITestResult)[pri:0, instance:testcase.IncidentReport@69ea3742]" name="getResult" is-config="true" duration-ms="1" started-at="2019-06-06T12:37:26Z" finished-at="2019-06-06T12:37:26Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=testcreateProblemfromIncident status=SUCCESS method=IncidentReport.testcreateProblemfromIncident()[pri:0, instance:testcase.IncidentReport@69ea3742] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getResult -->
+        <test-method status="PASS" signature="testcreateincidenttask()[pri:0, instance:testcase.IncidentReport@69ea3742]" name="testcreateincidenttask" duration-ms="109906" started-at="2019-06-06T12:37:26Z" description="Create incident task" finished-at="2019-06-06T12:39:16Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testcreateincidenttask -->
+        <test-method status="PASS" signature="testCreateNormalChangefromInc()[pri:0, instance:testcase.IncidentReport@69ea3742]" name="testCreateNormalChangefromInc" duration-ms="49348" started-at="2019-06-06T12:39:16Z" description="Create normal change from Incident " finished-at="2019-06-06T12:40:05Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testCreateNormalChangefromInc -->
+        <test-method status="PASS" signature="getResult(org.testng.ITestResult)[pri:0, instance:testcase.IncidentReport@69ea3742]" name="getResult" is-config="true" duration-ms="0" started-at="2019-06-06T12:39:16Z" finished-at="2019-06-06T12:39:16Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=testcreateincidenttask status=SUCCESS method=IncidentReport.testcreateincidenttask()[pri:0, instance:testcase.IncidentReport@69ea3742] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getResult -->
+        <test-method status="PASS" signature="testCreateEmergencyChangefromInc()[pri:0, instance:testcase.IncidentReport@69ea3742]" name="testCreateEmergencyChangefromInc" duration-ms="46560" started-at="2019-06-06T12:40:05Z" description="Create emergency change from Incident " finished-at="2019-06-06T12:40:52Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testCreateEmergencyChangefromInc -->
+        <test-method status="PASS" signature="getResult(org.testng.ITestResult)[pri:0, instance:testcase.IncidentReport@69ea3742]" name="getResult" is-config="true" duration-ms="0" started-at="2019-06-06T12:40:05Z" finished-at="2019-06-06T12:40:05Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=testCreateNormalChangefromInc status=SUCCESS method=IncidentReport.testCreateNormalChangefromInc()[pri:0, instance:testcase.IncidentReport@69ea3742] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getResult -->
+        <test-method status="PASS" signature="getResult(org.testng.ITestResult)[pri:0, instance:testcase.IncidentReport@69ea3742]" name="getResult" is-config="true" duration-ms="0" started-at="2019-06-06T12:40:52Z" finished-at="2019-06-06T12:40:52Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=testCreateEmergencyChangefromInc status=SUCCESS method=IncidentReport.testCreateEmergencyChangefromInc()[pri:0, instance:testcase.IncidentReport@69ea3742] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getResult -->
+        <test-method status="PASS" signature="testCreateChildIncfromInc()[pri:0, instance:testcase.IncidentReport@69ea3742]" name="testCreateChildIncfromInc" duration-ms="56356" started-at="2019-06-06T12:40:52Z" description="Create Child incident from Incident " finished-at="2019-06-06T12:41:48Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testCreateChildIncfromInc -->
+        <test-method status="PASS" signature="getResult(org.testng.ITestResult)[pri:0, instance:testcase.IncidentReport@69ea3742]" name="getResult" is-config="true" duration-ms="1" started-at="2019-06-06T12:41:48Z" finished-at="2019-06-06T12:41:48Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=testCreateChildIncfromInc status=SUCCESS method=IncidentReport.testCreateChildIncfromInc()[pri:0, instance:testcase.IncidentReport@69ea3742] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getResult -->
+        <test-method status="PASS" signature="testmoveIncidentTasktoclosecomplete()[pri:0, instance:testcase.IncidentReport@69ea3742]" name="testmoveIncidentTasktoclosecomplete" duration-ms="110193" started-at="2019-06-06T12:41:48Z" description="Movetasktoclosecomplete" finished-at="2019-06-06T12:43:38Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testmoveIncidentTasktoclosecomplete -->
+        <test-method status="PASS" signature="getResult(org.testng.ITestResult)[pri:0, instance:testcase.IncidentReport@69ea3742]" name="getResult" is-config="true" duration-ms="1" started-at="2019-06-06T12:43:38Z" finished-at="2019-06-06T12:43:38Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=testmoveIncidentTasktoclosecomplete status=SUCCESS method=IncidentReport.testmoveIncidentTasktoclosecomplete()[pri:0, instance:testcase.IncidentReport@69ea3742] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getResult -->
+        <test-method status="PASS" signature="testmoveIncidentTasktocancel()[pri:0, instance:testcase.IncidentReport@69ea3742]" name="testmoveIncidentTasktocancel" duration-ms="108977" started-at="2019-06-06T12:43:38Z" description="Movetasktocancel" finished-at="2019-06-06T12:45:27Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testmoveIncidentTasktocancel -->
+        <test-method status="PASS" signature="getResult(org.testng.ITestResult)[pri:0, instance:testcase.IncidentReport@69ea3742]" name="getResult" is-config="true" duration-ms="0" started-at="2019-06-06T12:45:27Z" finished-at="2019-06-06T12:45:27Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=testmoveIncidentTasktocancel status=SUCCESS method=IncidentReport.testmoveIncidentTasktocancel()[pri:0, instance:testcase.IncidentReport@69ea3742] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getResult -->
+        <test-method status="PASS" signature="testCreateincidentalert()[pri:0, instance:testcase.IncidentReport@69ea3742]" name="testCreateincidentalert" duration-ms="112565" started-at="2019-06-06T12:45:27Z" description="Create incident alert" finished-at="2019-06-06T12:47:20Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testCreateincidentalert -->
+        <test-method status="PASS" signature="getResult(org.testng.ITestResult)[pri:0, instance:testcase.IncidentReport@69ea3742]" name="getResult" is-config="true" duration-ms="1" started-at="2019-06-06T12:47:20Z" finished-at="2019-06-06T12:47:20Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=testCreateincidentalert status=SUCCESS method=IncidentReport.testCreateincidentalert()[pri:0, instance:testcase.IncidentReport@69ea3742] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getResult -->
+        <test-method status="PASS" signature="testcreateINCforuserimpact3()[pri:0, instance:testcase.IncidentReport@69ea3742]" name="testcreateINCforuserimpact3" duration-ms="42995" started-at="2019-06-06T12:47:20Z" description="CreateIncforuserimpact3" finished-at="2019-06-06T12:48:03Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testcreateINCforuserimpact3 -->
+        <test-method status="FAIL" signature="testcreateINCforuserimpact1()[pri:0, instance:testcase.IncidentReport@69ea3742]" name="testcreateINCforuserimpact1" duration-ms="148333" started-at="2019-06-06T12:48:03Z" description="CreateIncforuserimpact1" finished-at="2019-06-06T12:50:31Z">
+          <exception class="org.openqa.selenium.TimeoutException">
+            <message>
+              <![CDATA[Expected condition failed: waiting for title to be "Incidents | ServiceNow". Current title: "System Administration | ServiceNow" (tried for 30 second(s) with 500 milliseconds interval)
+Build info: version: '3.12.0', revision: '7c6e0b3', time: '2018-05-08T14:04:26.12Z'
+System info: host: 'TP6VDIDEVTCM068', ip: '10.25.36.75', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_172'
+Driver info: org.openqa.selenium.firefox.FirefoxDriver
+Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 61.0, javascriptEnabled: true, moz:accessibilityChecks: false, moz:headless: false, moz:processID: 43976, moz:profile: C:\Users\UX011974\AppData\L..., moz:useNonSpecCompliantPointerOrigin: false, moz:webdriverClick: true, pageLoadStrategy: normal, platform: XP, platformName: XP, platformVersion: 6.1, rotatable: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}}
+Session ID: ba178053-3296-4a2a-932a-c08e76892a69]]>
+            </message>
             <full-stacktrace>
-              <![CDATA[java.lang.NullPointerException
-	at com.servicenow.genericlibraries.ExtentReport.reportLog(ExtentReport.java:43)
-	at testcase.ChangeReg.testCreateNormalChnageRequestFromProblem(ChangeReg.java:375)
+              <![CDATA[org.openqa.selenium.TimeoutException: Expected condition failed: waiting for title to be "Incidents | ServiceNow". Current title: "System Administration | ServiceNow" (tried for 30 second(s) with 500 milliseconds interval)
+Build info: version: '3.12.0', revision: '7c6e0b3', time: '2018-05-08T14:04:26.12Z'
+System info: host: 'TP6VDIDEVTCM068', ip: '10.25.36.75', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_172'
+Driver info: org.openqa.selenium.firefox.FirefoxDriver
+Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 61.0, javascriptEnabled: true, moz:accessibilityChecks: false, moz:headless: false, moz:processID: 43976, moz:profile: C:\Users\UX011974\AppData\L..., moz:useNonSpecCompliantPointerOrigin: false, moz:webdriverClick: true, pageLoadStrategy: normal, platform: XP, platformName: XP, platformVersion: 6.1, rotatable: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}}
+Session ID: ba178053-3296-4a2a-932a-c08e76892a69
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:81)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:271)
+	at com.servicenow.applicationspecificlibraries.WaitUtils.waitForTitleIs(WaitUtils.java:49)
+	at com.servicenow.applicationspecificlibraries.IncidentReusables.verifyIncidentCreation(IncidentReusables.java:346)
+	at testcase.IncidentReport.testcreateINCforuserimpact1(IncidentReport.java:417)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -43,11 +291,143 @@
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
 ]]>
             </full-stacktrace>
-          </exception> <!-- java.lang.NullPointerException -->
+          </exception> <!-- org.openqa.selenium.TimeoutException -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testCreateNormalChnageRequestFromProblem -->
-      </class> <!-- testcase.ChangeReg -->
+        </test-method> <!-- testcreateINCforuserimpact1 -->
+        <test-method status="PASS" signature="getResult(org.testng.ITestResult)[pri:0, instance:testcase.IncidentReport@69ea3742]" name="getResult" is-config="true" duration-ms="0" started-at="2019-06-06T12:48:03Z" finished-at="2019-06-06T12:48:03Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=testcreateINCforuserimpact3 status=SUCCESS method=IncidentReport.testcreateINCforuserimpact3()[pri:0, instance:testcase.IncidentReport@69ea3742] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getResult -->
+        <test-method status="PASS" signature="getResult(org.testng.ITestResult)[pri:0, instance:testcase.IncidentReport@69ea3742]" name="getResult" is-config="true" duration-ms="1" started-at="2019-06-06T12:50:31Z" finished-at="2019-06-06T12:50:31Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=testcreateINCforuserimpact1 status=FAILURE method=IncidentReport.testcreateINCforuserimpact1()[pri:0, instance:testcase.IncidentReport@69ea3742] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getResult -->
+        <test-method status="PASS" signature="testcreateINCforuserimpact2()[pri:0, instance:testcase.IncidentReport@69ea3742]" name="testcreateINCforuserimpact2" duration-ms="41678" started-at="2019-06-06T12:50:31Z" description="CreateIncforuserimpact2" finished-at="2019-06-06T12:51:13Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testcreateINCforuserimpact2 -->
+        <test-method status="PASS" signature="getResult(org.testng.ITestResult)[pri:0, instance:testcase.IncidentReport@69ea3742]" name="getResult" is-config="true" duration-ms="1" started-at="2019-06-06T12:51:13Z" finished-at="2019-06-06T12:51:13Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=testcreateINCforuserimpact2 status=SUCCESS method=IncidentReport.testcreateINCforuserimpact2()[pri:0, instance:testcase.IncidentReport@69ea3742] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getResult -->
+        <test-method status="PASS" signature="testreassignim()[pri:0, instance:testcase.IncidentReport@69ea3742]" name="testreassignim" duration-ms="69118" started-at="2019-06-06T12:51:13Z" description="Reassign IM " finished-at="2019-06-06T12:52:22Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testreassignim -->
+        <test-method status="PASS" signature="getResult(org.testng.ITestResult)[pri:0, instance:testcase.IncidentReport@69ea3742]" name="getResult" is-config="true" duration-ms="0" started-at="2019-06-06T12:52:22Z" finished-at="2019-06-06T12:52:22Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=testreassignim status=SUCCESS method=IncidentReport.testreassignim()[pri:0, instance:testcase.IncidentReport@69ea3742] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getResult -->
+        <test-method status="PASS" signature="testcopyincident()[pri:0, instance:testcase.IncidentReport@69ea3742]" name="testcopyincident" duration-ms="53228" started-at="2019-06-06T12:52:22Z" description="Copy Incident " finished-at="2019-06-06T12:53:15Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testcopyincident -->
+        <test-method status="PASS" signature="testverifyINCforActiveIMtask()[pri:0, instance:testcase.IncidentReport@69ea3742]" name="testverifyINCforActiveIMtask" duration-ms="99504" started-at="2019-06-06T12:53:15Z" description="Active IM task " finished-at="2019-06-06T12:54:55Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testverifyINCforActiveIMtask -->
+        <test-method status="PASS" signature="getResult(org.testng.ITestResult)[pri:0, instance:testcase.IncidentReport@69ea3742]" name="getResult" is-config="true" duration-ms="0" started-at="2019-06-06T12:53:15Z" finished-at="2019-06-06T12:53:15Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=testcopyincident status=SUCCESS method=IncidentReport.testcopyincident()[pri:0, instance:testcase.IncidentReport@69ea3742] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getResult -->
+        <test-method status="PASS" signature="getResult(org.testng.ITestResult)[pri:0, instance:testcase.IncidentReport@69ea3742]" name="getResult" is-config="true" duration-ms="0" started-at="2019-06-06T12:54:55Z" finished-at="2019-06-06T12:54:55Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=testverifyINCforActiveIMtask status=SUCCESS method=IncidentReport.testverifyINCforActiveIMtask()[pri:0, instance:testcase.IncidentReport@69ea3742] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getResult -->
+        <test-method status="PASS" signature="endReport()[pri:0, instance:testcase.IncidentReport@69ea3742]" name="endReport" is-config="true" duration-ms="516" started-at="2019-06-06T12:54:55Z" finished-at="2019-06-06T12:54:55Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- endReport -->
+        <test-method status="FAIL" signature="afterSuite()[pri:0, instance:testcase.IncidentReport@69ea3742]" name="afterSuite" is-config="true" duration-ms="0" started-at="2019-06-06T12:54:55Z" finished-at="2019-06-06T12:54:55Z">
+          <exception class="java.lang.RuntimeException">
+            <message>
+              <![CDATA[javax.mail.AuthenticationFailedException: 535 5.7.3 Authentication unsuccessful [SN6PR16CA0050.namprd16.prod.outlook.com]
+]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.RuntimeException: javax.mail.AuthenticationFailedException: 535 5.7.3 Authentication unsuccessful [SN6PR16CA0050.namprd16.prod.outlook.com]
+
+	at testcase.IncidentReport.afterSuite(IncidentReport.java:575)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:80)
+	at org.testng.internal.Invoker.invokeConfigurationMethod(Invoker.java:564)
+	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:213)
+	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:138)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:308)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:240)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1198)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1123)
+	at org.testng.TestNG.run(TestNG.java:1031)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+Caused by: javax.mail.AuthenticationFailedException: 535 5.7.3 Authentication unsuccessful [SN6PR16CA0050.namprd16.prod.outlook.com]
+
+	at com.sun.mail.smtp.SMTPTransport$Authenticator.authenticate(SMTPTransport.java:965)
+	at com.sun.mail.smtp.SMTPTransport.authenticate(SMTPTransport.java:876)
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:780)
+	at javax.mail.Service.connect(Service.java:388)
+	at javax.mail.Service.connect(Service.java:246)
+	at javax.mail.Service.connect(Service.java:195)
+	at javax.mail.Transport.send0(Transport.java:254)
+	at javax.mail.Transport.send(Transport.java:124)
+	at testcase.IncidentReport.afterSuite(IncidentReport.java:570)
+	... 18 more
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.RuntimeException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterSuite -->
+      </class> <!-- testcase.IncidentReport -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

@@ -31,20 +31,92 @@ div.shootout {padding:2em;border:3px #4854A8 solid}
 <body>
 <table cellspacing="0" cellpadding="0" class="result">
 <tr><th>Test</th><th class="numi">Methods<br/>Passed</th><th class="numi">Scenarios<br/>Passed</th><th class="numi"># skipped</th><th class="numi"># failed</th><th class="numi">Total<br/>Time</th><th class="numi">Included<br/>Groups</th><th class="numi">Excluded<br/>Groups</th></tr>
-<tr><td style="text-align:left;padding-right:2em">Default test</td><td class="numi">0</td><td class="numi">0</td><td class="numi">0</td><td class="numi_attn">1</td><td class="numi">33.2 seconds</td><td class="numi"></td><td class="numi"></td></tr>
+<tr><td style="text-align:left;padding-right:2em">Default test</td><td class="numi">20</td><td class="numi">20</td><td class="numi">0</td><td class="numi_attn">1</td><td class="numi">1,502.3 seconds</td><td class="numi"></td><td class="numi"></td></tr>
 </table>
 <table cellspacing="0" cellpadding="0" class="passed" id="summary">
 <tr><th>Class</th><th>Method</th><th># of<br/>Scenarios</th><th>Start</th><th>Time<br/>(ms)</th></tr>
+<tr><th colspan="4">Default test &#8212; failed (configuration methods)</th></tr>
+<tr class="failedodd"><td rowspan="1">testcase.IncidentReport</td><td><a href="#m1"><b>afterSuite</b>  </a></td><td class="numi">1</td><td>1559805895691</td><td class="numi">0</td></tr>
 <tr><th colspan="4">Default test &#8212; failed</th></tr>
-<tr class="failedodd"><td rowspan="1">testcase.ChangeReg</td><td><a href="#m1"><b>testCreateNormalChnageRequestFromProblem</b>  ("Creation of a CR Ticket")</a></td><td class="numi">1</td><td>1550055929166</td><td class="numi">32739</td></tr>
+<tr class="failedodd"><td rowspan="1">testcase.IncidentReport</td><td><a href="#m2"><b>testcreateINCforuserimpact1</b>  ("CreateIncforuserimpact1")</a></td><td class="numi">1</td><td>1559805483244</td><td class="numi">148333</td></tr>
+<tr><th colspan="4">Default test &#8212; passed</th></tr>
+<tr class="passedodd"><td rowspan="20">testcase.IncidentReport</td><td><a href="#m3"><b>testCreateStandAloneIncidentTicket</b>  ("Create standalone incident ticket")</a></td><td class="numi">1</td><td>1559804393765</td><td class="numi">46302</td></tr><tr class="passedodd"><td><a href="#m4"><b>testCreateManagedIncidentTicket</b>  ("Create managed incident ticket")</a></td><td class="numi">1</td><td>1559804440070</td><td class="numi">43257</td></tr><tr class="passedodd"><td><a href="#m5"><b>testverifymandatoryfieldWIP</b>  ("Validate mandatory fields in WIP state")</a></td><td class="numi">1</td><td>1559804483329</td><td class="numi">44941</td></tr><tr class="passedodd"><td><a href="#m6"><b>testcreateIncidentfromIntake</b>  ("Creation of Incident from Intake")</a></td><td class="numi">1</td><td>1559804528272</td><td class="numi">47047</td></tr><tr class="passedodd"><td><a href="#m7"><b>testResolveIncidentTicket</b>  ("Progression of Incident ticket to Resolved state")</a></td><td class="numi">1</td><td>1559804575321</td><td class="numi">100438</td></tr><tr class="passedodd"><td><a href="#m8"><b>testCancelIncidentTicket</b>  ("Cancelling Incident Ticket")</a></td><td class="numi">1</td><td>1559804675763</td><td class="numi">61813</td></tr><tr class="passedodd"><td><a href="#m9"><b>testCreateStandardChangefromInc</b>  ("Create standard change from Incident ")</a></td><td class="numi">1</td><td>1559804737579</td><td class="numi">51822</td></tr><tr class="passedodd"><td><a href="#m10"><b>testcreateProblemfromIncident</b>  ("Createproblemfromincident")</a></td><td class="numi">1</td><td>1559804789404</td><td class="numi">56923</td></tr><tr class="passedodd"><td><a href="#m11"><b>testcreateincidenttask</b>  ("Create incident task")</a></td><td class="numi">1</td><td>1559804846329</td><td class="numi">109906</td></tr><tr class="passedodd"><td><a href="#m12"><b>testCreateNormalChangefromInc</b>  ("Create normal change from Incident ")</a></td><td class="numi">1</td><td>1559804956237</td><td class="numi">49348</td></tr><tr class="passedodd"><td><a href="#m13"><b>testCreateEmergencyChangefromInc</b>  ("Create emergency change from Incident ")</a></td><td class="numi">1</td><td>1559805005586</td><td class="numi">46560</td></tr><tr class="passedodd"><td><a href="#m14"><b>testCreateChildIncfromInc</b>  ("Create Child incident from Incident ")</a></td><td class="numi">1</td><td>1559805052148</td><td class="numi">56356</td></tr><tr class="passedodd"><td><a href="#m15"><b>testmoveIncidentTasktoclosecomplete</b>  ("Movetasktoclosecomplete")</a></td><td class="numi">1</td><td>1559805108506</td><td class="numi">110193</td></tr><tr class="passedodd"><td><a href="#m16"><b>testmoveIncidentTasktocancel</b>  ("Movetasktocancel")</a></td><td class="numi">1</td><td>1559805218701</td><td class="numi">108977</td></tr><tr class="passedodd"><td><a href="#m17"><b>testCreateincidentalert</b>  ("Create incident alert")</a></td><td class="numi">1</td><td>1559805327680</td><td class="numi">112565</td></tr><tr class="passedodd"><td><a href="#m18"><b>testcreateINCforuserimpact3</b>  ("CreateIncforuserimpact3")</a></td><td class="numi">1</td><td>1559805440247</td><td class="numi">42995</td></tr><tr class="passedodd"><td><a href="#m19"><b>testcreateINCforuserimpact2</b>  ("CreateIncforuserimpact2")</a></td><td class="numi">1</td><td>1559805631580</td><td class="numi">41678</td></tr><tr class="passedodd"><td><a href="#m20"><b>testreassignim</b> (Incidents) ("Reassign IM ")</a></td><td class="numi">1</td><td>1559805673261</td><td class="numi">69118</td></tr><tr class="passedodd"><td><a href="#m21"><b>testcopyincident</b>  ("Copy Incident ")</a></td><td class="numi">1</td><td>1559805742381</td><td class="numi">53228</td></tr><tr class="passedodd"><td><a href="#m22"><b>testverifyINCforActiveIMtask</b>  ("Active IM task ")</a></td><td class="numi">1</td><td>1559805795611</td><td class="numi">99504</td></tr>
 </table>
 <h1>Default test</h1>
-<h2 id="m1">testcase.ChangeReg:testCreateNormalChnageRequestFromProblem</h2>
+<h2 id="m1">testcase.IncidentReport:afterSuite</h2>
 <div style="padding-left:3em">
-<p>null</p>
-com.servicenow.genericlibraries.ExtentReport.reportLog(ExtentReport.java:43)
-<br/>at testcase.ChangeReg.testCreateNormalChnageRequestFromProblem(ChangeReg.java:375)
+<p>javax.mail.AuthenticationFailedException: 535 5.7.3 Authentication unsuccessful [SN6PR16CA0050.namprd16.prod.outlook.com]
+</p>
+testcase.IncidentReport.afterSuite(IncidentReport.java:575)
+<br/>19 lines not shown
+<p>Caused by 535 5.7.3 Authentication unsuccessful [SN6PR16CA0050.namprd16.prod.outlook.com]
+</p>
+com.sun.mail.smtp.SMTPTransport$Authenticator.authenticate(SMTPTransport.java:965)
+<br/>at com.sun.mail.smtp.SMTPTransport.authenticate(SMTPTransport.java:876)
+<br/>at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:780)
+<br/>at javax.mail.Service.connect(Service.java:388)
+<br/>at javax.mail.Service.connect(Service.java:246)
+<br/>at javax.mail.Service.connect(Service.java:195)
+<br/>at javax.mail.Transport.send0(Transport.java:254)
+<br/>at javax.mail.Transport.send(Transport.java:124)
+<br/>at testcase.IncidentReport.afterSuite(IncidentReport.java:570)
+<br/>19 lines not shown
+</div>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m2">testcase.IncidentReport:testcreateINCforuserimpact1</h2>
+<div style="padding-left:3em">
+<p>Expected condition failed: waiting for title to be &quot;Incidents | ServiceNow&quot;. Current title: &quot;System Administration | ServiceNow&quot; (tried for 30 second(s) with 500 milliseconds interval)
+Build info: version: &apos;3.12.0&apos;, revision: &apos;7c6e0b3&apos;, time: &apos;2018-05-08T14:04:26.12Z&apos;
+System info: host: &apos;TP6VDIDEVTCM068&apos;, ip: &apos;10.25.36.75&apos;, os.name: &apos;Windows 7&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.1&apos;, java.version: &apos;1.8.0_172&apos;
+Driver info: org.openqa.selenium.firefox.FirefoxDriver
+Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 61.0, javascriptEnabled: true, moz:accessibilityChecks: false, moz:headless: false, moz:processID: 43976, moz:profile: C:\Users\UX011974\AppData\L..., moz:useNonSpecCompliantPointerOrigin: false, moz:webdriverClick: true, pageLoadStrategy: normal, platform: XP, platformName: XP, platformVersion: 6.1, rotatable: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}}
+Session ID: ba178053-3296-4a2a-932a-c08e76892a69</p>
+org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:81)
+<br/>at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:271)
+<br/>at com.servicenow.applicationspecificlibraries.WaitUtils.waitForTitleIs(WaitUtils.java:49)
+<br/>at com.servicenow.applicationspecificlibraries.IncidentReusables.verifyIncidentCreation(IncidentReusables.java:346)
+<br/>at testcase.IncidentReport.testcreateINCforuserimpact1(IncidentReport.java:417)
 <br/>25 lines not shown
 </div>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m3">testcase.IncidentReport:testResolveIncidentTicket</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m4">testcase.IncidentReport:testcopyincident</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m5">testcase.IncidentReport:testcreateIncidentfromIntake</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m6">testcase.IncidentReport:testmoveIncidentTasktoclosecomplete</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m7">testcase.IncidentReport:testCreateManagedIncidentTicket</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m8">testcase.IncidentReport:testcreateincidenttask</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m9">testcase.IncidentReport:testCreateChildIncfromInc</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m10">testcase.IncidentReport:testcreateProblemfromIncident</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m11">testcase.IncidentReport:testCancelIncidentTicket</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m12">testcase.IncidentReport:testmoveIncidentTasktocancel</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m13">testcase.IncidentReport:testCreateNormalChangefromInc</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m14">testcase.IncidentReport:testCreateincidentalert</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m15">testcase.IncidentReport:testcreateINCforuserimpact3</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m16">testcase.IncidentReport:testCreateStandAloneIncidentTicket</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m17">testcase.IncidentReport:testcreateINCforuserimpact2</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m18">testcase.IncidentReport:testverifymandatoryfieldWIP</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m19">testcase.IncidentReport:testverifyINCforActiveIMtask</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m20">testcase.IncidentReport:testCreateEmergencyChangefromInc</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m21">testcase.IncidentReport:testCreateStandardChangefromInc</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m22">testcase.IncidentReport:testreassignim</h2>
 <p class="totop"><a href="#summary">back to summary</a></p>
 </body></html>

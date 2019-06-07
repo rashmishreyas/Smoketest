@@ -25,7 +25,7 @@ public class WaitUtils {
 	}
 	
 	public static void waitForIdPresent(WebDriver driver, String wbId){
-		WebDriverWait wait = new WebDriverWait(driver, 30);
+		WebDriverWait wait = new WebDriverWait(driver, 100);
 		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.id(wbId)));	
 	}
 	

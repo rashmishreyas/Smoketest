@@ -334,11 +334,11 @@ public void testCreateNormalChnageRequestfromproblem() throws Exception{
     SafeLogin.logInUser(driver);
     ServiceNowUtils.navigateToModuleName2(driver, "Problem");
     prNumber=ProblemReusables.createProblem(driver,1,2);
-	   ProblemReusables.verifyProblemCreation1(driver, prNumber); 
+	   //ProblemReusables.verifyProblemCreation1(driver, prNumber); 
 	   ProblemPage.getProblemNumberFromQueue(driver, prNumber).click();
 	   WaitUtils.waitForPageToLoad(driver, 30);
 	   
-	   ProblemPage.getMenu(driver).click();
+	   //ProblemPage.getMenu(driver).click();
 	   Thread.sleep(3000);
 	   //ProblemPage.getChangeLink(driver).click();
 	    WebElement element=driver.findElement(By.xpath("/html/body/div[8]/div[5]"));

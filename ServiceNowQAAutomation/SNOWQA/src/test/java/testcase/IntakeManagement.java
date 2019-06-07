@@ -1,4 +1,5 @@
 package testcase;
+import org.openqa.selenium.By;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -25,12 +26,14 @@ public class IntakeManagement extends SuperTestNG {
  	   ExtentReport.startReport(Capabilities.getPropertyValue("IntakeReports"), "Test Create intake Ticket", "Create Problem Ticket");
  	   SafeLogin.logInUser(driver);
  	   WaitUtils.waitForPageToLoad(driver, 10);
- 	   ServiceNowUtils.navigateToModuleName(driver, "Intake");
- 	  incNumber = IntakeReuasbles.createIncidentfromIntake(driver,1,2);
- 	 ServiceNowUtils.navigateToModuleName1(driver,"incident");
+ 	   ServiceNowUtils.navigateToModuleName1(driver, "Intake");
+ 	  incNumber = IntakeReuasbles.createIntake(driver,1,2);
+ 	driver.findElement(By.xpath("//button[@id='order_now']")).click();
  	 
  	
  	   Thread.sleep(5000);
 
-}
-}
+}}
+    
+    
+   

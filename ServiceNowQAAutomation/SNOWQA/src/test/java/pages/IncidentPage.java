@@ -1,19 +1,26 @@
 package pages;
 
 import java.util.Base64;
-import java.util.concurrent.TimeUnit;
+
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import java.util.Calendar;
+import java.util.List;
+import java.util.TimeZone;
+import java.util.concurrent.TimeUnit;
 
 public class IncidentPage {
 	
 
 	public static WebElement element;
+	private String today;
+	static WebDriver driver;
 	
 	public static WebElement getCreateNewIncidentlnk(WebDriver driver) throws Exception
 	{
@@ -23,9 +30,50 @@ public class IncidentPage {
 	
 	public static WebElement getAllIncidentslnk(WebDriver driver) throws Exception
 	{
-		element=driver.findElement(By.xpath("//a[text()='Incident Management']/following::a[text()='All']"));
+		//element=driver.findElement(By.xpath("//a[text()='Incident Management']/following::a[text()='All']"));
+		element = driver.findElement(By.xpath("//a[@id='b55b4ab0c0a80009007a9c0f03fb4da9']/div/div[text()='All']"));
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+    	wait.until(ExpectedConditions.visibilityOf(element));
+    	wait.until(ExpectedConditions.elementToBeClickable(element));
 		return element;
 	}
+	
+	public static WebElement getIncidentTaskTab(WebDriver driver){
+    	element = driver.findElement(By.xpath("//div[@id='tabs2_list']//span[contains(text(),'Incident') and contains(text(),'Tasks')]"));
+    	return element;
+    }
+	public static WebElement getincidentaskstate(WebDriver driver)
+	{
+		element = driver.findElement(By.id("u_inc_task.state"));
+		return element;
+	}
+	public static WebElement getassignedtotaskedt(WebDriver driver)
+	{
+		element = driver.findElement(By.id("sys_display.u_inc_task.assigned_to"));
+		return element;
+	}
+	public static WebElement getopenbygrouptaskedt(WebDriver driver)
+	{
+		element = driver.findElement(By.id("sys_display.u_inc_task.u_opened_by_group"));
+		return element;
+	}
+	public static WebElement Inctaskworknotes(WebDriver driver)
+	{
+		element = driver.findElement(By.xpath("//textarea[@placeholder='Work notes']"));
+		return element;
+	}
+	 public static WebElement getIncidentTaskLnk(WebDriver driver, int i){
+	    	element = driver.findElement(By.xpath("//table[@list_name='incident.u_inc_task.u_ud_parent']//tbody//tr["+i+"]//td[3]//a[starts-with(text(),'INCTSK')]"));
+	    	JavascriptExecutor js = (JavascriptExecutor) driver;
+	    	js.executeScript("arguments[0].scrollIntoView();", element);
+	    	WebDriverWait wait = new WebDriverWait(driver, 10);
+	    	wait.until(ExpectedConditions.visibilityOf(element));
+	    	wait.until(ExpectedConditions.elementToBeClickable(element));
+			return element;
+		 
+	    }
+	 
+	
 	
 	public static String getIncidentNumber(WebDriver driver) throws Exception
 	{
@@ -33,10 +81,17 @@ public class IncidentPage {
 		String incidentNumber=element.getAttribute("value");
 		return incidentNumber;
 	}
+	public static WebElement getchildIncidentNumber(WebDriver driver)
+	{
+		element=driver.findElement(By.xpath("//input[@id='sys_readonly.incident.number']"));
+		return element;
+		
+	}
 	
 	public static WebElement getStateDropdown(WebDriver driver) throws Exception
 	{
-		element=driver.findElement(By.xpath("//select[@id='incident.state']"));
+		element=driver.findElement(By.id("incident.state"));
+		System.out.println(element);
 		return element;
 	}
 	
@@ -73,12 +128,14 @@ public class IncidentPage {
 	public static WebElement getRequestedForEdt(WebDriver driver) throws Exception
 	{
 		element=driver.findElement(By.xpath("//input[@id='sys_display.incident.u_requested_for']"));
+		
 		return element;
 	}
 	
 	public static WebElement getBusinessServiceEdt(WebDriver driver) throws Exception
 	{
 		element=driver.findElement(By.xpath("//input[@id='sys_display.incident.u_business_service']"));
+		//element=driver.findElement(By.xpath("//contains(@id,'incident.u_business_service')"));
 		return element;
 	}
 	
@@ -148,27 +205,18 @@ public class IncidentPage {
 	
 	public static WebElement getIncidentManagerRequiredChkbox(WebDriver driver) throws Exception
 	{
-		
-		//WebDriverWait wait2 = new WebDriverWait(driver, 10);
-		//wait2.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("xpath_of_element_to_be_invisible")));
-		//driver.findElement(By.xpath("xpath_element_to_be_clicked")).click();
-		//WebDriverWait wait2 = new WebDriverWait(driver, 30);
-		//wait2.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//label[@id='label.ni.incident.u_incident_manager_required']")));
-		//wait2.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//label[@id='label.ni.incident.u_incident_manager_required']")));
-		System.out.println("start");
-		//element=driver.findElement(By.xpath("//label[@id='label.ni.incident.u_incident_manager_required']"));
-		//element=driver.findElement(By.className(" checkbox-label"));
-		//element=driver.findElement(By.cssSelector("input[id$='label.ni.incident.u_incident_manager_required']"));
-		element=driver.findElement(By.id("label.ni.incident.u_incident_manager_required"));
-		element.click();
-		System.out.println("end");
-	
-//wait2.until(ExpectedConditions.invisibilityOfElementLocated(By.id("label.ni.incident.u_incident_manager_required")));
-//element=driver.findElement(By.id("label.ni.incident.u_incident_manager_required"));
-		//driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		//element=driver.findElement(By.id("label.ni.incident.u_incident_manager_required"));
+		element = driver.findElement(By.xpath("//span[@class='input-group-checkbox']/label[@id='label.ni.incident.u_incident_manager_required'] "));
+		WebDriverWait wait = new WebDriverWait(driver, 120);
+		wait.until(ExpectedConditions.visibilityOf(element)); 
+		wait.until(ExpectedConditions.elementToBeClickable(element));
 		
 		return element;
 	}
+	public static WebElement Assignmentgroupedt(WebDriver driver)
+	{
+		element = driver.findElement(By.id("sys_display.u_task_route.u_assignment_group"));
+		return element;}
 	
 	public static WebElement getReasonForIncidentManagerDropdown(WebDriver driver) throws Exception
 	{
@@ -220,7 +268,7 @@ public class IncidentPage {
 	
 	public static WebElement getWorkNotesEdt(WebDriver driver) throws Exception
 	{
-		element=driver.findElement(By.id("incident.work_notes"));
+		element=driver.findElement(By.id("activity-stream-work_notes-textarea"));
 		return element;
 	}
 	
@@ -446,10 +494,35 @@ public class IncidentPage {
 	
 	public static WebElement getClosureTab(WebDriver driver) throws Exception
 	{
-		element=driver.findElement(By.xpath("//span[text()='Closure']"));
+		element=driver.findElement(By.xpath("//span[contains(text(),'Closure')]"));
+		//element=driver.findElement(By.xpath("//div[@id='tabs2_section']//following::span[6]"));
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+    	js.executeScript("arguments[0].scrollIntoView();", element);
+    	WebDriverWait wait = new WebDriverWait(driver, 10);
+    	wait.until(ExpectedConditions.visibilityOf(element));
+    	wait.until(ExpectedConditions.elementToBeClickable(element));
 		return element;
 	}
-	
+	public static WebElement getaccountabletab(WebDriver driver) throws Exception
+	{
+		element = driver.findElement(By.xpath("//span[contains(text(),'Accountability and Impact')]"));
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+    	js.executeScript("arguments[0].scrollIntoView();", element);
+    	WebDriverWait wait = new WebDriverWait(driver, 10);
+    	wait.until(ExpectedConditions.visibilityOf(element));
+    	wait.until(ExpectedConditions.elementToBeClickable(element));
+		return element;
+	}
+	public static WebElement getdetailstab(WebDriver driver) throws Exception
+	{
+		element = driver.findElement(By.xpath("//span[contains(text(),'Details')]"));
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+    	js.executeScript("arguments[0].scrollIntoView();", element);
+    	WebDriverWait wait = new WebDriverWait(driver, 10);
+    	wait.until(ExpectedConditions.visibilityOf(element));
+    	wait.until(ExpectedConditions.elementToBeClickable(element));
+		return element;
+	}
 	public static WebElement getCauseCodeDropdown(WebDriver driver) throws Exception
 	{
 		element=driver.findElement(By.id("incident.u_cause_code"));
@@ -512,13 +585,19 @@ public class IncidentPage {
 	
 	public static WebElement getIncidentStatusfromQueue(WebDriver driver, String incidentNumber) throws Exception
 	{
-		//element=driver.findElement(By.xpath("//tbody[@class='list2_body']//a[text()='"+incidentNumber+"']/following::td"));
-		element = driver.findElement(By.xpath("//tbody[@class='list2_body']//a[text()='"+incidentNumber+"']/following::td"));
-		//element=driver.findElement(By.xpath("/html/body/div[1]/div[1]/span/div/div[5]/table/tbody/tr/td/div/table/tbody/tr[1]/td[5]"));
-		System.out.println(element);
+		element=driver.findElement(By.xpath("//tbody[@class='list2_body']//a[text()='"+incidentNumber+"']/following::td"));
 		return element;
 	}
-	
+public static WebElement getIncidenttaskstatusfromQueue(WebDriver driver, String incidenttasknum) throws Exception
+	{
+		element = driver.findElement(By.xpath("//tbody[@class='list2_body]//a[text()='"+incidenttasknum+"']/following::td"));
+		return element;
+	}
+	public static WebElement getSearchIncidenttask(WebDriver driver) throws Exception
+	{
+		element = driver.findElement(By.xpath("//div[@class='input-group']/label[text()='Search']/following-sibling::input"));
+		return element;
+	}
 	public static WebElement getIncidentNumberfromQueue(WebDriver driver, String incidentNumber) throws Exception
 	{
 		element=driver.findElement(By.xpath("//tbody[@class='list2_body']//a[text()='"+incidentNumber+"']"));
@@ -535,5 +614,98 @@ public class IncidentPage {
     	element = driver.findElement(By.xpath("//div[@class='input-group']/label[text()='Search']/following-sibling::input"));
     	return element;
     }
-    
+   
+    public static WebElement clickonsaveEdt(WebDriver driver){
+    	element = driver.findElement(By.id("sysverb_insert"));
+    	return element;
     }
+    public static WebElement ErrormessagenewEdt(WebDriver driver)
+    {
+    	element = driver.findElement(By.xpath("//div[@class='outputmsg_div']/div[1]/span[2]"));
+    	return element;
+    }
+    
+   
+    public static WebElement onholdtype(WebDriver driver)
+    {
+    	element = driver.findElement(By.id("incident.u_on_hold_type"));
+    	return element;
+    }
+    
+  public static WebElement Clickonexternalreference(WebDriver driver)
+  {
+	  //element=driver.findElement(By.xpath("//span[contains(text(),'External Reference')]"));
+	  element = driver.findElement(By.xpath("/html/body/div[2]/form/div[1]/span[5]/span[1]/span[2]"));
+	  JavascriptExecutor js = (JavascriptExecutor) driver;
+  	 js.executeScript("arguments[0].scrollIntoView();", element);
+	return element;
+  }
+  public static WebElement Additionalcommentstask(WebDriver driver)
+  {
+	  element = driver.findElement(By.xpath("//*[@id='u_task_route.u_additional_comments']"));
+	  return element;
+  }
+    
+    public static WebElement getIncidenttasktab(WebDriver driver)
+    {
+    	element = driver.findElement(By.xpath("//table[@id='incident.u_inc_task.u_ud_parent_table']//tbody//tr//td[3]"));
+    	return element;
+    }
+    public static WebElement getsourceci(WebDriver driver)
+    {
+    	element = driver.findElement(By.id("sys_display.incident_alert.source_ci"));
+    	return element;
+    }
+    public static WebElement getincidentmanagergroup(WebDriver driver)
+    {
+    	element = driver.findElement(By.id("sys_display.incident_alert.assignment_group"));
+    	return element;
+    }
+    public static WebElement getincidentmanager(WebDriver driver)
+    {
+    	element = driver.findElement(By.id("sys_display.incident_alert.assigned_to"));
+    	return element;
+    }
+    public static WebElement getincidentowner(WebDriver driver)
+    {
+    	element = driver.findElement(By.id("sys_display.incident_alert.u_incident_owner"));
+    	return element;
+    }
+    public static WebElement getaccountablebu(WebDriver driver)
+    {
+    	element = driver.findElement(By.id("sys_display.incident_alert.u_accountable_bu"));
+    	return element;
+    }
+    public static WebElement getaffectedunit (WebDriver driver){
+    	element = driver.findElement(By.xpath("//*[@id='incident_alert.u_affected_bu_s_unlock']"));
+    	return element;
+    }
+    public static WebElement getimpactedlocation(WebDriver driver)
+    {
+    	element = driver.findElement(By.xpath("//span[@class='input-group-checkbox']/label[@id='label.ni.incident_alert.u_amers']"));
+    	return element;
+    }
+    public static WebElement getimpactedlocation1(WebDriver driver)
+    {
+    	element = driver.findElement(By.xpath("//span[@class='input-group-checkbox']/label[@id='label.ni.incident_alert.u_asia']"));
+    	return element;
+    }
+    public static WebElement getaffectedunitedt(WebDriver driver)
+    {
+    	element = driver.findElement(By.id("sys_display.incident_alert.u_affected_bu_s"));
+    	return element;
+    }
+    public static WebElement getaffectedlock(WebDriver driver)
+    {
+    	element = driver.findElement(By.xpath("//*[@id='incident_alert.u_affected_bu_s_lock']"));
+    	return element;
+    }
+    public static WebElement getlatestupdate(WebDriver driver)
+    {
+    	element = driver.findElement(By.id("incident_alert.u_latest_update"));
+    	return element;
+    }
+}
+
+
+    
